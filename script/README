@@ -1,0 +1,11 @@
+USAGE
+```
+python3 make_bootsplash.py \
+  --svg logo.svg \
+  --title "CM3588+" \
+  --subtitle "ByEhsan.com" \
+  --color "#B8C7D9" \
+  --out-bmp logo_kernel.bmp \
+  --out-png bootsplash_preview.png
+
+```
