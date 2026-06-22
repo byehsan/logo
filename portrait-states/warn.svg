@@ -1,0 +1,29 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <image href="../portrait.svg" width="512" height="512"/>
+
+  <!-- State badge — bottom right, pulsing triskelion (brand orange) -->
+  <circle cx="420" cy="420" r="52" fill="#0a0514" stroke="#f07828" stroke-width="3"/>
+  <g transform="translate(420,420)">
+    <g transform="rotate(0,0,0)">
+      <path d="M0,-24 Q9,-9 -9,-9 Q9,-9 0,21 Q-9,-9 9,-9 Q0,-24 0,-24 Z"
+            fill="none" stroke="#f07828" stroke-width="3" stroke-linejoin="round">
+        <animate attributeName="stroke-width" values="3;1.5;3" dur="1s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;0.5;1" dur="1s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    <g transform="rotate(120,0,0)">
+      <path d="M0,-24 Q9,-9 -9,-9 Q9,-9 0,21 Q-9,-9 9,-9 Q0,-24 0,-24 Z"
+            fill="none" stroke="#f07828" stroke-width="3" stroke-linejoin="round">
+        <animate attributeName="stroke-width" values="3;1.5;3" dur="1s" begin="0.1s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;0.5;1" dur="1s" begin="0.1s" repeatCount="indefinite"/>
+      </path>
+    </g>
+    <g transform="rotate(240,0,0)">
+      <path d="M0,-24 Q9,-9 -9,-9 Q9,-9 0,21 Q-9,-9 9,-9 Q0,-24 0,-24 Z"
+            fill="none" stroke="#f07828" stroke-width="3" stroke-linejoin="round">
+        <animate attributeName="stroke-width" values="3;1.5;3" dur="1s" begin="0.2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;0.5;1" dur="1s" begin="0.2s" repeatCount="indefinite"/>
+      </path>
+    </g>
+  </g>
+</svg>

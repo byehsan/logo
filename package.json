@@ -1,0 +1,28 @@
+{
+  "name": "@byehsan/logo",
+  "version": "1.0.0",
+  "description": "byEhsan brand logo assets — SVG sources, animated states, portrait illustration",
+  "type": "module",
+  "main": "dist/bundle.js",
+  "module": "dist/bundle.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/bundle.esm.js",
+      "require": "./dist/bundle.js"
+    },
+    "./css": "./dist/bundle.css",
+    "./palette": "./dist/palette.json"
+  },
+  "scripts": {
+    "build": "node scripts/bundle.mjs",
+    "validate": "find . -name '*.svg' -not -path './.git/*' | xargs xmllint --noout"
+  },
+  "files": [
+    "dist/",
+    "*.svg",
+    "portrait-states/",
+    "scripts/"
+  ],
+  "keywords": ["byehsan", "logo", "brand", "svg"],
+  "license": "MIT"
+}
