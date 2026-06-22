@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - 'v*.*.*'
-  push:
     branches:
       - main
 
@@ -39,7 +38,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --ignore-scripts
 
       - name: Install rsvg-convert (SVG → PNG)
         run: sudo apt-get install -y librsvg2-bin
