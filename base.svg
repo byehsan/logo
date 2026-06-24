@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+  <!-- hair: side-swept lock, silhouette + inner sweep -->
+  <path d="M26 43 C22 22 46 14 64 21 C72 24 76 31 72 37"/>
+  <path d="M28 39 C36 30 50 27 62 30 C56 33 49 33 42 37"/>
+  <!-- face + jaw silhouette -->
+  <path d="M26 43 C24 56 29 71 41 78 C47 81 53 81 59 78 C71 71 76 56 74 43"/>
+  <!-- beard boundary: cheek edge each side framing the jaw -->
+  <path d="M28 47 C29 56 33 64 40 69"/>
+  <path d="M72 47 C71 56 67 64 60 69"/>
+  <!-- brows: inner ends dip toward nose -->
+  <path d="M32 47 Q38 43 45 48"/>
+  <path d="M55 48 Q62 43 68 47"/>
+  <!-- eyes: dots (base primitive for state variants) -->
+  <circle cx="38" cy="55" r="3.1" fill="currentColor" stroke="none"/>
+  <circle cx="62" cy="55" r="3.1" fill="currentColor" stroke="none"/>
+  <!-- mouth: neutral -->
+  <path d="M42 69 Q50 71 58 69"/>
+</svg>
