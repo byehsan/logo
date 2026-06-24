@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512">
+  <style>
+    /* loading — 3-step discrete rotation, 1.2s cycle */
+    @keyframes step-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    #mark {
+      transform-box: fill-box;
+      transform-origin: 50px 56.67px;
+      animation: step-spin 1.2s steps(3, end) infinite;
+    }
+  </style>
+  <g id="mark" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+    <g transform="rotate(0 50 56.67)">
+      <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
+    </g>
+    <g transform="rotate(120 50 56.67)">
+      <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
+    </g>
+    <g transform="rotate(240 50 56.67)">
+      <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
+    </g>
+  </g>
+</svg>

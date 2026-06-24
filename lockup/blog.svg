@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" width="440" height="112">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap');
+  </style>
+
+  <!-- Mark — 48×48, y-offset 4 to center in 56px -->
+  <svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+      <g transform="rotate(0 50 56.67)">
+        <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
+      </g>
+      <g transform="rotate(120 50 56.67)">
+        <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
+      </g>
+      <g transform="rotate(240 50 56.67)">
+        <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
+      </g>
+    </g>
+  </svg>
+
+  <!-- Gap: 16px (x=48 to x=64) -->
+
+  <!-- Sub-brand text — baseline at y=37, cap-height ~24px -->
+  <text x="64" y="37"
+        font-family="'Space Grotesk', system-ui, sans-serif"
+        font-size="24" font-weight="600" letter-spacing="-0.5"
+        fill="currentColor">blog</text>
+</svg>

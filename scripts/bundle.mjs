@@ -32,19 +32,22 @@ console.log('✓ palette.json')
 
 // ── Collect SVG sources ───────────────────────────────────────────────────────
 const SVG_FILES = [
+  { key: 'base',            path: 'base.svg' },
   { key: 'logoPlain',       path: 'plain.svg' },
   { key: 'logoColored',     path: 'colored.svg' },
   { key: 'logoGradient',    path: 'gradient.svg' },
   { key: 'logoAnimated',    path: 'animated.svg' },
-  { key: 'logoLoad',        path: 'load.svg' },
-  { key: 'logoSuccess',     path: 'success.svg' },
-  { key: 'logoFail',        path: 'fail.svg' },
-  { key: 'logoWarn',        path: 'warn.svg' },
-  { key: 'portrait',        path: 'portrait.svg' },
-  { key: 'portraitLoad',    path: 'portrait-states/load.svg' },
-  { key: 'portraitSuccess', path: 'portrait-states/success.svg' },
-  { key: 'portraitFail',    path: 'portrait-states/fail.svg' },
-  { key: 'portraitWarn',    path: 'portrait-states/warn.svg' },
+  { key: 'stateNeutral',    path: 'states/neutral.svg' },
+  { key: 'stateLoading',    path: 'states/loading.svg' },
+  { key: 'stateSuccess',    path: 'states/success.svg' },
+  { key: 'stateWarning',    path: 'states/warning.svg' },
+  { key: 'stateError',      path: 'states/error.svg' },
+  { key: 'http404',         path: 'http/404.svg' },
+  { key: 'http500',         path: 'http/500.svg' },
+  { key: 'http503',         path: 'http/503.svg' },
+  { key: 'http403',         path: 'http/403.svg' },
+  { key: 'lockupTemplate',  path: 'lockup/template.svg' },
+  { key: 'lockupBlog',      path: 'lockup/blog.svg' },
 ]
 
 const svgMap = {}
@@ -98,9 +101,9 @@ console.log('✓ bundle.css')
 // ── PNG exports ───────────────────────────────────────────────────────────────
 const PNG_SIZES = [16, 32, 64, 128, 256, 512]
 const PNG_TARGETS = [
+  { key: 'base',        path: 'base.svg' },
   { key: 'logoPlain',   path: 'plain.svg' },
   { key: 'logoColored', path: 'colored.svg' },
-  { key: 'portrait',    path: 'portrait.svg' },
 ]
 
 for (const { key, path } of PNG_TARGETS) {

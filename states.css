@@ -1,0 +1,156 @@
+/*
+  byEhsan logo — state animations (Option B: class-driven)
+  Usage: add class to the <svg> element, e.g. <svg class="state-loading">
+  All animations theme via currentColor — set `color` on the SVG or a parent.
+  transform-box/transform-origin target the #mark group inside the SVG.
+*/
+
+/* ─── KEYFRAMES ─────────────────────────────────────────────────────────── */
+
+@keyframes be-blink {
+  0%, 92%, 100% { opacity: 1; }
+  94%            { opacity: 0.05; }
+  96%            { opacity: 1; }
+}
+
+@keyframes be-step-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes be-bloom {
+  0%   { transform: scale(1);    opacity: 0.6; }
+  30%  { transform: scale(1.22); opacity: 1; }
+  55%  { transform: scale(0.92); }
+  75%  { transform: scale(1.06); }
+  90%  { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
+
+@keyframes be-warn-pulse {
+  0%, 100% { stroke-width: 2;   opacity: 1; }
+  50%       { stroke-width: 3.5; opacity: 0.75; }
+}
+
+@keyframes be-shake {
+  0%   { transform: translateX(0); }
+  15%  { transform: translateX(3px); }
+  30%  { transform: translateX(-3px); }
+  45%  { transform: translateX(2px); }
+  60%  { transform: translateX(-2px); }
+  75%  { transform: translateX(1px); }
+  90%  { transform: translateX(-1px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes be-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  20%       { transform: rotate(6deg); }
+  70%       { transform: rotate(-6deg); }
+}
+
+@keyframes be-drift {
+  0%, 100% { opacity: 1; }
+  40%       { opacity: 0.4; }
+  80%       { opacity: 0.9; }
+}
+
+@keyframes be-flatline {
+  0%   { transform: translate(0,0);      opacity: 1; }
+  4%   { transform: translate(2px,-1px); opacity: 1; }
+  8%   { transform: translate(-2px,1px); opacity: 1; }
+  12%  { transform: translate(1px,-1px); opacity: 0.7; }
+  16%  { transform: translate(0,0);      opacity: 0.3; }
+  100% { transform: translate(0,0);      opacity: 0.3; }
+}
+
+@keyframes be-doze {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.15; }
+}
+
+@keyframes be-zzz {
+  0%   { opacity: 0;   transform: translate(0,0)       scale(0.7); }
+  15%  { opacity: 1; }
+  85%  { opacity: 0.8; }
+  100% { opacity: 0;   transform: translate(14px,-14px) scale(1.1); }
+}
+
+@keyframes be-wipe-in {
+  from { transform: scaleX(0); transform-origin: left center; }
+  to   { transform: scaleX(1); transform-origin: left center; }
+}
+
+@keyframes be-wipe-out {
+  from { transform: scaleX(1); transform-origin: right center; }
+  to   { transform: scaleX(0); transform-origin: right center; }
+}
+
+@keyframes be-dim {
+  0%, 100% { opacity: 1; }
+  40%       { opacity: 0.35; }
+}
+
+@keyframes be-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── STATE CLASSES ─────────────────────────────────────────────────────── */
+
+/* neutral */
+.state-neutral #p0,
+.state-neutral #p1,
+.state-neutral #p2 {
+  animation: be-blink 6s ease-in-out infinite;
+}
+
+/* loading */
+.state-loading #mark {
+  transform-box: fill-box;
+  transform-origin: 50px 56.67px;
+  animation: be-step-spin 1.2s steps(3, end) infinite;
+}
+
+/* success */
+.state-success #mark {
+  transform-box: fill-box;
+  transform-origin: 50px 56.67px;
+  animation: be-bloom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1 forwards;
+}
+.state-success #p0 { animation: be-fade-in 0.15s ease forwards; }
+.state-success #p1 { animation: be-fade-in 0.15s ease 0.08s forwards; opacity: 0; }
+.state-success #p2 { animation: be-fade-in 0.15s ease 0.16s forwards; opacity: 0; }
+
+/* warning */
+.state-warning #p0 path { animation: be-warn-pulse 0.8s ease-in-out infinite; }
+.state-warning #p1 path { animation: be-warn-pulse 0.8s ease-in-out 0.26s infinite; opacity: 0.6; }
+.state-warning #p2 path { animation: be-warn-pulse 0.8s ease-in-out 0.53s infinite; opacity: 0.6; }
+
+/* error */
+.state-error #mark {
+  animation: be-shake 0.3s ease 1 forwards;
+}
+
+/* 404 */
+.state-404 #mark {
+  transform-box: fill-box;
+  transform-origin: 50px 56.67px;
+  animation: be-tilt 2.4s ease-in-out infinite;
+}
+.state-404 #p1 path { animation: be-drift 2.4s ease-in-out 0.3s infinite; }
+.state-404 #p2 path { animation: be-drift 2.4s ease-in-out 0.6s infinite; }
+
+/* 500 */
+.state-500 #mark {
+  animation: be-flatline 0.5s ease 1 forwards;
+}
+
+/* 503 */
+.state-503 #mark  { animation: be-doze 2s ease-in-out infinite; }
+.state-503 #zzz   { animation: be-zzz  2s ease-in-out infinite; }
+
+/* 403 */
+.state-403 #mark    { animation: be-dim      0.6s ease 0.1s 1 forwards; }
+.state-403 #bar-in  { animation: be-wipe-in  0.25s ease-out 0.1s 1 forwards; transform: scaleX(0); }
+.state-403 #bar-out { animation: be-wipe-out 0.25s ease-in  0.5s 1 forwards; }
