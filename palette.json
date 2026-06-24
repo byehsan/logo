@@ -1,0 +1,53 @@
+{
+  "default": "brand-dark",
+  "palettes": {
+    "brand-dark": {
+      "name": "Brand Dark",
+      "background": "#0a0514",
+      "mark": "#f07828",
+      "text": "#eeeef4",
+      "accent": "#5901d8",
+      "muted": "#eeeef420"
+    },
+    "brand-light": {
+      "name": "Brand Light",
+      "background": "#eeeef4",
+      "mark": "#f07828",
+      "text": "#0a0514",
+      "accent": "#5901d8",
+      "muted": "#0a051420"
+    },
+    "mono-dark": {
+      "name": "Mono Dark",
+      "background": "#0f0f0f",
+      "mark": "#ffffff",
+      "text": "#cccccc",
+      "accent": "#555555",
+      "muted": "#ffffff15"
+    },
+    "mono-light": {
+      "name": "Mono Light",
+      "background": "#f0f0f0",
+      "mark": "#111111",
+      "text": "#333333",
+      "accent": "#888888",
+      "muted": "#11111115"
+    },
+    "indigo": {
+      "name": "Indigo",
+      "background": "#0a0514",
+      "mark": "#5901d8",
+      "text": "#eeeef4",
+      "accent": "#f07828",
+      "muted": "#5901d820"
+    }
+  },
+  "tokens": {
+    "dark":    "#0a0514",
+    "orange":  "#f07828",
+    "indigo":  "#5901d8",
+    "light":   "#eeeef4",
+    "success": "#2ecc71",
+    "error":   "#e74c3c"
+  }
+}

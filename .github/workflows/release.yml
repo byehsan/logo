@@ -8,15 +8,15 @@ on:
       - main
 
 jobs:
+
+  # ── Validate SVGs on every push ──────────────────────────────────────────
   validate:
     name: Validate SVGs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Install xmllint
         run: sudo apt-get update && sudo apt-get install -y libxml2-utils
-
       - name: Validate all SVGs
         run: |
           find . -name "*.svg" -not -path "./.git/*" | while read f; do
@@ -24,6 +24,28 @@ jobs:
             xmllint --noout "$f" || exit 1
           done
 
+  # ── Deploy GitHub Pages on every push to main ────────────────────────────
+  pages:
+    name: Deploy GitHub Pages
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+  # ── Build release bundle + publish npm on tags ───────────────────────────
   bundle:
     name: Build & Release Bundle
     runs-on: ubuntu-latest
@@ -31,6 +53,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     permissions:
       contents: write
+      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -38,17 +61,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@byehsan'
 
-      - name: Install dependencies
+      - name: Install system deps (rsvg-convert, imagemagick, zip)
+        run: sudo apt-get update && sudo apt-get install -y librsvg2-bin imagemagick zip
+
+      - name: Install JS deps
         run: npm install --ignore-scripts
 
-      - name: Install rsvg-convert (SVG → PNG)
-        run: sudo apt-get install -y librsvg2-bin zip
-
-      - name: Build bundle
+      - name: Build bundle (SVGs + PNGs + favicons + TypeScript defs)
         run: node scripts/bundle.mjs
 
-      - name: Create release archive
+      - name: Create release archives
         run: |
           VERSION=${GITHUB_REF_NAME}
           zip -r "byehsan-logo-${VERSION}.zip" dist/
@@ -64,27 +89,48 @@ jobs:
           body: |
             ## byEhsan Logo Bundle ${{ github.ref_name }}
 
-            ### Contents
-            - SVG sources (all variants + states)
-            - PNG exports: 16, 32, 64, 128, 256, 512px
-            - `bundle.js` — CJS module (all SVGs as strings)
-            - `bundle.esm.js` — ES module
-            - `bundle.css` — CSS custom properties with data URIs
-            - `palette.json` — brand color tokens
+            **GitHub Pages:** https://byehsan.github.io/logo/
 
-            ### Usage
-            ```js
-            // ES module
-            import { portrait, logoColored, logoLoad } from './bundle.esm.js'
+            ### Artifacts in this release
+            | File | Contents |
+            |------|----------|
+            | `byehsan-logo-${{ github.ref_name }}.zip` | Full bundle |
+            | `dist/index.js` | CJS module |
+            | `dist/index.esm.js` | ES module |
+            | `dist/index.d.ts` | TypeScript definitions |
+            | `dist/index.css` | CSS custom properties |
+            | `dist/favicons/` | favicon.ico, apple-touch-icon, all PNG sizes |
+            | `dist/site.webmanifest` | PWA manifest |
+            | `dist/palette.json` | Brand palette tokens |
+            | `dist/svgs/` | All SVG sources |
 
-            // CJS
-            const { portrait, logoColored } = require('./bundle.js')
+            ### Install (GitHub Packages)
+            ```
+            # .npmrc
+            @byehsan:registry=https://npm.pkg.github.com
+
+            npm install @byehsan/logo
             ```
 
-            ### CSS
-            ```css
-            @import 'bundle.css';
-            .hero { background-image: var(--logo-portrait); }
+            ### Quick use
+            ```js
+            import { base, stateLoading, http404, palettes } from '@byehsan/logo'
+            import '@byehsan/logo/css'
+            ```
+
+            ### Favicon HTML
+            ```html
+            <link rel="icon" type="image/svg+xml" href="base.svg">
+            <link rel="apple-touch-icon" href="apple-touch-icon.png">
+            <link rel="manifest" href="site.webmanifest">
             ```
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update package version
+        run: npm version ${{ github.ref_name }} --no-git-tag-version --allow-same-version
+
+      - name: Publish to GitHub Packages
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
