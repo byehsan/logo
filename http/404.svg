@@ -12,7 +12,7 @@
       80%       { opacity: 0.9; }
     }
     #mark {
-      transform-box: fill-box;
+      transform-box: view-box;
       transform-origin: 50px 56.67px;
       animation: tilt 2.4s ease-in-out infinite;
     }

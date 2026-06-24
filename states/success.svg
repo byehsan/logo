@@ -10,7 +10,7 @@
       100% { transform: scale(1);    }
     }
     #mark {
-      transform-box: fill-box;
+      transform-box: view-box;
       transform-origin: 50px 56.67px;
       animation: bloom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1 forwards;
     }

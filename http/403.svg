@@ -1,21 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512">
   <style>
-    /* 403 — bar wipes across once, firm refusal */
-    @keyframes wipe-in {
-      from { transform: scaleX(0); transform-origin: left center; }
-      to   { transform: scaleX(1); transform-origin: left center; }
+    /* 403 — tries once, gets refused, collapses to nothing */
+    @keyframes refused {
+      0%   { transform: scale(1);    opacity: 1;   }
+      18%  { transform: scale(1.08); opacity: 1;   }
+      38%  { transform: scale(0.88); opacity: 0.7; }
+      55%  { transform: scale(1.03); opacity: 0.4; }
+      100% { transform: scale(0);    opacity: 0;   }
     }
-    @keyframes wipe-out {
-      from { transform: scaleX(1); transform-origin: right center; }
-      to   { transform: scaleX(0); transform-origin: right center; }
-    }
-    #bar-in  { animation: wipe-in  0.25s ease-out 0.1s 1 forwards; transform: scaleX(0); }
-    #bar-out { animation: wipe-out 0.25s ease-in  0.5s 1 forwards; transform: scaleX(1); }
-    /* mark dims slightly while bar passes */
-    #mark    { animation: dim 0.6s ease 0.1s 1 forwards; }
-    @keyframes dim {
-      0%, 100% { opacity: 1; }
-      40%       { opacity: 0.35; }
+    #mark {
+      transform-box: view-box;
+      transform-origin: 50px 56.67px;
+      animation: refused 0.7s cubic-bezier(0.4, 0, 1, 1) 1 forwards;
     }
   </style>
   <g id="mark" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
@@ -29,7 +25,4 @@
       <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
     </g>
   </g>
-  <!-- wipe bar — two rects stacked to simulate wipe-in then wipe-out -->
-  <rect id="bar-in"  x="20" y="54" width="60" height="3" fill="currentColor" rx="1.5"/>
-  <rect id="bar-out" x="20" y="54" width="60" height="3" fill="currentColor" rx="1.5"/>
 </svg>

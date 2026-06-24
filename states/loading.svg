@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512">
   <style>
-    /* loading — 3-step discrete rotation, 1.2s cycle */
+    /* loading — smooth 3-step rotation, stays in frame via view-box origin */
     @keyframes step-spin {
       from { transform: rotate(0deg); }
       to   { transform: rotate(360deg); }
     }
     #mark {
-      transform-box: fill-box;
+      transform-box: view-box;
       transform-origin: 50px 56.67px;
-      animation: step-spin 1.2s steps(3, end) infinite;
+      animation: step-spin 1.8s steps(3, end) infinite;
     }
   </style>
   <g id="mark" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
