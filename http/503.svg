@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&amp;display=swap');
     /* 503 — asleep, slow breathe + Zzz floats up-right */
     @keyframes doze {
       0%, 100% { opacity: 0.35; }
