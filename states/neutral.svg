@@ -1,23 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512">
   <style>
-    /* neutral — calm blink every 6s, 120ms shut */
-    @keyframes blink {
-      0%, 92%, 100% { opacity: 1; }
-      94%           { opacity: 0.05; }
-      96%           { opacity: 1; }
+    /* neutral — double heartbeat pulse, alive and present */
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      12%       { transform: scale(1.05); }
+      22%       { transform: scale(1); }
+      32%       { transform: scale(1.08); }
+      48%       { transform: scale(1); }
     }
-    #p0, #p1, #p2 { animation: blink 6s ease-in-out infinite; }
-    #p1 { animation-delay: 0s; }
-    #p2 { animation-delay: 0s; }
+    #mark {
+      transform-box: view-box;
+      transform-origin: 50px 56.67px;
+      animation: heartbeat 2.5s ease-in-out infinite;
+    }
   </style>
   <g id="mark" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-    <g id="p0" transform="rotate(0 50 56.67)">
+    <g transform="rotate(0 50 56.67)">
       <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
     </g>
-    <g id="p1" transform="rotate(120 50 56.67)">
+    <g transform="rotate(120 50 56.67)">
       <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
     </g>
-    <g id="p2" transform="rotate(240 50 56.67)">
+    <g transform="rotate(240 50 56.67)">
       <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
     </g>
   </g>

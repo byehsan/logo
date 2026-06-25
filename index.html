@@ -292,17 +292,19 @@
 
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-          <style>@keyframes blink{0%,92%,100%{opacity:1}94%{opacity:.05}96%{opacity:1}}.nb{animation:blink 6s ease-in-out infinite}</style>
-          <g class="nb" transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-          <g class="nb" transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-          <g class="nb" transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+          <style>@keyframes hb{0%,100%{transform:scale(1)}12%{transform:scale(1.05)}22%{transform:scale(1)}32%{transform:scale(1.08)}48%{transform:scale(1)}}.nm{transform-box:view-box;transform-origin:50px 56.67px;animation:hb 2.5s ease-in-out infinite}</style>
+          <g class="nm">
+            <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+            <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+            <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+          </g>
         </svg>
         <label>neutral</label>
       </div>
 
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-          <style>@keyframes sspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}.ls{transform-box:view-box;transform-origin:50px 56.67px;animation:sspin 1.8s steps(3,end) infinite}</style>
+          <style>@keyframes sspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}.ls{transform-box:view-box;transform-origin:50px 56.67px;animation:sspin 3s linear infinite}</style>
           <g class="ls">
             <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
             <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
@@ -314,16 +316,11 @@
 
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-          <style>
-            @keyframes bloom2{0%{transform:scale(1);opacity:.6}30%{transform:scale(1.22);opacity:1}55%{transform:scale(.92)}75%{transform:scale(1.06)}90%{transform:scale(.98)}100%{transform:scale(1)}}
-            @keyframes fi2{from{opacity:0}to{opacity:1}}
-            .sm{transform-box:view-box;transform-origin:50px 56.67px;animation:bloom2 .5s cubic-bezier(.34,1.56,.64,1) 1s 1 forwards}
-            .s0{animation:fi2 .15s ease 1s forwards;opacity:0}.s1{animation:fi2 .15s ease 1.08s forwards;opacity:0}.s2{animation:fi2 .15s ease 1.16s forwards;opacity:0}
-          </style>
-          <g class="sm">
-            <g class="s0" transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-            <g class="s1" transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-            <g class="s2" transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+          <style>@keyframes joy2{0%,65%,100%{transform:scale(1)}15%{transform:scale(1.2)}28%{transform:scale(.9)}40%{transform:scale(1.07)}52%{transform:scale(.98)}60%{transform:scale(1)}}.jm{transform-box:view-box;transform-origin:50px 56.67px;animation:joy2 2.5s cubic-bezier(.34,1.56,.64,1) infinite}</style>
+          <g class="jm">
+            <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+            <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+            <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
           </g>
         </svg>
         <label>success</label>
@@ -341,8 +338,8 @@
 
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-          <style>@keyframes shk2{0%{transform:translateX(0)}15%{transform:translateX(3px)}30%{transform:translateX(-3px)}45%{transform:translateX(2px)}60%{transform:translateX(-2px)}75%{transform:translateX(1px)}90%{transform:translateX(-1px)}100%{transform:translateX(0)}}.em2{animation:shk2 .3s ease 1 forwards}</style>
-          <g class="em2">
+          <style>@keyframes frust{0%,55%,100%{transform:translateX(0)}5%{transform:translateX(-4px)}12%{transform:translateX(4px)}19%{transform:translateX(-3.5px)}26%{transform:translateX(3.5px)}33%{transform:translateX(-2px)}40%{transform:translateX(2px)}46%{transform:translateX(0)}}.er2{animation:frust 2.2s ease-in-out infinite}</style>
+          <g class="er2">
             <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
             <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
             <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
@@ -373,8 +370,8 @@
 
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-          <style>@keyframes fl2{0%{transform:translate(0,0);opacity:1}4%{transform:translate(2px,-1px)}8%{transform:translate(-2px,1px)}12%{transform:translate(1px,-1px);opacity:.7}16%,100%{transform:translate(0,0);opacity:.3}}.fm2{animation:fl2 .5s ease 1 forwards}</style>
-          <g class="fm2">
+          <style>@keyframes dying2{0%{transform:translate(0,0);opacity:1}3%{transform:translate(2px,-1px);opacity:.9}6%{transform:translate(-2px,1px);opacity:.7}9%{transform:translate(1px,-1px);opacity:.45}13%,72%{transform:translate(0,0);opacity:.2}76%{transform:translate(1px,0);opacity:.28}80%{transform:translate(0,0);opacity:.2}84%{transform:translate(-1px,1px);opacity:.26}88%{transform:translate(0,0);opacity:.2}93%{opacity:.6}96%,100%{opacity:1}}.dy2{animation:dying2 4s ease-in-out infinite}</style>
+          <g class="dy2">
             <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
             <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
             <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
@@ -398,8 +395,8 @@
 
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-          <style>@keyframes refused2{0%{transform:scale(1);opacity:1}18%{transform:scale(1.08);opacity:1}38%{transform:scale(.88);opacity:.7}55%{transform:scale(1.03);opacity:.4}100%{transform:scale(0);opacity:0}}.rf2{transform-box:view-box;transform-origin:50px 56.67px;animation:refused2 .7s cubic-bezier(.4,0,1,1) 1 forwards}</style>
-          <g class="rf2">
+          <style>@keyframes rl2{0%,100%{transform:scale(0);opacity:0}15%{transform:scale(1.05);opacity:1}25%{transform:scale(1);opacity:1}40%{transform:scale(1.08);opacity:1}62%{transform:scale(.2);opacity:.2}80%{transform:scale(0);opacity:0}}.rl2{transform-box:view-box;transform-origin:50px 56.67px;animation:rl2 2.8s cubic-bezier(.4,0,.6,1) infinite}</style>
+          <g class="rl2">
             <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
             <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
             <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>

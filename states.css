@@ -2,47 +2,54 @@
   byEhsan logo — state animations (Option B: class-driven)
   Usage: add class to the <svg> element, e.g. <svg class="state-loading">
   All animations theme via currentColor — set `color` on the SVG or a parent.
-  transform-box/transform-origin target the #mark group inside the SVG.
 */
 
 /* ─── KEYFRAMES ─────────────────────────────────────────────────────────── */
 
-@keyframes be-blink {
-  0%, 92%, 100% { opacity: 1; }
-  94%            { opacity: 0.05; }
-  96%            { opacity: 1; }
+/* neutral — double heartbeat, alive */
+@keyframes be-heartbeat {
+  0%, 100% { transform: scale(1); }
+  12%       { transform: scale(1.05); }
+  22%       { transform: scale(1); }
+  32%       { transform: scale(1.08); }
+  48%       { transform: scale(1); }
 }
 
-@keyframes be-step-spin {
+/* loading — smooth patient rotation */
+@keyframes be-smooth-spin {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
 
-@keyframes be-bloom {
-  0%   { transform: scale(1);    opacity: 0.6; }
-  30%  { transform: scale(1.22); opacity: 1; }
-  55%  { transform: scale(0.92); }
-  75%  { transform: scale(1.06); }
-  90%  { transform: scale(0.98); }
-  100% { transform: scale(1); }
+/* success — spring joy, loops */
+@keyframes be-joy {
+  0%, 65%, 100% { transform: scale(1); }
+  15%  { transform: scale(1.2); }
+  28%  { transform: scale(0.9); }
+  40%  { transform: scale(1.07); }
+  52%  { transform: scale(0.98); }
+  60%  { transform: scale(1); }
 }
 
+/* warning — asymmetric petal pulse, alert */
 @keyframes be-warn-pulse {
   0%, 100% { stroke-width: 2;   opacity: 1; }
   50%       { stroke-width: 3.5; opacity: 0.75; }
 }
 
-@keyframes be-shake {
-  0%   { transform: translateX(0); }
-  15%  { transform: translateX(3px); }
-  30%  { transform: translateX(-3px); }
-  45%  { transform: translateX(2px); }
-  60%  { transform: translateX(-2px); }
-  75%  { transform: translateX(1px); }
-  90%  { transform: translateX(-1px); }
-  100% { transform: translateX(0); }
+/* error — frustrated shake × 3, pause, repeat */
+@keyframes be-frustrated {
+  0%, 55%, 100% { transform: translateX(0); }
+  5%   { transform: translateX(-4px); }
+  12%  { transform: translateX(4px); }
+  19%  { transform: translateX(-3.5px); }
+  26%  { transform: translateX(3.5px); }
+  33%  { transform: translateX(-2px); }
+  40%  { transform: translateX(2px); }
+  46%  { transform: translateX(0); }
 }
 
+/* 404 — confused tilt oscillation */
 @keyframes be-tilt {
   0%, 100% { transform: rotate(0deg); }
   20%       { transform: rotate(6deg); }
@@ -55,65 +62,69 @@
   80%       { opacity: 0.9; }
 }
 
-@keyframes be-flatline {
-  0%   { transform: translate(0,0);      opacity: 1; }
-  4%   { transform: translate(2px,-1px); opacity: 1; }
-  8%   { transform: translate(-2px,1px); opacity: 1; }
-  12%  { transform: translate(1px,-1px); opacity: 0.7; }
-  16%  { transform: translate(0,0);      opacity: 0.3; }
-  100% { transform: translate(0,0);      opacity: 0.3; }
+/* 500 — dying machine, glitch → dim → rattle → flicker → repeat */
+@keyframes be-dying {
+  0%   { transform: translate(0,0);      opacity: 1;   }
+  3%   { transform: translate(2px,-1px); opacity: 0.9; }
+  6%   { transform: translate(-2px,1px); opacity: 0.7; }
+  9%   { transform: translate(1px,-1px); opacity: 0.45;}
+  13%  { transform: translate(0,0);      opacity: 0.2; }
+  72%  { transform: translate(0,0);      opacity: 0.2; }
+  76%  { transform: translate(1px,0);    opacity: 0.28;}
+  80%  { transform: translate(0,0);      opacity: 0.2; }
+  84%  { transform: translate(-1px,1px); opacity: 0.26;}
+  88%  { transform: translate(0,0);      opacity: 0.2; }
+  93%  { opacity: 0.6; }
+  96%  { opacity: 1;   }
+  100% { opacity: 1;   }
 }
 
+/* 503 — asleep, slow breathe */
 @keyframes be-doze {
   0%, 100% { opacity: 0.35; }
   50%       { opacity: 0.15; }
 }
 
 @keyframes be-zzz {
-  0%   { opacity: 0;   transform: translate(0,0)       scale(0.7); }
+  0%   { opacity: 0;   transform: translate(0,0)        scale(0.7); }
   15%  { opacity: 1; }
   85%  { opacity: 0.8; }
-  100% { opacity: 0;   transform: translate(14px,-14px) scale(1.1); }
+  100% { opacity: 0;   transform: translate(14px,-14px)  scale(1.1); }
 }
 
-@keyframes be-refused {
-  0%   { transform: scale(1);    opacity: 1;   }
-  18%  { transform: scale(1.08); opacity: 1;   }
-  38%  { transform: scale(0.88); opacity: 0.7; }
-  55%  { transform: scale(1.03); opacity: 0.4; }
-  100% { transform: scale(0);    opacity: 0;   }
-}
-
-@keyframes be-fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+/* 403 — appears, tries, gets refused, collapses to nothing, loops */
+@keyframes be-refused-loop {
+  0%    { transform: scale(0);    opacity: 0;   }
+  15%   { transform: scale(1.05); opacity: 1;   }
+  25%   { transform: scale(1);    opacity: 1;   }
+  40%   { transform: scale(1.08); opacity: 1;   }
+  62%   { transform: scale(0.2);  opacity: 0.2; }
+  80%   { transform: scale(0);    opacity: 0;   }
+  100%  { transform: scale(0);    opacity: 0;   }
 }
 
 /* ─── STATE CLASSES ─────────────────────────────────────────────────────── */
 
 /* neutral */
-.state-neutral #p0,
-.state-neutral #p1,
-.state-neutral #p2 {
-  animation: be-blink 6s ease-in-out infinite;
+.state-neutral #mark {
+  transform-box: view-box;
+  transform-origin: 50px 56.67px;
+  animation: be-heartbeat 2.5s ease-in-out infinite;
 }
 
 /* loading */
 .state-loading #mark {
   transform-box: view-box;
   transform-origin: 50px 56.67px;
-  animation: be-step-spin 1.8s steps(3, end) infinite;
+  animation: be-smooth-spin 3s linear infinite;
 }
 
 /* success */
 .state-success #mark {
   transform-box: view-box;
   transform-origin: 50px 56.67px;
-  animation: be-bloom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1 forwards;
+  animation: be-joy 2.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
 }
-.state-success #p0 { animation: be-fade-in 0.15s ease forwards; }
-.state-success #p1 { animation: be-fade-in 0.15s ease 0.08s forwards; opacity: 0; }
-.state-success #p2 { animation: be-fade-in 0.15s ease 0.16s forwards; opacity: 0; }
 
 /* warning */
 .state-warning #p0 path { animation: be-warn-pulse 0.8s ease-in-out infinite; }
@@ -121,9 +132,7 @@
 .state-warning #p2 path { animation: be-warn-pulse 0.8s ease-in-out 0.53s infinite; opacity: 0.6; }
 
 /* error */
-.state-error #mark {
-  animation: be-shake 0.3s ease 1 forwards;
-}
+.state-error #mark { animation: be-frustrated 2.2s ease-in-out infinite; }
 
 /* 404 */
 .state-404 #mark {
@@ -135,17 +144,15 @@
 .state-404 #p2 path { animation: be-drift 2.4s ease-in-out 0.6s infinite; }
 
 /* 500 */
-.state-500 #mark {
-  animation: be-flatline 0.5s ease 1 forwards;
-}
+.state-500 #mark { animation: be-dying 4s ease-in-out infinite; }
 
 /* 503 */
-.state-503 #mark  { animation: be-doze 2s ease-in-out infinite; }
-.state-503 #zzz   { animation: be-zzz  2s ease-in-out infinite; }
+.state-503 #mark { animation: be-doze 2s ease-in-out infinite; }
+.state-503 #zzz  { animation: be-zzz  2s ease-in-out infinite; }
 
 /* 403 */
 .state-403 #mark {
   transform-box: view-box;
   transform-origin: 50px 56.67px;
-  animation: be-refused 0.7s cubic-bezier(0.4, 0, 1, 1) 1 forwards;
+  animation: be-refused-loop 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

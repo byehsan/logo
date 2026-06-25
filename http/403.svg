@@ -1,17 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512">
   <style>
-    /* 403 — tries once, gets refused, collapses to nothing */
-    @keyframes refused {
-      0%   { transform: scale(1);    opacity: 1;   }
-      18%  { transform: scale(1.08); opacity: 1;   }
-      38%  { transform: scale(0.88); opacity: 0.7; }
-      55%  { transform: scale(1.03); opacity: 0.4; }
-      100% { transform: scale(0);    opacity: 0;   }
+    /* 403 — appears, tries to push through, gets refused, collapses. loops. */
+    @keyframes refused-loop {
+      0%    { transform: scale(0);    opacity: 0;   }
+      15%   { transform: scale(1.05); opacity: 1;   }
+      25%   { transform: scale(1);    opacity: 1;   }
+      40%   { transform: scale(1.08); opacity: 1;   }
+      62%   { transform: scale(0.2);  opacity: 0.2; }
+      80%   { transform: scale(0);    opacity: 0;   }
+      100%  { transform: scale(0);    opacity: 0;   }
     }
     #mark {
       transform-box: view-box;
       transform-origin: 50px 56.67px;
-      animation: refused 0.7s cubic-bezier(0.4, 0, 1, 1) 1 forwards;
+      animation: refused-loop 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
   </style>
   <g id="mark" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
