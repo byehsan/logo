@@ -95,6 +95,47 @@
     input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; border-radius: 50%; }
     input[type="color"]::-webkit-color-swatch { border-radius: 50%; border: 2px solid var(--muted); }
 
+    /* ── Palette Codes Widget ── */
+    .palette-tokens-section {
+      margin-top: 20px;
+      border-top: 1px solid var(--muted);
+      padding-top: 16px;
+    }
+    .palette-tokens-header {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .palette-tokens-label {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      opacity: 0.35;
+    }
+    .codes-toggle-btn {
+      appearance: none; border: 1px solid var(--muted); background: transparent;
+      color: var(--text); font-family: inherit; font-size: 10px; letter-spacing: 1px;
+      padding: 3px 10px; border-radius: 12px; cursor: pointer;
+      opacity: 0.5; transition: opacity 0.2s; text-transform: uppercase;
+    }
+    .codes-toggle-btn:hover { opacity: 1; }
+    .token-chips-grid {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;
+    }
+    .token-chips-grid.hidden { display: none; }
+    .token-chip {
+      display: flex; align-items: center; gap: 9px;
+      background: var(--muted); border-radius: 8px;
+      padding: 9px 13px; cursor: pointer; transition: all 0.15s;
+      border: 1px solid transparent; appearance: none; text-align: left;
+      color: var(--text); font-family: inherit;
+    }
+    .token-chip:hover { border-color: var(--mark); }
+    .token-swatch {
+      width: 18px; height: 18px; border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.12); flex-shrink: 0;
+    }
+    .token-info { display: flex; flex-direction: column; gap: 2px; }
+    .token-name { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.45; }
+    .token-hex { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; font-weight: 500; }
+    .token-chip .copied-flash { color: #2ecc71; }
+
     /* ── Mark grid ── */
     .mark-grid {
       display: flex; flex-wrap: wrap; gap: var(--gap); align-items: flex-end;
@@ -141,6 +182,129 @@
       text-transform: uppercase; opacity: 0.35; margin-bottom: 16px;
     }
     .lockup-cell svg { color: var(--mark); transition: color 0.3s; }
+
+    /* ── Sub-brand Generator ── */
+    .generator-card {
+      background: var(--muted); border-radius: var(--radius);
+      padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 22px;
+    }
+    .gen-tabs {
+      display: flex; gap: 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 16px;
+    }
+    .gen-tab {
+      appearance: none; border: none; background: transparent;
+      color: var(--text); font-family: inherit; font-size: 13px; font-weight: 500;
+      padding: 8px 16px; border-radius: 8px; cursor: pointer;
+      opacity: 0.38; transition: all 0.2s;
+    }
+    .gen-tab:hover { opacity: 0.72; background: rgba(255,255,255,0.05); }
+    .gen-tab.active { opacity: 1; background: rgba(255,255,255,0.09); }
+    .gen-panel { display: flex; flex-direction: column; gap: 10px; }
+    .gen-panel.hidden { display: none; }
+    .field-label {
+      display: block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      opacity: 0.4; margin-bottom: 6px;
+    }
+    .gen-text-input {
+      background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; color: var(--text);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 22px; font-weight: 600; letter-spacing: -0.5px;
+      padding: 11px 16px; width: 100%; transition: border-color 0.2s;
+    }
+    .gen-text-input:focus { outline: none; border-color: var(--mark); }
+    .gen-text-input::placeholder { opacity: 0.25; }
+    .gen-svg-textarea {
+      background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; color: var(--text);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 11px; line-height: 1.55; padding: 11px 14px; width: 100%;
+      resize: vertical; transition: border-color 0.2s;
+    }
+    .gen-svg-textarea:focus { outline: none; border-color: var(--mark); }
+    .gen-svg-textarea::placeholder { opacity: 0.3; }
+    .gen-file-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; border: 1px dashed rgba(255,255,255,0.18);
+      border-radius: 8px; padding: 9px 16px; cursor: pointer;
+      font-size: 12px; opacity: 0.55; transition: opacity 0.2s; color: var(--text);
+      width: fit-content;
+    }
+    .gen-file-label:hover { opacity: 1; }
+    .gen-slider-row {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .gen-slider {
+      flex: 1; accent-color: var(--mark); cursor: pointer;
+    }
+    .gen-slider-val {
+      font-size: 11px; font-family: 'SF Mono', monospace; opacity: 0.55;
+      min-width: 34px; text-align: right;
+    }
+    /* Palette chips for generator */
+    .gen-palette-row {
+      display: flex; flex-wrap: wrap; gap: 7px; align-items: center;
+    }
+    .gen-pal-btn {
+      appearance: none; border: 2px solid transparent; border-radius: 50%;
+      cursor: pointer; padding: 2px; background: transparent;
+      transition: border-color 0.15s;
+    }
+    .gen-pal-btn:hover { border-color: rgba(255,255,255,0.3); }
+    .gen-pal-btn.active { border-color: var(--mark); }
+    .gen-pal-swatch {
+      width: 26px; height: 26px; border-radius: 50%; display: block;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .gen-divider {
+      width: 1px; height: 24px; background: rgba(255,255,255,0.1); margin: 0 4px;
+    }
+    .gen-color-pair {
+      display: flex; align-items: center; gap: 4px;
+    }
+    .gen-color-pair label {
+      font-size: 9px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.35;
+    }
+    /* Preview area */
+    .gen-preview-wrap {
+      background: rgba(0,0,0,0.22); border-radius: 10px; padding: 20px;
+    }
+    .gen-preview-checkers {
+      background-image: repeating-conic-gradient(rgba(255,255,255,0.03) 0% 25%, transparent 0% 50%);
+      background-size: 12px 12px;
+      border-radius: 6px; padding: 20px;
+      display: flex; justify-content: center; align-items: center; min-height: 80px;
+    }
+    #gen-preview-box svg { max-width: 100%; height: auto; display: block; }
+    /* Download row */
+    .gen-download-row {
+      display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end;
+      padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .gen-dl-group { display: flex; flex-direction: column; gap: 7px; }
+    .size-chip-row, .format-chip-row {
+      display: flex; gap: 5px; flex-wrap: wrap;
+    }
+    .size-chip, .format-chip {
+      appearance: none; border: 1px solid rgba(255,255,255,0.12);
+      background: transparent; color: var(--text); font-family: inherit;
+      font-size: 11px; padding: 5px 11px; border-radius: 20px; cursor: pointer;
+      transition: all 0.15s;
+    }
+    .size-chip.active, .size-chip:hover,
+    .format-chip.active, .format-chip:hover {
+      border-color: var(--mark); color: var(--mark);
+    }
+    .gen-dl-btn {
+      appearance: none; background: var(--mark); color: var(--bg);
+      border: none; border-radius: 8px; font-family: inherit;
+      font-size: 13px; font-weight: 600; padding: 10px 22px;
+      cursor: pointer; transition: opacity 0.2s; display: flex;
+      align-items: center; gap: 7px; margin-left: auto;
+    }
+    .gen-dl-btn:hover { opacity: 0.85; }
+    .gen-dl-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
     /* ── Install ── */
     .install-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
@@ -204,7 +368,7 @@
           <div class="wordmark"><span>by</span>Ehsan <span class="tag">logo system</span></div>
         </div>
       </div>
-      <span class="version-badge" id="version-badge">v2.0.0</span>
+      <span class="version-badge" id="version-badge">v2.3.0</span>
     </div>
   </div>
 </header>
@@ -234,6 +398,17 @@
       <div class="custom-color-wrap">
         <label>Custom mark</label>
         <input type="color" id="custom-color" value="#f07828">
+      </div>
+    </div>
+
+    <!-- Color token codes widget -->
+    <div class="palette-tokens-section">
+      <div class="palette-tokens-header">
+        <span class="palette-tokens-label">Color tokens</span>
+        <button class="codes-toggle-btn" id="codes-toggle-btn">show codes</button>
+      </div>
+      <div class="token-chips-grid hidden" id="token-chips-grid">
+        <!-- injected by JS -->
       </div>
     </div>
   </section>
@@ -444,6 +619,109 @@
     </div>
   </section>
 
+  <!-- Sub-brand Logo Generator -->
+  <section>
+    <div class="section-label">Sub-brand logo generator</div>
+    <div class="generator-card">
+
+      <!-- Mode tabs -->
+      <div class="gen-tabs">
+        <button class="gen-tab active" data-tab="text">Text sub-brand</button>
+        <button class="gen-tab" data-tab="custommark">Custom mark (SVG)</button>
+      </div>
+
+      <!-- Sub-brand text (always shown) -->
+      <div>
+        <label class="field-label" for="gen-text">Sub-brand name</label>
+        <input type="text" class="gen-text-input" id="gen-text" placeholder="e.g. blog, store, news…" value="blog" maxlength="48" autocomplete="off" spellcheck="false">
+      </div>
+
+      <!-- Font size slider (text mode only) -->
+      <div id="gen-fontsize-row">
+        <label class="field-label">Font size</label>
+        <div class="gen-slider-row">
+          <input type="range" id="gen-font-size" min="12" max="40" value="24" step="1" class="gen-slider">
+          <span class="gen-slider-val" id="gen-font-size-val">24px</span>
+        </div>
+      </div>
+
+      <!-- Custom mark SVG panel -->
+      <div class="gen-panel hidden" id="gen-panel-custommark">
+        <label class="field-label">Custom mark SVG — replaces the triskelion on the left</label>
+        <label class="gen-file-label" for="gen-svg-file">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Upload SVG file
+          <input type="file" id="gen-svg-file" accept=".svg,image/svg+xml" style="display:none">
+        </label>
+        <textarea class="gen-svg-textarea" id="gen-svg-code" placeholder="…or paste SVG code here&#10;&#10;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&#10;  &lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;40&quot; fill=&quot;currentColor&quot;/&gt;&#10;&lt;/svg&gt;" rows="6"></textarea>
+      </div>
+
+      <!-- Palette presets -->
+      <div>
+        <label class="field-label">Palette</label>
+        <div class="gen-palette-row">
+          <button class="gen-pal-btn active" data-pal="brand-dark" title="Brand Dark">
+            <span class="gen-pal-swatch" style="background: conic-gradient(#0a0514 180deg, #f07828 180deg)"></span>
+          </button>
+          <button class="gen-pal-btn" data-pal="brand-light" title="Brand Light">
+            <span class="gen-pal-swatch" style="background: conic-gradient(#eeeef4 180deg, #f07828 180deg)"></span>
+          </button>
+          <button class="gen-pal-btn" data-pal="mono-dark" title="Mono Dark">
+            <span class="gen-pal-swatch" style="background: conic-gradient(#0f0f0f 180deg, #ffffff 180deg)"></span>
+          </button>
+          <button class="gen-pal-btn" data-pal="mono-light" title="Mono Light">
+            <span class="gen-pal-swatch" style="background: conic-gradient(#f0f0f0 180deg, #111111 180deg)"></span>
+          </button>
+          <button class="gen-pal-btn" data-pal="indigo" title="Indigo">
+            <span class="gen-pal-swatch" style="background: conic-gradient(#0a0514 180deg, #5901d8 180deg)"></span>
+          </button>
+          <div class="gen-divider"></div>
+          <div class="gen-color-pair">
+            <label for="gen-mark-color">Mark</label>
+            <input type="color" id="gen-mark-color" value="#f07828" title="Mark & text color">
+          </div>
+          <div class="gen-color-pair">
+            <label for="gen-bg-color">BG</label>
+            <input type="color" id="gen-bg-color" value="#0a0514" title="Background color">
+          </div>
+        </div>
+      </div>
+
+      <!-- Live preview -->
+      <div class="gen-preview-wrap">
+        <label class="field-label">Live preview</label>
+        <div class="gen-preview-checkers">
+          <div id="gen-preview-box"></div>
+        </div>
+      </div>
+
+      <!-- Download controls -->
+      <div class="gen-download-row">
+        <div class="gen-dl-group">
+          <label class="field-label">Size</label>
+          <div class="size-chip-row" id="gen-size-chips">
+            <button class="size-chip" data-scale="0.5">½×</button>
+            <button class="size-chip active" data-scale="1">1× <span style="opacity:0.45;font-size:10px" id="gen-size-label">220×56</span></button>
+            <button class="size-chip" data-scale="2">2×</button>
+            <button class="size-chip" data-scale="4">4×</button>
+          </div>
+        </div>
+        <div class="gen-dl-group">
+          <label class="field-label">Format</label>
+          <div class="format-chip-row" id="gen-format-chips">
+            <button class="format-chip active" data-fmt="svg">SVG</button>
+            <button class="format-chip" data-fmt="png">PNG</button>
+          </div>
+        </div>
+        <button class="gen-dl-btn" id="gen-dl-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download
+        </button>
+      </div>
+
+    </div>
+  </section>
+
   <!-- Install -->
   <section>
     <div class="section-label">Install</div>
@@ -520,6 +798,7 @@ npm install @byehsan/logo</pre>
 </footer>
 
 <script>
+  // ── Global palette ──
   const PALETTES = {
     'brand-dark':  { bg:'#0a0514', mark:'#f07828', text:'#eeeef4', accent:'#5901d8', muted:'rgba(238,238,244,0.12)' },
     'brand-light': { bg:'#eeeef4', mark:'#f07828', text:'#0a0514', accent:'#5901d8', muted:'rgba(10,5,20,0.1)' },
@@ -537,7 +816,6 @@ npm install @byehsan/logo</pre>
     r.setProperty('--muted', p.muted);
   }
 
-  // Palette buttons
   document.querySelectorAll('.palette-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
@@ -547,13 +825,11 @@ npm install @byehsan/logo</pre>
     });
   });
 
-  // Custom color picker
   document.getElementById('custom-color').addEventListener('input', e => {
     document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
     document.documentElement.style.setProperty('--mark', e.target.value);
   });
 
-  // Copy buttons
   document.querySelectorAll('.copy-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       navigator.clipboard.writeText(btn.dataset.copy).then(() => {
@@ -564,7 +840,6 @@ npm install @byehsan/logo</pre>
     });
   });
 
-  // Fetch version from GitHub API
   fetch('https://api.github.com/repos/byehsan/logo/releases/latest')
     .then(r => r.json())
     .then(d => {
@@ -574,6 +849,314 @@ npm install @byehsan/logo</pre>
         if (zip) zip.href = `https://github.com/byehsan/logo/releases/download/${d.tag_name}/byehsan-logo-${d.tag_name}.zip`;
       }
     }).catch(() => {});
+
+
+  // ── Palette codes widget ──
+  const BRAND_TOKENS = [
+    { name: 'dark',    hex: '#0a0514', note: 'bg, outlines' },
+    { name: 'orange',  hex: '#f07828', note: 'primary accent' },
+    { name: 'indigo',  hex: '#5901d8', note: 'secondary accent' },
+    { name: 'light',   hex: '#eeeef4', note: 'text on dark' },
+    { name: 'success', hex: '#2ecc71', note: 'success state' },
+    { name: 'error',   hex: '#e74c3c', note: 'error state' },
+  ];
+
+  const tokenGrid = document.getElementById('token-chips-grid');
+  const codesToggle = document.getElementById('codes-toggle-btn');
+
+  BRAND_TOKENS.forEach(token => {
+    const chip = document.createElement('button');
+    chip.className = 'token-chip';
+    chip.title = `Click to copy ${token.hex}`;
+    chip.innerHTML = `
+      <span class="token-swatch" style="background:${token.hex}"></span>
+      <span class="token-info">
+        <span class="token-name">${token.name}</span>
+        <span class="token-hex">${token.hex}</span>
+      </span>
+    `;
+    chip.addEventListener('click', () => {
+      navigator.clipboard.writeText(token.hex).then(() => {
+        const hexEl = chip.querySelector('.token-hex');
+        const prev = hexEl.textContent;
+        hexEl.textContent = 'copied!';
+        hexEl.classList.add('copied-flash');
+        setTimeout(() => { hexEl.textContent = prev; hexEl.classList.remove('copied-flash'); }, 1300);
+      });
+    });
+    tokenGrid.appendChild(chip);
+  });
+
+  codesToggle.addEventListener('click', () => {
+    const isHidden = tokenGrid.classList.toggle('hidden');
+    codesToggle.textContent = isHidden ? 'show codes' : 'hide codes';
+  });
+
+
+  // ── Sub-brand Logo Generator ──
+  const GEN_PALETTES = {
+    'brand-dark':  { mark: '#f07828', bg: '#0a0514' },
+    'brand-light': { mark: '#f07828', bg: '#eeeef4' },
+    'mono-dark':   { mark: '#ffffff', bg: '#0f0f0f' },
+    'mono-light':  { mark: '#111111', bg: '#f0f0f0' },
+    'indigo':      { mark: '#5901d8', bg: '#0a0514' },
+  };
+
+  const TRISKELION_INNER = `<g fill="none" stroke-width="2" stroke-linejoin="round">
+    <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+    <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+    <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+  </g>`;
+
+  let genMode = 'text';
+  let genMarkColor = '#f07828';
+  let genBgColor = '#0a0514';
+  let genText = 'blog';
+  let genFontSize = 24;
+  let genCustomSvgInner = null;
+  let genCustomSvgViewBox = '0 0 100 100';
+  let genScale = 1;
+  let genFormat = 'svg';
+
+  function xmlEsc(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function calcLockupWidth() {
+    // Estimate text pixel width for Space Grotesk 600
+    const charWidth = genFontSize * 0.60;
+    const textPixels = Math.max(60, genText.length * charWidth + 8);
+    return Math.ceil(Math.max(220, 64 + textPixels + 12));
+  }
+
+  function buildSVG(opts = {}) {
+    const { forDownload = false, useSystemFont = false } = opts;
+    const W = calcLockupWidth();
+    const H = 56;
+    const baseline = (28 + genFontSize * 0.35).toFixed(1);
+    const fontFamily = useSystemFont
+      ? "system-ui, sans-serif"
+      : "'Space Grotesk', system-ui, sans-serif";
+
+    // Mark content
+    let markSVG;
+    if (genMode === 'custommark' && genCustomSvgInner) {
+      markSVG = `<svg x="0" y="4" width="48" height="48" viewBox="${genCustomSvgViewBox}" overflow="visible">
+        ${genCustomSvgInner}
+      </svg>`;
+    } else {
+      markSVG = `<svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100">
+        <g fill="none" stroke="${genMarkColor}" stroke-width="2" stroke-linejoin="round">
+          <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+          <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+          <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+        </g>
+      </svg>`;
+    }
+
+    const fontImport = (!useSystemFont && forDownload)
+      ? `<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&amp;display=swap');</style>\n  `
+      : '';
+
+    const sizeAttrs = forDownload
+      ? `width="${Math.round(W * genScale)}" height="${Math.round(H * genScale)}"`
+      : '';
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" ${sizeAttrs}>
+  ${fontImport}<rect width="${W}" height="${H}" fill="${genBgColor}"/>
+  ${markSVG}
+  <text x="64" y="${baseline}"
+    font-family="${fontFamily}"
+    font-size="${genFontSize}" font-weight="600" letter-spacing="-0.5"
+    fill="${genMarkColor}">${xmlEsc(genText)}</text>
+</svg>`;
+  }
+
+  function updatePreview() {
+    const W = calcLockupWidth();
+    document.getElementById('gen-size-label').textContent = `${W}×56`;
+    document.getElementById('gen-preview-box').innerHTML = buildSVG({ forDownload: false });
+  }
+
+  // Initial render
+  updatePreview();
+
+  // Text input
+  document.getElementById('gen-text').addEventListener('input', e => {
+    genText = e.target.value;
+    updatePreview();
+  });
+
+  // Font size slider
+  const fsSlider = document.getElementById('gen-font-size');
+  const fsVal = document.getElementById('gen-font-size-val');
+  fsSlider.addEventListener('input', e => {
+    genFontSize = parseInt(e.target.value);
+    fsVal.textContent = genFontSize + 'px';
+    updatePreview();
+  });
+
+  // Mode tabs
+  document.querySelectorAll('.gen-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.gen-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      genMode = tab.dataset.tab;
+      const customPanel = document.getElementById('gen-panel-custommark');
+      const fontRow = document.getElementById('gen-fontsize-row');
+      if (genMode === 'custommark') {
+        customPanel.classList.remove('hidden');
+      } else {
+        customPanel.classList.add('hidden');
+      }
+      updatePreview();
+    });
+  });
+
+  // SVG sanitizer — strips scripts and event handlers
+  function parseSanitizedSVG(svgString) {
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(svgString.trim(), 'image/svg+xml');
+      if (doc.querySelector('parsererror')) return null;
+      const svg = doc.documentElement;
+      svg.querySelectorAll('script').forEach(el => el.remove());
+      svg.querySelectorAll('*').forEach(el => {
+        Array.from(el.attributes).forEach(attr => {
+          if (attr.name.startsWith('on') ||
+              (attr.name === 'href' && attr.value.startsWith('javascript:'))) {
+            el.removeAttribute(attr.name);
+          }
+        });
+      });
+      return {
+        inner: svg.innerHTML,
+        viewBox: svg.getAttribute('viewBox') || '0 0 100 100',
+      };
+    } catch (_) { return null; }
+  }
+
+  function applySVGInput(svgString) {
+    const result = parseSanitizedSVG(svgString);
+    if (result) {
+      genCustomSvgInner = result.inner;
+      genCustomSvgViewBox = result.viewBox;
+    } else {
+      genCustomSvgInner = null;
+    }
+    updatePreview();
+  }
+
+  document.getElementById('gen-svg-code').addEventListener('input', e => {
+    applySVGInput(e.target.value);
+  });
+
+  document.getElementById('gen-svg-file').addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const text = ev.target.result;
+      document.getElementById('gen-svg-code').value = text;
+      applySVGInput(text);
+    };
+    reader.readAsText(file);
+  });
+
+  // Palette preset chips
+  document.querySelectorAll('.gen-pal-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.gen-pal-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const pal = GEN_PALETTES[btn.dataset.pal];
+      genMarkColor = pal.mark;
+      genBgColor = pal.bg;
+      document.getElementById('gen-mark-color').value = genMarkColor;
+      document.getElementById('gen-bg-color').value = genBgColor;
+      updatePreview();
+    });
+  });
+
+  document.getElementById('gen-mark-color').addEventListener('input', e => {
+    genMarkColor = e.target.value;
+    document.querySelectorAll('.gen-pal-btn').forEach(b => b.classList.remove('active'));
+    updatePreview();
+  });
+
+  document.getElementById('gen-bg-color').addEventListener('input', e => {
+    genBgColor = e.target.value;
+    document.querySelectorAll('.gen-pal-btn').forEach(b => b.classList.remove('active'));
+    updatePreview();
+  });
+
+  // Size chips
+  document.querySelectorAll('.size-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      genScale = parseFloat(chip.dataset.scale);
+    });
+  });
+
+  // Format chips
+  document.querySelectorAll('.format-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.format-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      genFormat = chip.dataset.fmt;
+    });
+  });
+
+  // Download
+  document.getElementById('gen-dl-btn').addEventListener('click', () => {
+    const safeName = (genText || 'logo').replace(/[^a-z0-9]/gi, '-').toLowerCase().slice(0, 32) || 'logo';
+    const W = calcLockupWidth();
+    const H = 56;
+    const pw = Math.round(W * genScale);
+    const ph = Math.round(H * genScale);
+
+    if (genFormat === 'svg') {
+      const svgStr = buildSVG({ forDownload: true, useSystemFont: false });
+      const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `byehsan-${safeName}.svg`;
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    } else {
+      // PNG: use system fonts to avoid CORS canvas taint
+      const svgStr = buildSVG({ forDownload: true, useSystemFont: true });
+      const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+      const svgUrl = URL.createObjectURL(blob);
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = pw; canvas.height = ph;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, pw, ph);
+        canvas.toBlob(pngBlob => {
+          const url = URL.createObjectURL(pngBlob);
+          const a = document.createElement('a');
+          a.href = url; a.download = `byehsan-${safeName}-${pw}x${ph}.png`;
+          document.body.appendChild(a); a.click();
+          document.body.removeChild(a);
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }, 'image/png');
+        URL.revokeObjectURL(svgUrl);
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(svgUrl);
+        alert('PNG export failed — try SVG format instead.');
+      };
+      img.src = svgUrl;
+    }
+  });
 </script>
 
 </body>
