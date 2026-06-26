@@ -1,6 +1,6 @@
 {
   "name": "@byehsan/logo",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "byEhsan brand logo system — triskelion mark, state animations, HTTP error states, lockups, favicons",
   "type": "module",
   "main": "dist/index.js",
