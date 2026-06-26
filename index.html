@@ -28,42 +28,21 @@
 
     /* ── Layout ── */
     .container { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
-    header {
-      border-bottom: 1px solid var(--muted);
-      padding: 20px 0;
-    }
-    header .inner {
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo-lockup {
-      display: flex; align-items: center; gap: 14px;
-    }
+    header { border-bottom: 1px solid var(--muted); padding: 20px 0; }
+    header .inner { display: flex; align-items: center; justify-content: space-between; }
+    .logo-lockup { display: flex; align-items: center; gap: 14px; }
     .logo-lockup svg { color: var(--mark); transition: color 0.3s; }
-    .logo-lockup .wordmark {
-      font-size: 18px; font-weight: 600; letter-spacing: -0.5px;
-    }
+    .logo-lockup .wordmark { font-size: 18px; font-weight: 600; letter-spacing: -0.5px; }
     .wordmark span { color: var(--mark); transition: color 0.3s; }
-    .tag {
-      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--text); opacity: 0.35; margin-left: 6px;
-    }
-    .version-badge {
-      font-size: 11px; padding: 3px 10px;
-      border: 1px solid var(--muted); border-radius: 20px;
-      color: var(--text); opacity: 0.5;
-    }
+    .tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text); opacity: 0.35; margin-left: 6px; }
+    .version-badge { font-size: 11px; padding: 3px 10px; border: 1px solid var(--muted); border-radius: 20px; color: var(--text); opacity: 0.5; }
 
     main { padding: 56px 0; }
     section { margin-bottom: 64px; }
-    .section-label {
-      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--text); opacity: 0.35; margin-bottom: 28px;
-    }
+    .section-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text); opacity: 0.35; margin-bottom: 28px; }
 
     /* ── Palette switcher ── */
-    .palette-bar {
-      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
-    }
+    .palette-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
     .palette-btn {
       appearance: none; border: none; cursor: pointer;
       padding: 7px 16px; border-radius: 20px;
@@ -72,271 +51,181 @@
       transition: all 0.2s; border: 1px solid transparent;
     }
     .palette-btn:hover { opacity: 0.9; }
-    .palette-btn.active {
-      border-color: var(--mark); color: var(--mark);
-      background: transparent;
-    }
+    .palette-btn.active { border-color: var(--mark); color: var(--mark); background: transparent; }
     .palette-swatch {
       width: 18px; height: 18px; border-radius: 50%;
       display: inline-block; vertical-align: middle; margin-right: 6px;
       border: 2px solid rgba(255,255,255,0.15);
     }
-    .custom-color-wrap {
-      display: flex; align-items: center; gap: 8px;
-    }
-    .custom-color-wrap label {
-      font-size: 12px; opacity: 0.5;
-    }
+    .custom-color-wrap { display: flex; align-items: center; gap: 8px; }
+    .custom-color-wrap label { font-size: 12px; opacity: 0.5; }
     input[type="color"] {
       -webkit-appearance: none; width: 32px; height: 32px;
-      border: none; border-radius: 50%; cursor: pointer;
-      background: none; padding: 0;
+      border: none; border-radius: 50%; cursor: pointer; background: none; padding: 0;
     }
     input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; border-radius: 50%; }
     input[type="color"]::-webkit-color-swatch { border-radius: 50%; border: 2px solid var(--muted); }
 
-    /* ── Palette Codes Widget ── */
-    .palette-tokens-section {
-      margin-top: 20px;
+    /* ── Palette codes widget ── */
+    .palette-codes {
+      margin-top: 18px; padding-top: 16px;
       border-top: 1px solid var(--muted);
-      padding-top: 16px;
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
     }
-    .palette-tokens-header {
-      display: flex; align-items: center; gap: 10px;
+    .codes-toggle {
+      appearance: none; background: transparent;
+      border: 1px solid var(--muted); border-radius: 20px;
+      color: var(--text); font-family: inherit; font-size: 10px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 12px; cursor: pointer; opacity: 0.45; transition: opacity 0.2s;
     }
-    .palette-tokens-label {
-      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-      opacity: 0.35;
-    }
-    .codes-toggle-btn {
-      appearance: none; border: 1px solid var(--muted); background: transparent;
-      color: var(--text); font-family: inherit; font-size: 10px; letter-spacing: 1px;
-      padding: 3px 10px; border-radius: 12px; cursor: pointer;
-      opacity: 0.5; transition: opacity 0.2s; text-transform: uppercase;
-    }
-    .codes-toggle-btn:hover { opacity: 1; }
-    .token-chips-grid {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;
-    }
-    .token-chips-grid.hidden { display: none; }
+    .codes-toggle:hover { opacity: 1; }
+    .token-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; width: 100%; }
+    .token-grid.hidden { display: none; }
     .token-chip {
       display: flex; align-items: center; gap: 9px;
-      background: var(--muted); border-radius: 8px;
-      padding: 9px 13px; cursor: pointer; transition: all 0.15s;
-      border: 1px solid transparent; appearance: none; text-align: left;
-      color: var(--text); font-family: inherit;
+      background: var(--muted); border-radius: 8px; padding: 9px 13px;
+      cursor: pointer; border: 1px solid transparent; transition: border-color 0.15s;
+      appearance: none; color: var(--text); font-family: inherit; text-align: left;
     }
     .token-chip:hover { border-color: var(--mark); }
-    .token-swatch {
-      width: 18px; height: 18px; border-radius: 4px;
-      border: 1px solid rgba(255,255,255,0.12); flex-shrink: 0;
-    }
+    .token-dot { width: 18px; height: 18px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
     .token-info { display: flex; flex-direction: column; gap: 2px; }
     .token-name { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.45; }
     .token-hex { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; font-weight: 500; }
-    .token-chip .copied-flash { color: #2ecc71; }
+    .token-hex.ok { color: #2ecc71; }
 
     /* ── Mark grid ── */
-    .mark-grid {
-      display: flex; flex-wrap: wrap; gap: var(--gap); align-items: flex-end;
-    }
-    .mark-cell {
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-    }
+    .mark-grid { display: flex; flex-wrap: wrap; gap: var(--gap); align-items: flex-end; }
+    .mark-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; }
     .mark-cell svg { color: var(--mark); transition: color 0.3s; display: block; }
-    .mark-cell label {
-      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
-      opacity: 0.4;
-    }
-    .mark-bg {
-      padding: 20px; border-radius: var(--radius);
-      background: var(--muted);
-    }
+    .mark-cell label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.4; }
+    .mark-bg { padding: 20px; border-radius: var(--radius); background: var(--muted); }
 
     /* ── States grid ── */
-    .states-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: var(--gap);
-    }
-    .state-cell {
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-      padding: 20px 16px; border-radius: var(--radius);
-      background: var(--muted);
-    }
+    .states-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--gap); }
+    .state-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 16px; border-radius: var(--radius); background: var(--muted); }
     .state-cell svg { color: var(--mark); transition: color 0.3s; }
-    .state-cell label {
-      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
-      opacity: 0.45;
-    }
+    .state-cell label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.45; }
 
     /* ── Lockup ── */
-    .lockup-grid {
-      display: flex; flex-direction: column; gap: var(--gap);
-    }
-    .lockup-cell {
-      padding: 24px; border-radius: var(--radius); background: var(--muted);
-    }
-    .lockup-cell label {
-      display: block; font-size: 10px; letter-spacing: 2px;
-      text-transform: uppercase; opacity: 0.35; margin-bottom: 16px;
-    }
+    .lockup-grid { display: flex; flex-direction: column; gap: var(--gap); }
+    .lockup-cell { padding: 24px; border-radius: var(--radius); background: var(--muted); }
+    .lockup-cell label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.35; margin-bottom: 16px; }
     .lockup-cell svg { color: var(--mark); transition: color 0.3s; }
 
-    /* ── Sub-brand Generator ── */
-    .generator-card {
+    /* ── Generator ── */
+    .gen-card {
       background: var(--muted); border-radius: var(--radius);
-      padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 22px;
+      padding: 28px; display: flex; flex-direction: column; gap: 22px;
     }
-    .gen-tabs {
-      display: flex; gap: 4px;
-      border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 16px;
-    }
+    .gen-tabs { display: flex; gap: 4px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px; }
     .gen-tab {
-      appearance: none; border: none; background: transparent;
+      appearance: none; background: transparent; border: none;
       color: var(--text); font-family: inherit; font-size: 13px; font-weight: 500;
-      padding: 8px 16px; border-radius: 8px; cursor: pointer;
-      opacity: 0.38; transition: all 0.2s;
+      padding: 8px 18px; border-radius: 8px; cursor: pointer; opacity: 0.38; transition: all 0.2s;
     }
-    .gen-tab:hover { opacity: 0.72; background: rgba(255,255,255,0.05); }
+    .gen-tab:hover { opacity: 0.7; background: rgba(255,255,255,0.05); }
     .gen-tab.active { opacity: 1; background: rgba(255,255,255,0.09); }
-    .gen-panel { display: flex; flex-direction: column; gap: 10px; }
     .gen-panel.hidden { display: none; }
-    .field-label {
+    .gen-field-label {
       display: block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-      opacity: 0.4; margin-bottom: 6px;
+      opacity: 0.4; margin-bottom: 8px;
     }
     .gen-text-input {
-      background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px; color: var(--text);
-      font-family: 'Space Grotesk', system-ui, sans-serif;
+      width: 100%; background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+      color: var(--text); font-family: 'Space Grotesk', system-ui, sans-serif;
       font-size: 22px; font-weight: 600; letter-spacing: -0.5px;
-      padding: 11px 16px; width: 100%; transition: border-color 0.2s;
+      padding: 11px 16px; transition: border-color 0.2s;
     }
     .gen-text-input:focus { outline: none; border-color: var(--mark); }
-    .gen-text-input::placeholder { opacity: 0.25; }
+    .gen-text-input::placeholder { opacity: 0.2; }
+    .gen-slider-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+    .gen-slider-row span:first-child { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; white-space: nowrap; }
+    .gen-slider { flex: 1; accent-color: var(--mark); cursor: pointer; }
+    .gen-slider-val { font-size: 11px; font-family: 'SF Mono', monospace; opacity: 0.5; min-width: 30px; text-align: right; }
     .gen-svg-textarea {
-      background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px; color: var(--text);
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 11px; line-height: 1.55; padding: 11px 14px; width: 100%;
+      width: 100%; background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+      color: var(--text); font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 11px; line-height: 1.55; padding: 11px 14px;
       resize: vertical; transition: border-color 0.2s;
     }
     .gen-svg-textarea:focus { outline: none; border-color: var(--mark); }
-    .gen-svg-textarea::placeholder { opacity: 0.3; }
-    .gen-file-label {
+    .gen-svg-textarea::placeholder { opacity: 0.25; }
+    .gen-upload-label {
       display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; border: 1px dashed rgba(255,255,255,0.18);
-      border-radius: 8px; padding: 9px 16px; cursor: pointer;
-      font-size: 12px; opacity: 0.55; transition: opacity 0.2s; color: var(--text);
-      width: fit-content;
+      border: 1px dashed rgba(255,255,255,0.2); border-radius: 8px;
+      padding: 9px 16px; cursor: pointer; font-size: 12px;
+      opacity: 0.55; transition: opacity 0.2s; color: var(--text); margin-bottom: 10px;
     }
-    .gen-file-label:hover { opacity: 1; }
-    .gen-slider-row {
-      display: flex; align-items: center; gap: 12px;
+    .gen-upload-label:hover { opacity: 1; }
+    /* Generator palette — same pill-button design as the top palette bar */
+    .gen-palette-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .gen-palette-btn {
+      appearance: none; border: 1px solid transparent; border-radius: 20px; cursor: pointer;
+      padding: 7px 16px; font-family: inherit; font-size: 12px; font-weight: 500;
+      background: rgba(0,0,0,0.25); color: var(--text); transition: all 0.2s;
     }
-    .gen-slider {
-      flex: 1; accent-color: var(--mark); cursor: pointer;
+    .gen-palette-btn:hover { opacity: 0.9; }
+    .gen-palette-btn.active { border-color: var(--mark); color: var(--mark); background: transparent; }
+    .gen-pal-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      display: inline-block; vertical-align: middle; margin-right: 6px;
+      border: 2px solid rgba(255,255,255,0.15);
     }
-    .gen-slider-val {
-      font-size: 11px; font-family: 'SF Mono', monospace; opacity: 0.55;
-      min-width: 34px; text-align: right;
+    .gen-color-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 10px; }
+    .gen-color-row label { font-size: 12px; opacity: 0.5; display: flex; align-items: center; gap: 6px; }
+    .gen-color-row input[type="checkbox"] { accent-color: var(--mark); width: 15px; height: 15px; cursor: pointer; }
+    /* Preview */
+    .gen-preview-box {
+      background-image: repeating-conic-gradient(rgba(255,255,255,0.04) 0% 25%, transparent 0% 50%);
+      background-size: 14px 14px;
+      border-radius: 8px; padding: 24px;
+      display: flex; align-items: center; justify-content: center; min-height: 88px;
+      overflow: hidden;
     }
-    /* Palette chips for generator */
-    .gen-palette-row {
-      display: flex; flex-wrap: wrap; gap: 7px; align-items: center;
-    }
-    .gen-pal-btn {
-      appearance: none; border: 2px solid transparent; border-radius: 50%;
-      cursor: pointer; padding: 2px; background: transparent;
-      transition: border-color 0.15s;
-    }
-    .gen-pal-btn:hover { border-color: rgba(255,255,255,0.3); }
-    .gen-pal-btn.active { border-color: var(--mark); }
-    .gen-pal-swatch {
-      width: 26px; height: 26px; border-radius: 50%; display: block;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .gen-divider {
-      width: 1px; height: 24px; background: rgba(255,255,255,0.1); margin: 0 4px;
-    }
-    .gen-color-pair {
-      display: flex; align-items: center; gap: 4px;
-    }
-    .gen-color-pair label {
-      font-size: 9px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.35;
-    }
-    /* Preview area */
-    .gen-preview-wrap {
-      background: rgba(0,0,0,0.22); border-radius: 10px; padding: 20px;
-    }
-    .gen-preview-checkers {
-      background-image: repeating-conic-gradient(rgba(255,255,255,0.03) 0% 25%, transparent 0% 50%);
-      background-size: 12px 12px;
-      border-radius: 6px; padding: 20px;
-      display: flex; justify-content: center; align-items: center; min-height: 80px;
-    }
-    #gen-preview-box svg { max-width: 100%; height: auto; display: block; }
+    .gen-preview-box svg { display: block; max-width: 100%; height: auto; }
     /* Download row */
-    .gen-download-row {
-      display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end;
+    .gen-dl-row {
+      display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end;
       padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.06);
     }
-    .gen-dl-group { display: flex; flex-direction: column; gap: 7px; }
-    .size-chip-row, .format-chip-row {
-      display: flex; gap: 5px; flex-wrap: wrap;
+    .gen-dl-group { display: flex; flex-direction: column; gap: 8px; }
+    .chip-row { display: flex; gap: 5px; }
+    .chip {
+      appearance: none; background: transparent; border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 20px; color: var(--text); font-family: inherit;
+      font-size: 11px; padding: 5px 12px; cursor: pointer; transition: all 0.15s;
     }
-    .size-chip, .format-chip {
-      appearance: none; border: 1px solid rgba(255,255,255,0.12);
-      background: transparent; color: var(--text); font-family: inherit;
-      font-size: 11px; padding: 5px 11px; border-radius: 20px; cursor: pointer;
-      transition: all 0.15s;
-    }
-    .size-chip.active, .size-chip:hover,
-    .format-chip.active, .format-chip:hover {
-      border-color: var(--mark); color: var(--mark);
-    }
+    .chip.active, .chip:hover { border-color: var(--mark); color: var(--mark); }
     .gen-dl-btn {
       appearance: none; background: var(--mark); color: var(--bg);
       border: none; border-radius: 8px; font-family: inherit;
-      font-size: 13px; font-weight: 600; padding: 10px 22px;
-      cursor: pointer; transition: opacity 0.2s; display: flex;
-      align-items: center; gap: 7px; margin-left: auto;
+      font-size: 13px; font-weight: 600; padding: 10px 22px; cursor: pointer;
+      transition: opacity 0.2s; display: flex; align-items: center; gap: 7px;
+      margin-left: auto;
     }
     .gen-dl-btn:hover { opacity: 0.85; }
-    .gen-dl-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
     /* ── Install ── */
     .install-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
     @media (max-width: 640px) { .install-grid { grid-template-columns: 1fr; } }
-    .code-block {
-      background: var(--muted); border-radius: var(--radius);
-      padding: 20px 24px;
-    }
-    .code-block h4 {
-      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-      opacity: 0.4; margin-bottom: 14px;
-    }
-    .code-block pre {
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 12px; line-height: 1.7;
-      color: var(--text); white-space: pre-wrap; word-break: break-all;
-    }
+    .code-block { background: var(--muted); border-radius: var(--radius); padding: 20px 24px; }
+    .code-block h4 { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; margin-bottom: 14px; }
+    .code-block pre { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; line-height: 1.7; color: var(--text); white-space: pre-wrap; word-break: break-all; }
     .code-block pre .hl { color: var(--mark); }
     .copy-btn {
       margin-top: 12px; appearance: none; border: none; cursor: pointer;
-      padding: 6px 14px; border-radius: 6px;
-      font-family: inherit; font-size: 11px; font-weight: 500;
-      background: var(--mark); color: var(--bg);
-      transition: opacity 0.2s;
+      padding: 6px 14px; border-radius: 6px; font-family: inherit; font-size: 11px; font-weight: 500;
+      background: var(--mark); color: var(--bg); transition: opacity 0.2s;
     }
     .copy-btn:hover { opacity: 0.85; }
     .copy-btn.copied { background: #2ecc71; }
 
     /* ── Download ── */
-    .dl-grid {
-      display: flex; flex-wrap: wrap; gap: 12px;
-    }
+    .dl-grid { display: flex; flex-wrap: wrap; gap: 12px; }
     .dl-btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 10px 20px; border-radius: var(--radius);
@@ -347,10 +236,7 @@
     .dl-btn:hover { border-color: var(--mark); color: var(--mark); }
     .dl-btn svg { flex-shrink: 0; }
 
-    footer {
-      border-top: 1px solid var(--muted); padding: 28px 0;
-      text-align: center; font-size: 12px; opacity: 0.3;
-    }
+    footer { border-top: 1px solid var(--muted); padding: 28px 0; text-align: center; font-size: 12px; opacity: 0.3; }
   </style>
 </head>
 <body>
@@ -402,14 +288,10 @@
     </div>
 
     <!-- Color token codes widget -->
-    <div class="palette-tokens-section">
-      <div class="palette-tokens-header">
-        <span class="palette-tokens-label">Color tokens</span>
-        <button class="codes-toggle-btn" id="codes-toggle-btn">show codes</button>
-      </div>
-      <div class="token-chips-grid hidden" id="token-chips-grid">
-        <!-- injected by JS -->
-      </div>
+    <div class="palette-codes">
+      <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:0.35">Color tokens</span>
+      <button class="codes-toggle" id="codes-toggle">show codes</button>
+      <div class="token-grid hidden" id="token-grid"></div>
     </div>
   </section>
 
@@ -464,7 +346,6 @@
   <section>
     <div class="section-label">States</div>
     <div class="states-grid">
-
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
           <style>@keyframes hb{0%,100%{transform:scale(1)}12%{transform:scale(1.05)}22%{transform:scale(1)}32%{transform:scale(1.08)}48%{transform:scale(1)}}.nm{transform-box:view-box;transform-origin:50px 56.67px;animation:hb 2.5s ease-in-out infinite}</style>
@@ -476,7 +357,6 @@
         </svg>
         <label>neutral</label>
       </div>
-
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
           <style>@keyframes sspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}.ls{transform-box:view-box;transform-origin:50px 56.67px;animation:sspin 3s linear infinite}</style>
@@ -488,7 +368,6 @@
         </svg>
         <label>loading</label>
       </div>
-
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
           <style>@keyframes joy2{0%,65%,100%{transform:scale(1)}15%{transform:scale(1.2)}28%{transform:scale(.9)}40%{transform:scale(1.07)}52%{transform:scale(.98)}60%{transform:scale(1)}}.jm{transform-box:view-box;transform-origin:50px 56.67px;animation:joy2 2.5s cubic-bezier(.34,1.56,.64,1) infinite}</style>
@@ -500,7 +379,6 @@
         </svg>
         <label>success</label>
       </div>
-
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
           <style>@keyframes wp2{0%,100%{stroke-width:2;opacity:1}50%{stroke-width:3.5;opacity:.75}}.wp0 path{animation:wp2 .8s ease-in-out infinite}.wp1 path{animation:wp2 .8s ease-in-out .26s infinite;opacity:.6}.wp2 path{animation:wp2 .8s ease-in-out .53s infinite;opacity:.6}</style>
@@ -510,7 +388,6 @@
         </svg>
         <label>warning</label>
       </div>
-
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
           <style>@keyframes frust{0%,55%,100%{transform:translateX(0)}5%{transform:translateX(-4px)}12%{transform:translateX(4px)}19%{transform:translateX(-3.5px)}26%{transform:translateX(3.5px)}33%{transform:translateX(-2px)}40%{transform:translateX(2px)}46%{transform:translateX(0)}}.er2{animation:frust 2.2s ease-in-out infinite}</style>
@@ -522,7 +399,6 @@
         </svg>
         <label>error</label>
       </div>
-
     </div>
   </section>
 
@@ -530,7 +406,6 @@
   <section>
     <div class="section-label">HTTP states</div>
     <div class="states-grid">
-
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
           <style>@keyframes tlt2{0%,100%{transform:rotate(0)}20%{transform:rotate(6deg)}70%{transform:rotate(-6deg)}}@keyframes dft2{0%,100%{opacity:1}40%{opacity:.4}80%{opacity:.9}}.tm2{transform-box:view-box;transform-origin:50px 56.67px;animation:tlt2 2.4s ease-in-out infinite}.t12 path{animation:dft2 2.4s ease-in-out .3s infinite}.t22 path{animation:dft2 2.4s ease-in-out .6s infinite}</style>
@@ -542,7 +417,6 @@
         </svg>
         <label>404 · lost</label>
       </div>
-
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
           <style>@keyframes dying2{0%{transform:translate(0,0);opacity:1}3%{transform:translate(2px,-1px);opacity:.9}6%{transform:translate(-2px,1px);opacity:.7}9%{transform:translate(1px,-1px);opacity:.45}13%,72%{transform:translate(0,0);opacity:.2}76%{transform:translate(1px,0);opacity:.28}80%{transform:translate(0,0);opacity:.2}84%{transform:translate(-1px,1px);opacity:.26}88%{transform:translate(0,0);opacity:.2}93%{opacity:.6}96%,100%{opacity:1}}.dy2{animation:dying2 4s ease-in-out infinite}</style>
@@ -554,7 +428,6 @@
         </svg>
         <label>500 · flatline</label>
       </div>
-
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
           <style>@keyframes dz2{0%,100%{opacity:.35}50%{opacity:.15}}@keyframes zz2{0%{opacity:0;transform:translate(0,0) scale(.7)}15%{opacity:1}85%{opacity:.8}100%{opacity:0;transform:translate(14px,-14px) scale(1.1)}}.zm2{animation:dz2 2s ease-in-out infinite}.zt2{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:600;font-size:14px;fill:currentColor;animation:zz2 2s ease-in-out infinite}</style>
@@ -567,7 +440,6 @@
         </svg>
         <label>503 · asleep</label>
       </div>
-
       <div class="state-cell">
         <svg viewBox="0 0 100 100" width="72" height="72" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
           <style>@keyframes rl2{0%,100%{transform:scale(0);opacity:0}15%{transform:scale(1.05);opacity:1}25%{transform:scale(1);opacity:1}40%{transform:scale(1.08);opacity:1}62%{transform:scale(.2);opacity:.2}80%{transform:scale(0);opacity:0}}.rl2{transform-box:view-box;transform-origin:50px 56.67px;animation:rl2 2.8s cubic-bezier(.4,0,.6,1) infinite}</style>
@@ -579,7 +451,6 @@
         </svg>
         <label>403 · refused</label>
       </div>
-
     </div>
   </section>
 
@@ -622,95 +493,94 @@
   <!-- Sub-brand Logo Generator -->
   <section>
     <div class="section-label">Sub-brand logo generator</div>
-    <div class="generator-card">
+    <div class="gen-card">
 
       <!-- Mode tabs -->
       <div class="gen-tabs">
-        <button class="gen-tab active" data-tab="text">Text sub-brand</button>
+        <button class="gen-tab active" data-tab="text">Text</button>
         <button class="gen-tab" data-tab="custommark">Custom mark (SVG)</button>
       </div>
 
-      <!-- Sub-brand text (always shown) -->
-      <div>
-        <label class="field-label" for="gen-text">Sub-brand name</label>
-        <input type="text" class="gen-text-input" id="gen-text" placeholder="e.g. blog, store, news…" value="blog" maxlength="48" autocomplete="off" spellcheck="false">
-      </div>
-
-      <!-- Font size slider (text mode only) -->
-      <div id="gen-fontsize-row">
-        <label class="field-label">Font size</label>
+      <!-- Text panel -->
+      <div class="gen-panel" id="gen-panel-text">
+        <label class="gen-field-label" for="gen-text">Sub-brand name</label>
+        <input class="gen-text-input" type="text" id="gen-text" value="blog" placeholder="e.g. blog, store, docs…" maxlength="48" autocomplete="off" spellcheck="false">
         <div class="gen-slider-row">
-          <input type="range" id="gen-font-size" min="12" max="40" value="24" step="1" class="gen-slider">
+          <span>Font size</span>
+          <input class="gen-slider" type="range" id="gen-font-size" min="12" max="40" value="24" step="1">
           <span class="gen-slider-val" id="gen-font-size-val">24px</span>
         </div>
       </div>
 
-      <!-- Custom mark SVG panel -->
+      <!-- Custom mark panel -->
       <div class="gen-panel hidden" id="gen-panel-custommark">
-        <label class="field-label">Custom mark SVG — replaces the triskelion on the left</label>
-        <label class="gen-file-label" for="gen-svg-file">
+        <label class="gen-field-label">Custom mark SVG — replaces the triskelion</label>
+        <label class="gen-upload-label" for="gen-svg-file">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Upload SVG file
           <input type="file" id="gen-svg-file" accept=".svg,image/svg+xml" style="display:none">
         </label>
-        <textarea class="gen-svg-textarea" id="gen-svg-code" placeholder="…or paste SVG code here&#10;&#10;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&#10;  &lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;40&quot; fill=&quot;currentColor&quot;/&gt;&#10;&lt;/svg&gt;" rows="6"></textarea>
+        <textarea class="gen-svg-textarea" id="gen-svg-code" rows="5" placeholder="…or paste SVG code here&#10;&#10;&lt;svg viewBox=&quot;0 0 100 100&quot;&gt;&#10;  &lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;40&quot; fill=&quot;currentColor&quot;/&gt;&#10;&lt;/svg&gt;"></textarea>
+        <div class="gen-slider-row" style="margin-top:4px">
+          <span>Font size</span>
+          <input class="gen-slider" type="range" id="gen-font-size-b" min="12" max="40" value="24" step="1">
+          <span class="gen-slider-val" id="gen-font-size-val-b">24px</span>
+        </div>
+        <div style="margin-top:8px">
+          <label class="gen-field-label" for="gen-text-b">Sub-brand name (shown to the right)</label>
+          <input class="gen-text-input" type="text" id="gen-text-b" value="blog" placeholder="e.g. blog, store, docs…" maxlength="48" autocomplete="off" spellcheck="false">
+        </div>
       </div>
 
-      <!-- Palette presets -->
+      <!-- Palette -->
       <div>
-        <label class="field-label">Palette</label>
-        <div class="gen-palette-row">
-          <button class="gen-pal-btn active" data-pal="brand-dark" title="Brand Dark">
-            <span class="gen-pal-swatch" style="background: conic-gradient(#0a0514 180deg, #f07828 180deg)"></span>
+        <label class="gen-field-label">Palette</label>
+        <div class="gen-palette-bar">
+          <button class="gen-palette-btn active" data-pal="brand-dark">
+            <span class="gen-pal-dot" style="background:#f07828"></span>Brand Dark
           </button>
-          <button class="gen-pal-btn" data-pal="brand-light" title="Brand Light">
-            <span class="gen-pal-swatch" style="background: conic-gradient(#eeeef4 180deg, #f07828 180deg)"></span>
+          <button class="gen-palette-btn" data-pal="brand-light">
+            <span class="gen-pal-dot" style="background:#f07828;border-color:#aaa"></span>Brand Light
           </button>
-          <button class="gen-pal-btn" data-pal="mono-dark" title="Mono Dark">
-            <span class="gen-pal-swatch" style="background: conic-gradient(#0f0f0f 180deg, #ffffff 180deg)"></span>
+          <button class="gen-palette-btn" data-pal="mono-dark">
+            <span class="gen-pal-dot" style="background:#fff"></span>Mono Dark
           </button>
-          <button class="gen-pal-btn" data-pal="mono-light" title="Mono Light">
-            <span class="gen-pal-swatch" style="background: conic-gradient(#f0f0f0 180deg, #111111 180deg)"></span>
+          <button class="gen-palette-btn" data-pal="mono-light">
+            <span class="gen-pal-dot" style="background:#111;border-color:#aaa"></span>Mono Light
           </button>
-          <button class="gen-pal-btn" data-pal="indigo" title="Indigo">
-            <span class="gen-pal-swatch" style="background: conic-gradient(#0a0514 180deg, #5901d8 180deg)"></span>
+          <button class="gen-palette-btn" data-pal="indigo">
+            <span class="gen-pal-dot" style="background:#5901d8"></span>Indigo
           </button>
-          <div class="gen-divider"></div>
-          <div class="gen-color-pair">
-            <label for="gen-mark-color">Mark</label>
-            <input type="color" id="gen-mark-color" value="#f07828" title="Mark & text color">
-          </div>
-          <div class="gen-color-pair">
-            <label for="gen-bg-color">BG</label>
-            <input type="color" id="gen-bg-color" value="#0a0514" title="Background color">
-          </div>
+        </div>
+        <div class="gen-color-row">
+          <label>Mark color <input type="color" id="gen-mark-color" value="#f07828"></label>
+          <label>Background <input type="color" id="gen-bg-color" value="#0a0514"></label>
+          <label><input type="checkbox" id="gen-with-bg"> Include background</label>
         </div>
       </div>
 
       <!-- Live preview -->
-      <div class="gen-preview-wrap">
-        <label class="field-label">Live preview</label>
-        <div class="gen-preview-checkers">
-          <div id="gen-preview-box"></div>
-        </div>
+      <div>
+        <label class="gen-field-label">Live preview <span id="gen-size-hint" style="opacity:0.4;font-size:9px;letter-spacing:0;text-transform:none;margin-left:4px"></span></label>
+        <div class="gen-preview-box" id="gen-preview-box"></div>
       </div>
 
-      <!-- Download controls -->
-      <div class="gen-download-row">
+      <!-- Download -->
+      <div class="gen-dl-row">
         <div class="gen-dl-group">
-          <label class="field-label">Size</label>
-          <div class="size-chip-row" id="gen-size-chips">
-            <button class="size-chip" data-scale="0.5">½×</button>
-            <button class="size-chip active" data-scale="1">1× <span style="opacity:0.45;font-size:10px" id="gen-size-label">220×56</span></button>
-            <button class="size-chip" data-scale="2">2×</button>
-            <button class="size-chip" data-scale="4">4×</button>
+          <label class="gen-field-label">Size</label>
+          <div class="chip-row">
+            <button class="chip" data-scale="0.5">½×</button>
+            <button class="chip active" data-scale="1">1×</button>
+            <button class="chip" data-scale="2">2×</button>
+            <button class="chip" data-scale="4">4×</button>
           </div>
         </div>
         <div class="gen-dl-group">
-          <label class="field-label">Format</label>
-          <div class="format-chip-row" id="gen-format-chips">
-            <button class="format-chip active" data-fmt="svg">SVG</button>
-            <button class="format-chip" data-fmt="png">PNG</button>
+          <label class="gen-field-label">Format</label>
+          <div class="chip-row">
+            <button class="chip active" data-fmt="svg">SVG</button>
+            <button class="chip" data-fmt="png">PNG</button>
           </div>
         </div>
         <button class="gen-dl-btn" id="gen-dl-btn">
@@ -736,6 +606,20 @@ npm install @byehsan/logo</pre>
         <button class="copy-btn" data-copy="npm install @byehsan/logo">Copy</button>
       </div>
       <div class="code-block">
+        <h4>Sub-brand lockup generator</h4>
+        <pre>import { <span class="hl">subbrandLockup</span> } from <span class="hl">'@byehsan/logo'</span>
+
+<span class="hl">// returns SVG markup string</span>
+const svg = subbrandLockup(<span class="hl">'blog'</span>)
+const svg2 = subbrandLockup(<span class="hl">'store'</span>, {
+  palette: <span class="hl">'brand-light'</span>,
+  fontSize: <span class="hl">20</span>,
+  bgColor: <span class="hl">'#eeeef4'</span>,
+})</pre>
+        <button class="copy-btn" data-copy="import { subbrandLockup } from '@byehsan/logo'
+const svg = subbrandLockup('blog')">Copy</button>
+      </div>
+      <div class="code-block">
         <h4>ESM import</h4>
         <pre>import {
   base,
@@ -744,17 +628,6 @@ npm install @byehsan/logo</pre>
   palettes
 } from <span class="hl">'@byehsan/logo'</span></pre>
         <button class="copy-btn" data-copy="import { base, stateLoading, http404, palettes } from '@byehsan/logo'">Copy</button>
-      </div>
-      <div class="code-block">
-        <h4>CSS custom properties</h4>
-        <pre>import <span class="hl">'@byehsan/logo/css'</span>
-
-/* then in your CSS */
-.logo {
-  background: var(<span class="hl">--logo-base</span>);
-  color: var(<span class="hl">--color-orange</span>);
-}</pre>
-        <button class="copy-btn" data-copy="import '@byehsan/logo/css'">Copy</button>
       </div>
       <div class="code-block">
         <h4>Favicon HTML</h4>
@@ -798,7 +671,7 @@ npm install @byehsan/logo</pre>
 </footer>
 
 <script>
-  // ── Global palette ──
+  // ── Global palette switcher ──
   const PALETTES = {
     'brand-dark':  { bg:'#0a0514', mark:'#f07828', text:'#eeeef4', accent:'#5901d8', muted:'rgba(238,238,244,0.12)' },
     'brand-light': { bg:'#eeeef4', mark:'#f07828', text:'#0a0514', accent:'#5901d8', muted:'rgba(10,5,20,0.1)' },
@@ -833,9 +706,9 @@ npm install @byehsan/logo</pre>
   document.querySelectorAll('.copy-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       navigator.clipboard.writeText(btn.dataset.copy).then(() => {
-        btn.textContent = 'Copied!';
-        btn.classList.add('copied');
-        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+        const prev = btn.textContent;
+        btn.textContent = 'Copied!'; btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = prev; btn.classList.remove('copied'); }, 1500);
       });
     });
   });
@@ -850,310 +723,254 @@ npm install @byehsan/logo</pre>
       }
     }).catch(() => {});
 
-
   // ── Palette codes widget ──
   const BRAND_TOKENS = [
-    { name: 'dark',    hex: '#0a0514', note: 'bg, outlines' },
-    { name: 'orange',  hex: '#f07828', note: 'primary accent' },
-    { name: 'indigo',  hex: '#5901d8', note: 'secondary accent' },
-    { name: 'light',   hex: '#eeeef4', note: 'text on dark' },
-    { name: 'success', hex: '#2ecc71', note: 'success state' },
-    { name: 'error',   hex: '#e74c3c', note: 'error state' },
+    { name:'dark',    hex:'#0a0514' },
+    { name:'orange',  hex:'#f07828' },
+    { name:'indigo',  hex:'#5901d8' },
+    { name:'light',   hex:'#eeeef4' },
+    { name:'success', hex:'#2ecc71' },
+    { name:'error',   hex:'#e74c3c' },
   ];
-
-  const tokenGrid = document.getElementById('token-chips-grid');
-  const codesToggle = document.getElementById('codes-toggle-btn');
-
-  BRAND_TOKENS.forEach(token => {
-    const chip = document.createElement('button');
-    chip.className = 'token-chip';
-    chip.title = `Click to copy ${token.hex}`;
-    chip.innerHTML = `
-      <span class="token-swatch" style="background:${token.hex}"></span>
-      <span class="token-info">
-        <span class="token-name">${token.name}</span>
-        <span class="token-hex">${token.hex}</span>
-      </span>
-    `;
-    chip.addEventListener('click', () => {
-      navigator.clipboard.writeText(token.hex).then(() => {
-        const hexEl = chip.querySelector('.token-hex');
-        const prev = hexEl.textContent;
-        hexEl.textContent = 'copied!';
-        hexEl.classList.add('copied-flash');
-        setTimeout(() => { hexEl.textContent = prev; hexEl.classList.remove('copied-flash'); }, 1300);
+  const tokenGrid = document.getElementById('token-grid');
+  const codesToggle = document.getElementById('codes-toggle');
+  BRAND_TOKENS.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'token-chip'; btn.title = 'Copy ' + t.hex;
+    btn.innerHTML = `<span class="token-dot" style="background:${t.hex}"></span><span class="token-info"><span class="token-name">${t.name}</span><span class="token-hex">${t.hex}</span></span>`;
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(t.hex).then(() => {
+        const el = btn.querySelector('.token-hex');
+        el.textContent = 'copied!'; el.classList.add('ok');
+        setTimeout(() => { el.textContent = t.hex; el.classList.remove('ok'); }, 1300);
       });
     });
-    tokenGrid.appendChild(chip);
+    tokenGrid.appendChild(btn);
   });
-
   codesToggle.addEventListener('click', () => {
-    const isHidden = tokenGrid.classList.toggle('hidden');
-    codesToggle.textContent = isHidden ? 'show codes' : 'hide codes';
+    const hidden = tokenGrid.classList.toggle('hidden');
+    codesToggle.textContent = hidden ? 'show codes' : 'hide codes';
   });
 
-
-  // ── Sub-brand Logo Generator ──
+  // ── Sub-brand generator ──
   const GEN_PALETTES = {
-    'brand-dark':  { mark: '#f07828', bg: '#0a0514' },
-    'brand-light': { mark: '#f07828', bg: '#eeeef4' },
-    'mono-dark':   { mark: '#ffffff', bg: '#0f0f0f' },
-    'mono-light':  { mark: '#111111', bg: '#f0f0f0' },
-    'indigo':      { mark: '#5901d8', bg: '#0a0514' },
+    'brand-dark':  { mark:'#f07828', bg:'#0a0514' },
+    'brand-light': { mark:'#f07828', bg:'#eeeef4' },
+    'mono-dark':   { mark:'#ffffff', bg:'#0f0f0f' },
+    'mono-light':  { mark:'#111111', bg:'#f0f0f0' },
+    'indigo':      { mark:'#5901d8', bg:'#0a0514' },
   };
 
-  const TRISKELION_INNER = `<g fill="none" stroke-width="2" stroke-linejoin="round">
-    <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-    <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-    <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-  </g>`;
+  const MARK_PATHS = [
+    'rotate(0 50 56.67)', 'rotate(120 50 56.67)', 'rotate(240 50 56.67)'
+  ].map(t => `<g transform="${t}"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>`).join('');
 
-  let genMode = 'text';
-  let genMarkColor = '#f07828';
-  let genBgColor = '#0a0514';
-  let genText = 'blog';
-  let genFontSize = 24;
-  let genCustomSvgInner = null;
-  let genCustomSvgViewBox = '0 0 100 100';
-  let genScale = 1;
-  let genFormat = 'svg';
+  // State
+  let gMode      = 'text';
+  let gText      = 'blog';
+  let gFontSize  = 24;
+  let gMarkColor = '#f07828';
+  let gBgColor   = '#0a0514';
+  let gWithBg    = false;
+  let gScale     = 1;
+  let gFormat    = 'svg';
+  let gCustomInner  = null;
+  let gCustomViewBox = '0 0 100 100';
 
-  function xmlEsc(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+  function xe(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function calcLockupWidth() {
-    // Estimate text pixel width for Space Grotesk 600
-    const charWidth = genFontSize * 0.60;
-    const textPixels = Math.max(60, genText.length * charWidth + 8);
-    return Math.ceil(Math.max(220, 64 + textPixels + 12));
+  function calcW() {
+    return Math.ceil(Math.max(220, 64 + Math.max(60, gText.length * gFontSize * 0.60 + 8) + 12));
   }
 
-  function buildSVG(opts = {}) {
-    const { forDownload = false, useSystemFont = false } = opts;
-    const W = calcLockupWidth();
-    const H = 56;
-    const baseline = (28 + genFontSize * 0.35).toFixed(1);
-    const fontFamily = useSystemFont
-      ? "system-ui, sans-serif"
-      : "'Space Grotesk', system-ui, sans-serif";
+  function buildSVG(opts) {
+    // opts: { forDownload, useSystemFont }
+    const W = calcW(), H = 56;
+    const baseline = (28 + gFontSize * 0.35).toFixed(1);
+    const ff = (opts && opts.useSystemFont) ? 'system-ui,sans-serif' : "'Space Grotesk',system-ui,sans-serif";
 
-    // Mark content
+    // mark
     let markSVG;
-    if (genMode === 'custommark' && genCustomSvgInner) {
-      markSVG = `<svg x="0" y="4" width="48" height="48" viewBox="${genCustomSvgViewBox}" overflow="visible">
-        ${genCustomSvgInner}
-      </svg>`;
+    if (gMode === 'custommark' && gCustomInner) {
+      markSVG = `<svg x="0" y="4" width="48" height="48" viewBox="${gCustomViewBox}">${gCustomInner}</svg>`;
     } else {
-      markSVG = `<svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100">
-        <g fill="none" stroke="${genMarkColor}" stroke-width="2" stroke-linejoin="round">
-          <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-          <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-          <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-        </g>
-      </svg>`;
+      markSVG = `<svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100"><g fill="none" stroke="${gMarkColor}" stroke-width="2" stroke-linejoin="round">${MARK_PATHS}</g></svg>`;
     }
 
-    const fontImport = (!useSystemFont && forDownload)
-      ? `<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&amp;display=swap');</style>\n  `
+    const bg = gWithBg ? `<rect width="${W}" height="${H}" fill="${gBgColor}"/>` : '';
+
+    // explicit width+height only for download; for preview let CSS control sizing
+    const wh = (opts && opts.forDownload) ? ` width="${Math.round(W * gScale)}" height="${Math.round(H * gScale)}"` : ` width="${W}" height="${H}"`;
+
+    const fontImport = (opts && opts.forDownload && !opts.useSystemFont)
+      ? `<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&amp;display=swap');</style>`
       : '';
 
-    const sizeAttrs = forDownload
-      ? `width="${Math.round(W * genScale)}" height="${Math.round(H * genScale)}"`
+    const textEl = gText
+      ? `<text x="64" y="${baseline}" font-family="${ff}" font-size="${gFontSize}" font-weight="600" letter-spacing="-0.5" fill="${gMarkColor}">${xe(gText)}</text>`
       : '';
 
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" ${sizeAttrs}>
-  ${fontImport}<rect width="${W}" height="${H}" fill="${genBgColor}"/>
-  ${markSVG}
-  <text x="64" y="${baseline}"
-    font-family="${fontFamily}"
-    font-size="${genFontSize}" font-weight="600" letter-spacing="-0.5"
-    fill="${genMarkColor}">${xmlEsc(genText)}</text>
-</svg>`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}"${wh}>${fontImport}${bg}${markSVG}${textEl}</svg>`;
   }
 
   function updatePreview() {
-    const W = calcLockupWidth();
-    document.getElementById('gen-size-label').textContent = `${W}×56`;
+    const W = calcW();
+    document.getElementById('gen-size-hint').textContent = `${W} × 56 px`;
     document.getElementById('gen-preview-box').innerHTML = buildSVG({ forDownload: false });
   }
 
-  // Initial render
   updatePreview();
 
-  // Text input
-  document.getElementById('gen-text').addEventListener('input', e => {
-    genText = e.target.value;
-    updatePreview();
-  });
+  // Text input (text mode)
+  document.getElementById('gen-text').addEventListener('input', e => { gText = e.target.value; updatePreview(); });
 
-  // Font size slider
-  const fsSlider = document.getElementById('gen-font-size');
-  const fsVal = document.getElementById('gen-font-size-val');
-  fsSlider.addEventListener('input', e => {
-    genFontSize = parseInt(e.target.value);
-    fsVal.textContent = genFontSize + 'px';
+  // Text input (custom mark mode)
+  document.getElementById('gen-text-b').addEventListener('input', e => { gText = e.target.value; updatePreview(); });
+
+  // Font size sliders (keep both in sync)
+  function syncFontSize(val) {
+    gFontSize = parseInt(val);
+    document.getElementById('gen-font-size').value = val;
+    document.getElementById('gen-font-size-b').value = val;
+    document.getElementById('gen-font-size-val').textContent = val + 'px';
+    document.getElementById('gen-font-size-val-b').textContent = val + 'px';
     updatePreview();
-  });
+  }
+  document.getElementById('gen-font-size').addEventListener('input', e => syncFontSize(e.target.value));
+  document.getElementById('gen-font-size-b').addEventListener('input', e => syncFontSize(e.target.value));
 
   // Mode tabs
   document.querySelectorAll('.gen-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.gen-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-      genMode = tab.dataset.tab;
-      const customPanel = document.getElementById('gen-panel-custommark');
-      const fontRow = document.getElementById('gen-fontsize-row');
-      if (genMode === 'custommark') {
-        customPanel.classList.remove('hidden');
+      gMode = tab.dataset.tab;
+      document.getElementById('gen-panel-text').classList.toggle('hidden', gMode !== 'text');
+      document.getElementById('gen-panel-custommark').classList.toggle('hidden', gMode !== 'custommark');
+      // keep text in sync
+      if (gMode === 'custommark') {
+        document.getElementById('gen-text-b').value = gText;
       } else {
-        customPanel.classList.add('hidden');
+        document.getElementById('gen-text').value = gText;
       }
       updatePreview();
     });
   });
 
-  // SVG sanitizer — strips scripts and event handlers
-  function parseSanitizedSVG(svgString) {
+  // SVG sanitizer
+  function parseSVG(svgStr) {
     try {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(svgString.trim(), 'image/svg+xml');
+      const doc = new DOMParser().parseFromString(svgStr.trim(), 'image/svg+xml');
       if (doc.querySelector('parsererror')) return null;
       const svg = doc.documentElement;
       svg.querySelectorAll('script').forEach(el => el.remove());
       svg.querySelectorAll('*').forEach(el => {
         Array.from(el.attributes).forEach(attr => {
-          if (attr.name.startsWith('on') ||
-              (attr.name === 'href' && attr.value.startsWith('javascript:'))) {
+          if (attr.name.startsWith('on') || (attr.name === 'href' && attr.value.startsWith('javascript:')))
             el.removeAttribute(attr.name);
-          }
         });
       });
-      return {
-        inner: svg.innerHTML,
-        viewBox: svg.getAttribute('viewBox') || '0 0 100 100',
-      };
+      return { inner: svg.innerHTML, viewBox: svg.getAttribute('viewBox') || '0 0 100 100' };
     } catch (_) { return null; }
   }
 
-  function applySVGInput(svgString) {
-    const result = parseSanitizedSVG(svgString);
-    if (result) {
-      genCustomSvgInner = result.inner;
-      genCustomSvgViewBox = result.viewBox;
-    } else {
-      genCustomSvgInner = null;
-    }
+  function applySVGInput(str) {
+    const r = parseSVG(str);
+    if (r) { gCustomInner = r.inner; gCustomViewBox = r.viewBox; }
+    else { gCustomInner = null; }
     updatePreview();
   }
 
-  document.getElementById('gen-svg-code').addEventListener('input', e => {
-    applySVGInput(e.target.value);
-  });
+  document.getElementById('gen-svg-code').addEventListener('input', e => applySVGInput(e.target.value));
 
   document.getElementById('gen-svg-file').addEventListener('change', e => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const f = e.target.files[0]; if (!f) return;
     const reader = new FileReader();
     reader.onload = ev => {
-      const text = ev.target.result;
-      document.getElementById('gen-svg-code').value = text;
-      applySVGInput(text);
+      document.getElementById('gen-svg-code').value = ev.target.result;
+      applySVGInput(ev.target.result);
     };
-    reader.readAsText(file);
+    reader.readAsText(f);
   });
 
-  // Palette preset chips
-  document.querySelectorAll('.gen-pal-btn').forEach(btn => {
+  // Generator palette buttons
+  document.querySelectorAll('.gen-palette-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.gen-pal-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.gen-palette-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const pal = GEN_PALETTES[btn.dataset.pal];
-      genMarkColor = pal.mark;
-      genBgColor = pal.bg;
-      document.getElementById('gen-mark-color').value = genMarkColor;
-      document.getElementById('gen-bg-color').value = genBgColor;
+      const p = GEN_PALETTES[btn.dataset.pal];
+      gMarkColor = p.mark; gBgColor = p.bg;
+      document.getElementById('gen-mark-color').value = gMarkColor;
+      document.getElementById('gen-bg-color').value = gBgColor;
       updatePreview();
     });
   });
 
   document.getElementById('gen-mark-color').addEventListener('input', e => {
-    genMarkColor = e.target.value;
-    document.querySelectorAll('.gen-pal-btn').forEach(b => b.classList.remove('active'));
+    gMarkColor = e.target.value;
+    document.querySelectorAll('.gen-palette-btn').forEach(b => b.classList.remove('active'));
     updatePreview();
   });
-
   document.getElementById('gen-bg-color').addEventListener('input', e => {
-    genBgColor = e.target.value;
-    document.querySelectorAll('.gen-pal-btn').forEach(b => b.classList.remove('active'));
+    gBgColor = e.target.value;
+    document.querySelectorAll('.gen-palette-btn').forEach(b => b.classList.remove('active'));
     updatePreview();
   });
+  document.getElementById('gen-with-bg').addEventListener('change', e => { gWithBg = e.target.checked; updatePreview(); });
 
   // Size chips
-  document.querySelectorAll('.size-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      genScale = parseFloat(chip.dataset.scale);
+  document.querySelectorAll('[data-scale]').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('[data-scale]').forEach(x => x.classList.remove('active'));
+      c.classList.add('active');
+      gScale = parseFloat(c.dataset.scale);
     });
   });
 
   // Format chips
-  document.querySelectorAll('.format-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      document.querySelectorAll('.format-chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      genFormat = chip.dataset.fmt;
+  document.querySelectorAll('[data-fmt]').forEach(c => {
+    c.addEventListener('click', () => {
+      document.querySelectorAll('[data-fmt]').forEach(x => x.classList.remove('active'));
+      c.classList.add('active');
+      gFormat = c.dataset.fmt;
     });
   });
 
   // Download
   document.getElementById('gen-dl-btn').addEventListener('click', () => {
-    const safeName = (genText || 'logo').replace(/[^a-z0-9]/gi, '-').toLowerCase().slice(0, 32) || 'logo';
-    const W = calcLockupWidth();
-    const H = 56;
-    const pw = Math.round(W * genScale);
-    const ph = Math.round(H * genScale);
+    const name = (gText || 'logo').replace(/[^a-z0-9]/gi, '-').toLowerCase().slice(0, 32) || 'logo';
+    const W = calcW(), H = 56;
+    const pw = Math.round(W * gScale), ph = Math.round(H * gScale);
 
-    if (genFormat === 'svg') {
-      const svgStr = buildSVG({ forDownload: true, useSystemFont: false });
-      const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+    if (gFormat === 'svg') {
+      const str = buildSVG({ forDownload: true, useSystemFont: false });
+      const blob = new Blob([str], { type: 'image/svg+xml' });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = `byehsan-${safeName}.svg`;
-      document.body.appendChild(a); a.click();
-      document.body.removeChild(a);
+      const a = Object.assign(document.createElement('a'), { href: url, download: `byehsan-${name}.svg` });
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
       setTimeout(() => URL.revokeObjectURL(url), 1000);
 
     } else {
-      // PNG: use system fonts to avoid CORS canvas taint
-      const svgStr = buildSVG({ forDownload: true, useSystemFont: true });
-      const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+      // PNG via canvas — use system fonts to avoid CORS canvas taint
+      const str = buildSVG({ forDownload: true, useSystemFont: true });
+      const blob = new Blob([str], { type: 'image/svg+xml' });
       const svgUrl = URL.createObjectURL(blob);
       const img = new Image();
       img.onload = () => {
         const canvas = document.createElement('canvas');
         canvas.width = pw; canvas.height = ph;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, pw, ph);
+        canvas.getContext('2d').drawImage(img, 0, 0, pw, ph);
         canvas.toBlob(pngBlob => {
           const url = URL.createObjectURL(pngBlob);
-          const a = document.createElement('a');
-          a.href = url; a.download = `byehsan-${safeName}-${pw}x${ph}.png`;
-          document.body.appendChild(a); a.click();
-          document.body.removeChild(a);
+          const a = Object.assign(document.createElement('a'), { href: url, download: `byehsan-${name}-${pw}x${ph}.png` });
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
           setTimeout(() => URL.revokeObjectURL(url), 1000);
         }, 'image/png');
         URL.revokeObjectURL(svgUrl);
       };
-      img.onerror = () => {
-        URL.revokeObjectURL(svgUrl);
-        alert('PNG export failed — try SVG format instead.');
-      };
+      img.onerror = () => { URL.revokeObjectURL(svgUrl); alert('PNG export failed — download SVG instead.'); };
       img.src = svgUrl;
     }
   });
