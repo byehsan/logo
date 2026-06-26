@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512">
+  <style>
+    /* error — frustrated shaking head, sharp × 3, then pause, loops */
+    @keyframes frustrated {
+      0%, 55%, 100% { transform: translateX(0); }
+      5%   { transform: translateX(-4px); }
+      12%  { transform: translateX(4px); }
+      19%  { transform: translateX(-3.5px); }
+      26%  { transform: translateX(3.5px); }
+      33%  { transform: translateX(-2px); }
+      40%  { transform: translateX(2px); }
+      46%  { transform: translateX(0); }
+    }
+    #mark { animation: frustrated 2.2s ease-in-out infinite; }
+  </style>
+  <g id="mark" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+    <g transform="rotate(0 50 56.67)">
+      <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
+    </g>
+    <g transform="rotate(120 50 56.67)">
+      <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
+    </g>
+    <g transform="rotate(240 50 56.67)">
+      <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
+    </g>
+  </g>
+</svg>
