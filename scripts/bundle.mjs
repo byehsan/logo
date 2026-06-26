@@ -58,12 +58,42 @@ for (const { key, path } of SVG_FILES) {
   console.log(`✓ loaded ${path}`)
 }
 
+// ── subbrandLockup function ───────────────────────────────────────────────
+// Shared implementation injected into both CJS and ESM bundles
+const MARK_PATHS_JSON = JSON.stringify(
+  ['rotate(0 50 56.67)', 'rotate(120 50 56.67)', 'rotate(240 50 56.67)']
+    .map(t => `<g transform="${t}"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>`)
+    .join('')
+)
+const PALETTES_JSON = JSON.stringify(paletteData.palettes)
+
+const subbrandFn = `
+function _xe(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+var _mp=${MARK_PATHS_JSON};
+var _pp=${PALETTES_JSON};
+function subbrandLockup(text,opts){
+  opts=opts||{};
+  var p=_pp[opts.palette||'brand-dark']||_pp['brand-dark'];
+  var mc=opts.markColor||p.mark;
+  var fs=Number(opts.fontSize)||24;
+  var W=Math.ceil(Math.max(220,64+Math.max(60,String(text).length*fs*0.6+8)+12));
+  var bl=(28+fs*0.35).toFixed(1);
+  var bg=opts.bgColor?'<rect width="'+W+'" height="56" fill="'+_xe(opts.bgColor)+'"/>':(opts.withBackground?'<rect width="'+W+'" height="56" fill="'+_xe(p.background||'transparent')+'"/>':'');
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' 56">'
+    +bg
+    +'<svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100"><g fill="none" stroke="'+_xe(mc)+'" stroke-width="2" stroke-linejoin="round">'+_mp+'</g></svg>'
+    +'<text x="64" y="'+bl+'" font-family="\'Space Grotesk\',system-ui,sans-serif" font-size="'+fs+'" font-weight="600" letter-spacing="-0.5" fill="'+_xe(mc)+'">'+_xe(text)+'</text>'
+    +'</svg>';
+}
+`.trim()
+
 // ── CJS bundle ────────────────────────────────────────────────────────────
 const cjsLines = [
   `'use strict';`,
   `const palette = ${JSON.stringify(paletteData, null, 2)};`,
   ...Object.entries(svgMap).map(([k, v]) => `const ${k} = ${JSON.stringify(v)};`),
-  `module.exports = { palette, ${Object.keys(svgMap).join(', ')} };`,
+  subbrandFn,
+  `module.exports = { palette, ${Object.keys(svgMap).join(', ')}, subbrandLockup };`,
 ]
 writeFileSync(join(DIST, 'index.js'), cjsLines.join('\n'))
 console.log('✓ index.js (CJS)')
@@ -72,6 +102,7 @@ console.log('✓ index.js (CJS)')
 const esmLines = [
   `export const palette = ${JSON.stringify(paletteData, null, 2)};`,
   ...Object.entries(svgMap).map(([k, v]) => `export const ${k} = ${JSON.stringify(v)};`),
+  subbrandFn.replace(/^function /, 'export function '),
 ]
 writeFileSync(join(DIST, 'index.esm.js'), esmLines.join('\n'))
 console.log('✓ index.esm.js (ESM)')
@@ -97,6 +128,29 @@ const dtsLines = [
   `export declare const palette: Palette;`,
   ``,
   ...Object.entries(svgMap).map(([k]) => `/** SVG markup string: ${k} */\nexport declare const ${k}: string;`),
+  ``,
+  `export interface SubbrandOptions {`,
+  `  /** Named palette from palette.json (default: 'brand-dark') */`,
+  `  palette?: 'brand-dark' | 'brand-light' | 'mono-dark' | 'mono-light' | 'indigo';`,
+  `  /** Override the mark and text color (hex) */`,
+  `  markColor?: string;`,
+  `  /** Explicit background fill color — omit for transparent */`,
+  `  bgColor?: string;`,
+  `  /** Font size in px (default: 24) */`,
+  `  fontSize?: number;`,
+  `  /** Fill background using the palette's background color */`,
+  `  withBackground?: boolean;`,
+  `}`,
+  ``,
+  `/**`,
+  ` * Generate a sub-brand lockup SVG string.`,
+  ` * Returns transparent SVG by default — pass bgColor or withBackground to fill.`,
+  ` *`,
+  ` * @example`,
+  ` * subbrandLockup('blog')`,
+  ` * subbrandLockup('store', { palette: 'brand-light', bgColor: '#eeeef4' })`,
+  ` */`,
+  `export declare function subbrandLockup(text: string, options?: SubbrandOptions): string;`,
 ]
 writeFileSync(join(DIST, 'index.d.ts'), dtsLines.join('\n'))
 console.log('✓ index.d.ts (TypeScript)')
