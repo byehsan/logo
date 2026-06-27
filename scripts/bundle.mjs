@@ -66,8 +66,8 @@ const MARK_INNER = `<svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100
 const _svgOpen  = JSON.stringify('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56">')
 const _svgClose = JSON.stringify('</svg>')
 const _markStr  = JSON.stringify(MARK_INNER)
-const _tx64     = JSON.stringify('<text x="64" y="37" font-family="\'Space Grotesk\',system-ui,sans-serif" font-size="24" font-weight="600" letter-spacing="-0.5" fill="currentColor">')
-const _tx88     = JSON.stringify('<text x="88" y="37" font-family="\'Space Grotesk\',system-ui,sans-serif" font-size="24" font-weight="600" letter-spacing="-0.5" fill="currentColor">')
+const _tx64     = JSON.stringify('<text x="56" y="37" font-family="\'Space Grotesk\',system-ui,sans-serif" font-size="24" font-weight="600" letter-spacing="-0.5" fill="currentColor">')
+const _tx88     = JSON.stringify('<text x="80" y="37" font-family="\'Space Grotesk\',system-ui,sans-serif" font-size="24" font-weight="600" letter-spacing="-0.5" fill="currentColor">')
 const _txClose  = JSON.stringify('</text>')
 
 const LOCKUP_FN_SRC = `

@@ -7,15 +7,15 @@
       <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
     </g>
   </svg>
-  <!-- Gap guides -->
+  <!-- Gap guides (8px gap: x=48 to x=56) -->
   <line x1="48" y1="4" x2="48" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
-  <line x1="64" y1="4" x2="64" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
-  <!-- Icon slot (20×20 at x=64, y=18 — vertically centred in the 56px container) -->
-  <rect x="64" y="18" width="20" height="20" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
-  <text x="66" y="30" font-family="'Space Grotesk',system-ui,sans-serif" font-size="5" fill="currentColor" opacity="0.35">ICON</text>
-  <!-- Gap between icon and text -->
-  <line x1="88" y1="4" x2="88" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.2"/>
-  <!-- Text slot (x=88 baseline y=37) -->
-  <rect x="88" y="4" width="128" height="48" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
-  <text x="92" y="36" font-family="'Space Grotesk',system-ui,sans-serif" font-size="10" fill="currentColor" opacity="0.35">SUB-BRAND SLOT</text>
+  <line x1="56" y1="4" x2="56" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+  <!-- Icon slot (20×20 at x=56, y=18 — vertically centred in the 56px container) -->
+  <rect x="56" y="18" width="20" height="20" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
+  <text x="57.5" y="30" font-family="'Space Grotesk',system-ui,sans-serif" font-size="5" fill="currentColor" opacity="0.35">ICON</text>
+  <!-- Gap between icon and text (4px: x=76 to x=80) -->
+  <line x1="80" y1="4" x2="80" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.2"/>
+  <!-- Text slot (x=80 baseline y=37) -->
+  <rect x="80" y="4" width="136" height="48" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
+  <text x="84" y="36" font-family="'Space Grotesk',system-ui,sans-serif" font-size="10" fill="currentColor" opacity="0.35">SUB-BRAND SLOT</text>
 </svg>

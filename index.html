@@ -438,9 +438,9 @@
             </g>
           </svg>
           <line x1="48" y1="4" x2="48" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
-          <line x1="64" y1="4" x2="64" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
-          <rect x="64" y="4" width="152" height="48" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
-          <text x="68" y="36" font-family="'Space Grotesk',system-ui,sans-serif" font-size="10" fill="currentColor" opacity="0.35">SUB-BRAND SLOT</text>
+          <line x1="56" y1="4" x2="56" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+          <rect x="56" y="4" width="160" height="48" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
+          <text x="60" y="36" font-family="'Space Grotesk',system-ui,sans-serif" font-size="10" fill="currentColor" opacity="0.35">SUB-BRAND SLOT</text>
         </svg>
       </div>
       <div class="lockup-cell">
@@ -454,12 +454,12 @@
             </g>
           </svg>
           <line x1="48" y1="4" x2="48" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
-          <line x1="64" y1="4" x2="64" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
-          <rect x="64" y="18" width="20" height="20" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
-          <text x="65.5" y="30" font-family="'Space Grotesk',system-ui,sans-serif" font-size="5" fill="currentColor" opacity="0.35">ICON</text>
-          <line x1="88" y1="4" x2="88" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.2"/>
-          <rect x="88" y="4" width="128" height="48" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
-          <text x="92" y="36" font-family="'Space Grotesk',system-ui,sans-serif" font-size="10" fill="currentColor" opacity="0.35">SUB-BRAND SLOT</text>
+          <line x1="56" y1="4" x2="56" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+          <rect x="56" y="18" width="20" height="20" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
+          <text x="57.5" y="30" font-family="'Space Grotesk',system-ui,sans-serif" font-size="5" fill="currentColor" opacity="0.35">ICON</text>
+          <line x1="80" y1="4" x2="80" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.2"/>
+          <rect x="80" y="4" width="136" height="48" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
+          <text x="84" y="36" font-family="'Space Grotesk',system-ui,sans-serif" font-size="10" fill="currentColor" opacity="0.35">SUB-BRAND SLOT</text>
         </svg>
       </div>
       <div class="lockup-cell">
@@ -472,7 +472,7 @@
               <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
             </g>
           </svg>
-          <text x="64" y="37" font-family="'Space Grotesk',system-ui,sans-serif" font-size="24" font-weight="600" letter-spacing="-0.5" fill="currentColor">blog</text>
+          <text x="56" y="37" font-family="'Space Grotesk',system-ui,sans-serif" font-size="24" font-weight="600" letter-spacing="-0.5" fill="currentColor">blog</text>
         </svg>
       </div>
     </div>
@@ -781,7 +781,7 @@ const git  = createIconLockup(
       if (!sel) return null;
       const icon = PRESET_ICONS.find(i => i.id === sel.dataset.icon);
       if (!icon) return null;
-      return `<svg x="64" y="18" width="20" height="20" viewBox="${icon.vb}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon.paths}</svg>`;
+      return `<svg x="56" y="18" width="20" height="20" viewBox="${icon.vb}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon.paths}</svg>`;
     }
     if (mode === 'custom') {
       const raw = document.getElementById('custom-svg-input').value.trim();
@@ -794,7 +794,7 @@ const git  = createIconLockup(
         const vb = svgEl.getAttribute('viewBox') || '0 0 24 24';
         const inner = new XMLSerializer().serializeToString(svgEl)
           .replace(/<svg[^>]*>/, '').replace(/<\/svg>$/, '');
-        return `<svg x="64" y="18" width="20" height="20" viewBox="${vb}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+        return `<svg x="56" y="18" width="20" height="20" viewBox="${vb}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
       } catch { return null; }
     }
     return null;
@@ -803,7 +803,7 @@ const git  = createIconLockup(
   function buildLockupSvg(widthPx) {
     const name = escXml(document.getElementById('builder-name').value.trim() || 'byEhsan');
     const iconSvg = getActiveIconData();
-    const textX = iconSvg ? 88 : 64;
+    const textX = iconSvg ? 80 : 56;
     const heightPx = Math.round(widthPx * 56 / 220);
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" width="${widthPx}" height="${heightPx}">
   <svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100">${MARK_PATHS}</svg>

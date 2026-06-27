@@ -2,7 +2,7 @@
 
 Brand asset repository for byEhsan. Triskelion mark with full state animation system, HTTP error states, lockup templates, favicon set, and CI release pipeline.
 
-**Current version:** v2.4.0
+**Current version:** v2.4.1
 **GH Pages:** https://byehsan.github.io/logo/ (interactive palette switcher + sub-logo builder)
 **npm:** `@byehsan/logo` on GitHub Packages
 
@@ -108,28 +108,28 @@ const gitSvg  = createIconLockup('git', iconSvg)  // iconSvg = <svg x=64 y=18 w=
 
 ```
 Mark area:   x=0,  y=0,  w=48, h=56   (mark at y+4, 48×48)
-Gap:         16px  (x=48 to x=64)
-Text slot:   x=64, baseline y=37, Space Grotesk 600 24px, letter-spacing -0.5
-Icon slot:   x=64, y=18, w=20, h=20   (vertically centred in 56px container)
-Text+icon:   icon at x=64,y=18; text x=88,y=37
+Gap:         8px   (x=48 to x=56)
+Text slot:   x=56, baseline y=37, Space Grotesk 600 24px, letter-spacing -0.5
+Icon slot:   x=56, y=18, w=20, h=20   (vertically centred in 56px container)
+Text+icon:   icon at x=56,y=18; text x=80,y=37
 ```
 
 Text-only lockup:
 ```xml
-<text x="64" y="37"
+<text x="56" y="37"
       font-family="'Space Grotesk', system-ui, sans-serif"
       font-size="24" font-weight="600" letter-spacing="-0.5"
       fill="currentColor">sub-brand</text>
 ```
 
-Icon + text lockup (icon slot is 20×20 at x=64,y=18, text starts at x=88):
+Icon + text lockup (icon slot is 20×20 at x=56,y=18, text starts at x=80):
 ```xml
-<svg x="64" y="18" width="20" height="20" viewBox="0 0 24 24"
+<svg x="56" y="18" width="20" height="20" viewBox="0 0 24 24"
      fill="none" stroke="currentColor" stroke-width="2"
      stroke-linecap="round" stroke-linejoin="round">
   <!-- icon paths -->
 </svg>
-<text x="88" y="37" font-family="'Space Grotesk',system-ui,sans-serif"
+<text x="80" y="37" font-family="'Space Grotesk',system-ui,sans-serif"
       font-size="24" font-weight="600" letter-spacing="-0.5"
       fill="currentColor">sub-brand</text>
 ```
