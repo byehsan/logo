@@ -42,8 +42,9 @@ const SVG_FILES = [
   { key: 'http500',        path: 'http/500.svg' },
   { key: 'http503',        path: 'http/503.svg' },
   { key: 'http403',        path: 'http/403.svg' },
-  { key: 'lockupTemplate', path: 'lockup/template.svg' },
-  { key: 'lockupBlog',     path: 'lockup/blog.svg' },
+  { key: 'lockupTemplate',     path: 'lockup/template.svg' },
+  { key: 'lockupBlog',         path: 'lockup/blog.svg' },
+  { key: 'lockupIconTemplate', path: 'lockup/icon-template.svg' },
 ]
 
 const svgMap = {}
@@ -58,12 +59,38 @@ for (const { key, path } of SVG_FILES) {
   console.log(`✓ loaded ${path}`)
 }
 
+// ── Lockup utility source ─────────────────────────────────────────────────
+const MARK_INNER = `<svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g><g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g><g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g></g></svg>`
+
+// Use JSON.stringify for string literals so quoting is always correct
+const _svgOpen  = JSON.stringify('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56">')
+const _svgClose = JSON.stringify('</svg>')
+const _markStr  = JSON.stringify(MARK_INNER)
+const _tx64     = JSON.stringify('<text x="64" y="37" font-family="\'Space Grotesk\',system-ui,sans-serif" font-size="24" font-weight="600" letter-spacing="-0.5" fill="currentColor">')
+const _tx88     = JSON.stringify('<text x="88" y="37" font-family="\'Space Grotesk\',system-ui,sans-serif" font-size="24" font-weight="600" letter-spacing="-0.5" fill="currentColor">')
+const _txClose  = JSON.stringify('</text>')
+
+const LOCKUP_FN_SRC = `
+var _be_mark=${_markStr};
+var _be_svgo=${_svgOpen};
+var _be_svgc=${_svgClose};
+var _be_tx64=${_tx64};
+var _be_tx88=${_tx88};
+var _be_txc=${_txClose};
+function createTextLockup(subBrand) {
+  return _be_svgo + _be_mark + _be_tx64 + subBrand + _be_txc + _be_svgc;
+}
+function createIconLockup(subBrand, iconSvg) {
+  return _be_svgo + _be_mark + iconSvg + _be_tx88 + subBrand + _be_txc + _be_svgc;
+}`
+
 // ── CJS bundle ────────────────────────────────────────────────────────────
 const cjsLines = [
   `'use strict';`,
   `const palette = ${JSON.stringify(paletteData, null, 2)};`,
   ...Object.entries(svgMap).map(([k, v]) => `const ${k} = ${JSON.stringify(v)};`),
-  `module.exports = { palette, ${Object.keys(svgMap).join(', ')} };`,
+  LOCKUP_FN_SRC,
+  `module.exports = { palette, ${Object.keys(svgMap).join(', ')}, createTextLockup, createIconLockup };`,
 ]
 writeFileSync(join(DIST, 'index.js'), cjsLines.join('\n'))
 console.log('✓ index.js (CJS)')
@@ -72,6 +99,7 @@ console.log('✓ index.js (CJS)')
 const esmLines = [
   `export const palette = ${JSON.stringify(paletteData, null, 2)};`,
   ...Object.entries(svgMap).map(([k, v]) => `export const ${k} = ${JSON.stringify(v)};`),
+  LOCKUP_FN_SRC.replace(/^function /gm, 'export function '),
 ]
 writeFileSync(join(DIST, 'index.esm.js'), esmLines.join('\n'))
 console.log('✓ index.esm.js (ESM)')
@@ -97,6 +125,13 @@ const dtsLines = [
   `export declare const palette: Palette;`,
   ``,
   ...Object.entries(svgMap).map(([k]) => `/** SVG markup string: ${k} */\nexport declare const ${k}: string;`),
+  ``,
+  `/** Generate a text-only lockup SVG string. Uses currentColor for theming. */`,
+  `export declare function createTextLockup(subBrand: string): string;`,
+  ``,
+  `/** Generate an icon+text lockup SVG string. iconSvg should be a <svg> element string */`,
+  `/** positioned at x=64, y=18, width=20, height=20 in the 220×56 viewBox. */`,
+  `export declare function createIconLockup(subBrand: string, iconSvg: string): string;`,
 ]
 writeFileSync(join(DIST, 'index.d.ts'), dtsLines.join('\n'))
 console.log('✓ index.d.ts (TypeScript)')

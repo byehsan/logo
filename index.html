@@ -28,42 +28,21 @@
 
     /* ── Layout ── */
     .container { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
-    header {
-      border-bottom: 1px solid var(--muted);
-      padding: 20px 0;
-    }
-    header .inner {
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo-lockup {
-      display: flex; align-items: center; gap: 14px;
-    }
+    header { border-bottom: 1px solid var(--muted); padding: 20px 0; }
+    header .inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .logo-lockup { display: flex; align-items: center; gap: 14px; }
     .logo-lockup svg { color: var(--mark); transition: color 0.3s; }
-    .logo-lockup .wordmark {
-      font-size: 18px; font-weight: 600; letter-spacing: -0.5px;
-    }
+    .logo-lockup .wordmark { font-size: 18px; font-weight: 600; letter-spacing: -0.5px; }
     .wordmark span { color: var(--mark); transition: color 0.3s; }
-    .tag {
-      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--text); opacity: 0.35; margin-left: 6px;
-    }
-    .version-badge {
-      font-size: 11px; padding: 3px 10px;
-      border: 1px solid var(--muted); border-radius: 20px;
-      color: var(--text); opacity: 0.5;
-    }
+    .tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text); opacity: 0.35; margin-left: 6px; }
+    .version-badge { font-size: 11px; padding: 3px 10px; border: 1px solid var(--muted); border-radius: 20px; color: var(--text); opacity: 0.5; }
 
     main { padding: 56px 0; }
     section { margin-bottom: 64px; }
-    .section-label {
-      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--text); opacity: 0.35; margin-bottom: 28px;
-    }
+    .section-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text); opacity: 0.35; margin-bottom: 28px; }
 
     /* ── Palette switcher ── */
-    .palette-bar {
-      display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
-    }
+    .palette-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
     .palette-btn {
       appearance: none; border: none; cursor: pointer;
       padding: 7px 16px; border-radius: 20px;
@@ -72,92 +51,105 @@
       transition: all 0.2s; border: 1px solid transparent;
     }
     .palette-btn:hover { opacity: 0.9; }
-    .palette-btn.active {
-      border-color: var(--mark); color: var(--mark);
-      background: transparent;
+    .palette-btn.active { border-color: var(--mark); color: var(--mark); background: transparent; }
+    .palette-swatch { width: 18px; height: 18px; border-radius: 50%; display: inline-block; vertical-align: middle; margin-right: 6px; border: 2px solid rgba(255,255,255,0.15); }
+
+    .palette-custom-row {
+      display: flex; flex-wrap: wrap; gap: 20px; align-items: center;
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid var(--muted);
     }
-    .palette-swatch {
-      width: 18px; height: 18px; border-radius: 50%;
-      display: inline-block; vertical-align: middle; margin-right: 6px;
-      border: 2px solid rgba(255,255,255,0.15);
-    }
-    .custom-color-wrap {
-      display: flex; align-items: center; gap: 8px;
-    }
-    .custom-color-wrap label {
-      font-size: 12px; opacity: 0.5;
-    }
+    .color-token-item { display: flex; align-items: center; gap: 8px; }
+    .color-token-item label { font-size: 12px; opacity: 0.5; cursor: pointer; user-select: none; }
     input[type="color"] {
       -webkit-appearance: none; width: 32px; height: 32px;
-      border: none; border-radius: 50%; cursor: pointer;
-      background: none; padding: 0;
+      border: none; border-radius: 50%; cursor: pointer; background: none; padding: 0;
     }
     input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; border-radius: 50%; }
     input[type="color"]::-webkit-color-swatch { border-radius: 50%; border: 2px solid var(--muted); }
 
     /* ── Mark grid ── */
-    .mark-grid {
-      display: flex; flex-wrap: wrap; gap: var(--gap); align-items: flex-end;
-    }
-    .mark-cell {
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-    }
+    .mark-grid { display: flex; flex-wrap: wrap; gap: var(--gap); align-items: flex-end; }
+    .mark-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; }
     .mark-cell svg { color: var(--mark); transition: color 0.3s; display: block; }
-    .mark-cell label {
-      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
-      opacity: 0.4;
-    }
-    .mark-bg {
-      padding: 20px; border-radius: var(--radius);
-      background: var(--muted);
-    }
+    .mark-cell label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.4; }
+    .mark-bg { padding: 20px; border-radius: var(--radius); background: var(--muted); }
 
     /* ── States grid ── */
-    .states-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: var(--gap);
-    }
-    .state-cell {
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-      padding: 20px 16px; border-radius: var(--radius);
-      background: var(--muted);
-    }
+    .states-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--gap); }
+    .state-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 16px; border-radius: var(--radius); background: var(--muted); }
     .state-cell svg { color: var(--mark); transition: color 0.3s; }
-    .state-cell label {
-      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
-      opacity: 0.45;
-    }
+    .state-cell label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.45; }
 
     /* ── Lockup ── */
-    .lockup-grid {
-      display: flex; flex-direction: column; gap: var(--gap);
+    .lockup-grid { display: flex; flex-direction: column; gap: var(--gap); }
+    .lockup-cell { padding: 24px; border-radius: var(--radius); background: var(--muted); overflow-x: auto; }
+    .lockup-cell label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.35; margin-bottom: 16px; }
+    .lockup-cell svg { color: var(--mark); transition: color 0.3s; max-width: 100%; height: auto; }
+
+    /* ── Sub-logo builder ── */
+    .builder-layout { display: flex; gap: var(--gap); align-items: flex-start; }
+    .builder-controls { flex: 0 0 260px; display: flex; flex-direction: column; gap: 20px; }
+    .builder-previews { flex: 1; min-width: 0; }
+    .builder-field { display: flex; flex-direction: column; }
+    .field-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; margin-bottom: 8px; }
+    .builder-name-input {
+      width: 100%; padding: 9px 14px; border-radius: 8px;
+      background: var(--muted); border: 1px solid transparent;
+      color: var(--text); font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 17px; font-weight: 600; letter-spacing: -0.5px;
+      outline: none; transition: border-color 0.2s;
     }
-    .lockup-cell {
-      padding: 24px; border-radius: var(--radius); background: var(--muted);
+    .builder-name-input:focus { border-color: var(--mark); }
+    .icon-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .icon-tab {
+      appearance: none; cursor: pointer; padding: 6px 13px; border-radius: 6px;
+      font-family: inherit; font-size: 12px; font-weight: 500;
+      background: var(--muted); color: var(--text);
+      border: 1px solid transparent; transition: all 0.2s;
     }
-    .lockup-cell label {
-      display: block; font-size: 10px; letter-spacing: 2px;
-      text-transform: uppercase; opacity: 0.35; margin-bottom: 16px;
+    .icon-tab.active { border-color: var(--mark); color: var(--mark); background: transparent; }
+    .icon-picker-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .icon-opt {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      padding: 10px 4px; border-radius: 8px; border: 1px solid transparent;
+      cursor: pointer; background: var(--muted); transition: all 0.15s;
     }
-    .lockup-cell svg { color: var(--mark); transition: color 0.3s; }
+    .icon-opt:hover { opacity: 0.8; }
+    .icon-opt.selected { border-color: var(--mark); }
+    .icon-opt svg { color: var(--mark); transition: color 0.3s; }
+    .icon-opt span { font-size: 8px; opacity: 0.45; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+    .custom-svg-area {
+      width: 100%; min-height: 80px; padding: 10px 12px; border-radius: 8px;
+      background: var(--muted); border: 1px solid transparent;
+      color: var(--text); font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 11px; line-height: 1.5; resize: vertical; outline: none;
+      transition: border-color 0.2s;
+    }
+    .custom-svg-area:focus { border-color: var(--mark); }
+    .custom-svg-area::placeholder { opacity: 0.35; }
+    .builder-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .builder-dl-btn {
+      appearance: none; cursor: pointer; padding: 6px 14px; border-radius: 6px;
+      font-family: inherit; font-size: 11px; font-weight: 500;
+      background: var(--muted); color: var(--text);
+      border: 1px solid transparent; transition: all 0.2s;
+    }
+    .builder-dl-btn:hover { border-color: var(--mark); color: var(--mark); }
+    .preview-row { display: flex; flex-direction: column; gap: 12px; }
+    .preview-cell {
+      padding: 16px 20px; border-radius: var(--radius); background: var(--muted);
+      display: flex; align-items: center; gap: 16px; overflow-x: auto;
+    }
+    .preview-cell .sz { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.3; white-space: nowrap; flex-shrink: 0; min-width: 40px; text-align: right; }
+    .preview-cell .svg-wrap { color: var(--mark); transition: color 0.3s; flex-shrink: 0; }
+    .preview-cell .svg-wrap svg { display: block; max-width: 100%; height: auto; }
 
     /* ── Install ── */
     .install-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
-    @media (max-width: 640px) { .install-grid { grid-template-columns: 1fr; } }
-    .code-block {
-      background: var(--muted); border-radius: var(--radius);
-      padding: 20px 24px;
-    }
-    .code-block h4 {
-      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-      opacity: 0.4; margin-bottom: 14px;
-    }
-    .code-block pre {
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 12px; line-height: 1.7;
-      color: var(--text); white-space: pre-wrap; word-break: break-all;
-    }
+    .code-block { background: var(--muted); border-radius: var(--radius); padding: 20px 24px; overflow-x: auto; }
+    .code-block h4 { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; margin-bottom: 14px; }
+    .code-block pre { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; line-height: 1.7; color: var(--text); white-space: pre; }
     .code-block pre .hl { color: var(--mark); }
     .copy-btn {
       margin-top: 12px; appearance: none; border: none; cursor: pointer;
@@ -170,9 +162,7 @@
     .copy-btn.copied { background: #2ecc71; }
 
     /* ── Download ── */
-    .dl-grid {
-      display: flex; flex-wrap: wrap; gap: 12px;
-    }
+    .dl-grid { display: flex; flex-wrap: wrap; gap: 12px; }
     .dl-btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 10px 20px; border-radius: var(--radius);
@@ -183,9 +173,20 @@
     .dl-btn:hover { border-color: var(--mark); color: var(--mark); }
     .dl-btn svg { flex-shrink: 0; }
 
-    footer {
-      border-top: 1px solid var(--muted); padding: 28px 0;
-      text-align: center; font-size: 12px; opacity: 0.3;
+    footer { border-top: 1px solid var(--muted); padding: 28px 0; text-align: center; font-size: 12px; opacity: 0.3; }
+
+    /* ── Mobile responsive ── */
+    @media (max-width: 768px) {
+      .container { padding: 0 16px; }
+      main { padding: 32px 0; }
+      section { margin-bottom: 44px; }
+      .builder-layout { flex-direction: column; }
+      .builder-controls { flex: none; width: 100%; }
+      .install-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .mark-grid { gap: 12px; }
+      .palette-custom-row { gap: 12px; }
     }
   </style>
 </head>
@@ -204,7 +205,7 @@
           <div class="wordmark"><span>by</span>Ehsan <span class="tag">logo system</span></div>
         </div>
       </div>
-      <span class="version-badge" id="version-badge">v2.0.0</span>
+      <span class="version-badge" id="version-badge">v2.4.0</span>
     </div>
   </div>
 </header>
@@ -231,9 +232,23 @@
       <button class="palette-btn" data-palette="indigo">
         <span class="palette-swatch" style="background:#5901d8"></span>Indigo
       </button>
-      <div class="custom-color-wrap">
-        <label>Custom mark</label>
-        <input type="color" id="custom-color" value="#f07828">
+    </div>
+    <div class="palette-custom-row">
+      <div class="color-token-item">
+        <input type="color" id="cp-mark"   value="#f07828" title="Primary / Mark">
+        <label for="cp-mark">Primary</label>
+      </div>
+      <div class="color-token-item">
+        <input type="color" id="cp-accent" value="#5901d8" title="Accent / Secondary">
+        <label for="cp-accent">Accent</label>
+      </div>
+      <div class="color-token-item">
+        <input type="color" id="cp-bg"     value="#0a0514" title="Background">
+        <label for="cp-bg">Background</label>
+      </div>
+      <div class="color-token-item">
+        <input type="color" id="cp-text"   value="#eeeef4" title="Text">
+        <label for="cp-text">Text</label>
       </div>
     </div>
   </section>
@@ -413,7 +428,7 @@
     <div class="section-label">Lockup system — Space Grotesk 600, baseline y=37</div>
     <div class="lockup-grid">
       <div class="lockup-cell">
-        <label>Template (dashed slot guide)</label>
+        <label>Template (text slot guide)</label>
         <svg viewBox="0 0 220 56" width="440" height="112">
           <svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100">
             <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
@@ -429,7 +444,26 @@
         </svg>
       </div>
       <div class="lockup-cell">
-        <label>blog — worked example</label>
+        <label>Icon + text template (icon slot guide)</label>
+        <svg viewBox="0 0 220 56" width="440" height="112">
+          <svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+              <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+              <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+              <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+            </g>
+          </svg>
+          <line x1="48" y1="4" x2="48" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+          <line x1="64" y1="4" x2="64" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+          <rect x="64" y="18" width="20" height="20" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
+          <text x="65.5" y="30" font-family="'Space Grotesk',system-ui,sans-serif" font-size="5" fill="currentColor" opacity="0.35">ICON</text>
+          <line x1="88" y1="4" x2="88" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.2"/>
+          <rect x="88" y="4" width="128" height="48" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
+          <text x="92" y="36" font-family="'Space Grotesk',system-ui,sans-serif" font-size="10" fill="currentColor" opacity="0.35">SUB-BRAND SLOT</text>
+        </svg>
+      </div>
+      <div class="lockup-cell">
+        <label>blog — text-only example</label>
         <svg viewBox="0 0 220 56" width="440" height="112">
           <svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100">
             <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
@@ -441,6 +475,66 @@
           <text x="64" y="37" font-family="'Space Grotesk',system-ui,sans-serif" font-size="24" font-weight="600" letter-spacing="-0.5" fill="currentColor">blog</text>
         </svg>
       </div>
+    </div>
+  </section>
+
+  <!-- Sub-logo builder -->
+  <section>
+    <div class="section-label">Sub-logo builder</div>
+    <div class="builder-layout">
+
+      <div class="builder-controls">
+
+        <div class="builder-field">
+          <div class="field-label">Sub-brand name</div>
+          <input type="text" id="builder-name" class="builder-name-input"
+                 placeholder="git" maxlength="24" autocomplete="off" spellcheck="false">
+        </div>
+
+        <div class="builder-field">
+          <div class="field-label">Icon</div>
+          <div class="icon-tabs">
+            <button class="icon-tab active" data-mode="none">No icon</button>
+            <button class="icon-tab" data-mode="preset">Preset</button>
+            <button class="icon-tab" data-mode="custom">Custom SVG</button>
+          </div>
+        </div>
+
+        <div id="preset-icons-panel" class="icon-picker-grid" style="display:none"></div>
+
+        <div id="custom-svg-panel" style="display:none">
+          <textarea id="custom-svg-input" class="custom-svg-area"
+                    rows="5" placeholder="Paste full &lt;svg&gt;…&lt;/svg&gt; here&#10;(will be placed at 20×20px in the slot)"></textarea>
+        </div>
+
+        <div class="builder-actions">
+          <button class="copy-btn" id="builder-copy-btn">Copy SVG</button>
+          <button class="builder-dl-btn" id="builder-dl-btn">↓ Download</button>
+        </div>
+
+      </div>
+
+      <div class="builder-previews">
+        <div class="preview-row" id="preview-row">
+          <div class="preview-cell">
+            <span class="sz">440px</span>
+            <div class="svg-wrap" id="prev-440"></div>
+          </div>
+          <div class="preview-cell">
+            <span class="sz">220px</span>
+            <div class="svg-wrap" id="prev-220"></div>
+          </div>
+          <div class="preview-cell">
+            <span class="sz">120px</span>
+            <div class="svg-wrap" id="prev-120"></div>
+          </div>
+          <div class="preview-cell">
+            <span class="sz">80px</span>
+            <div class="svg-wrap" id="prev-80"></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -460,18 +554,28 @@ npm install @byehsan/logo</pre>
       <div class="code-block">
         <h4>ESM import</h4>
         <pre>import {
-  base,
-  stateLoading,
-  http404,
-  palettes
+  base, stateLoading,
+  http404, palettes
 } from <span class="hl">'@byehsan/logo'</span></pre>
         <button class="copy-btn" data-copy="import { base, stateLoading, http404, palettes } from '@byehsan/logo'">Copy</button>
+      </div>
+      <div class="code-block">
+        <h4>Create lockups</h4>
+        <pre>import {
+  createTextLockup,
+  createIconLockup
+} from <span class="hl">'@byehsan/logo'</span>
+
+const blog = createTextLockup(<span class="hl">'blog'</span>)
+const git  = createIconLockup(
+  <span class="hl">'git'</span>, gitIconSvgString)</pre>
+        <button class="copy-btn" data-copy="import { createTextLockup, createIconLockup } from '@byehsan/logo'">Copy</button>
       </div>
       <div class="code-block">
         <h4>CSS custom properties</h4>
         <pre>import <span class="hl">'@byehsan/logo/css'</span>
 
-/* then in your CSS */
+/* then in CSS */
 .logo {
   background: var(<span class="hl">--logo-base</span>);
   color: var(<span class="hl">--color-orange</span>);
@@ -480,13 +584,24 @@ npm install @byehsan/logo</pre>
       </div>
       <div class="code-block">
         <h4>Favicon HTML</h4>
-        <pre>&lt;link rel=<span class="hl">"icon"</span> type=<span class="hl">"image/svg+xml"</span>
+        <pre>&lt;link rel=<span class="hl">"icon"</span>
+      type=<span class="hl">"image/svg+xml"</span>
       href=<span class="hl">"base.svg"</span>&gt;
 &lt;link rel=<span class="hl">"apple-touch-icon"</span>
       href=<span class="hl">"apple-touch-icon.png"</span>&gt;
 &lt;link rel=<span class="hl">"manifest"</span>
       href=<span class="hl">"site.webmanifest"</span>&gt;</pre>
         <button class="copy-btn" data-copy='<link rel="icon" type="image/svg+xml" href="base.svg">'>Copy</button>
+      </div>
+      <div class="code-block">
+        <h4>Theming via currentColor</h4>
+        <pre>&lt;!-- Set color on SVG or parent --&gt;
+&lt;img src=<span class="hl">"lockup-git.svg"</span>
+     style=<span class="hl">"color:#f07828"</span>&gt;
+
+&lt;!-- Or drive from CSS --&gt;
+.brand { color: var(<span class="hl">--color-orange</span>); }</pre>
+        <button class="copy-btn" data-copy='<img src="lockup.svg" style="color:#f07828">'>Copy</button>
       </div>
     </div>
   </section>
@@ -520,6 +635,7 @@ npm install @byehsan/logo</pre>
 </footer>
 
 <script>
+  /* ── Palettes ── */
   const PALETTES = {
     'brand-dark':  { bg:'#0a0514', mark:'#f07828', text:'#eeeef4', accent:'#5901d8', muted:'rgba(238,238,244,0.12)' },
     'brand-light': { bg:'#eeeef4', mark:'#f07828', text:'#0a0514', accent:'#5901d8', muted:'rgba(10,5,20,0.1)' },
@@ -535,36 +651,55 @@ npm install @byehsan/logo</pre>
     r.setProperty('--text', p.text);
     r.setProperty('--accent', p.accent);
     r.setProperty('--muted', p.muted);
+    document.getElementById('cp-mark').value   = rgbToHex(p.mark);
+    document.getElementById('cp-accent').value = rgbToHex(p.accent);
+    document.getElementById('cp-bg').value     = rgbToHex(p.bg);
+    document.getElementById('cp-text').value   = rgbToHex(p.text);
   }
 
-  // Palette buttons
+  function rgbToHex(c) {
+    // Return as-is if already a hex; can't convert rgba to hex simply so skip
+    return c.startsWith('#') ? c : '#888888';
+  }
+
   document.querySelectorAll('.palette-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       applyPalette(PALETTES[btn.dataset.palette]);
-      document.getElementById('custom-color').value = PALETTES[btn.dataset.palette].mark;
     });
   });
 
-  // Custom color picker
-  document.getElementById('custom-color').addEventListener('input', e => {
+  document.getElementById('cp-mark').addEventListener('input', e => {
     document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
     document.documentElement.style.setProperty('--mark', e.target.value);
   });
+  document.getElementById('cp-accent').addEventListener('input', e => {
+    document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
+    document.documentElement.style.setProperty('--accent', e.target.value);
+  });
+  document.getElementById('cp-bg').addEventListener('input', e => {
+    document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
+    document.documentElement.style.setProperty('--bg', e.target.value);
+  });
+  document.getElementById('cp-text').addEventListener('input', e => {
+    document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
+    document.documentElement.style.setProperty('--text', e.target.value);
+  });
 
-  // Copy buttons
-  document.querySelectorAll('.copy-btn').forEach(btn => {
+  /* ── Copy buttons ── */
+  document.querySelectorAll('.copy-btn[data-copy]').forEach(btn => {
     btn.addEventListener('click', () => {
       navigator.clipboard.writeText(btn.dataset.copy).then(() => {
+        const orig = btn.textContent;
         btn.textContent = 'Copied!';
         btn.classList.add('copied');
-        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
       });
     });
   });
 
-  // Fetch version from GitHub API
+  /* ── Version badge ── */
   fetch('https://api.github.com/repos/byehsan/logo/releases/latest')
     .then(r => r.json())
     .then(d => {
@@ -574,6 +709,150 @@ npm install @byehsan/logo</pre>
         if (zip) zip.href = `https://github.com/byehsan/logo/releases/download/${d.tag_name}/byehsan-logo-${d.tag_name}.zip`;
       }
     }).catch(() => {});
+
+  /* ── Sub-logo builder ── */
+
+  const MARK_PATHS = `<g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+    <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+    <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+    <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
+  </g>`;
+
+  const PRESET_ICONS = [
+    { id: 'git',   label: 'Git',    vb: '0 0 24 24',
+      paths: '<circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="6" y1="9" x2="6" y2="15"/><path d="M18 9v1.5a3.5 3.5 0 0 1-3.5 3.5H6"/>' },
+    { id: 'globe', label: 'Globe',  vb: '0 0 24 24',
+      paths: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' },
+    { id: 'home',  label: 'Home',   vb: '0 0 24 24',
+      paths: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>' },
+    { id: 'code',  label: 'Code',   vb: '0 0 24 24',
+      paths: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>' },
+    { id: 'star',  label: 'Star',   vb: '0 0 24 24',
+      paths: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>' },
+    { id: 'mail',  label: 'Mail',   vb: '0 0 24 24',
+      paths: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>' },
+    { id: 'rss',   label: 'RSS',    vb: '0 0 24 24',
+      paths: '<path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1" fill="currentColor" stroke="none"/>' },
+    { id: 'book',  label: 'Docs',   vb: '0 0 24 24',
+      paths: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>' },
+  ];
+
+  // Build preset icon grid
+  const presetPanel = document.getElementById('preset-icons-panel');
+  PRESET_ICONS.forEach(icon => {
+    const btn = document.createElement('button');
+    btn.className = 'icon-opt';
+    btn.dataset.icon = icon.id;
+    btn.innerHTML = `<svg viewBox="${icon.vb}" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon.paths}</svg><span>${icon.label}</span>`;
+    btn.addEventListener('click', () => {
+      presetPanel.querySelectorAll('.icon-opt').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      updateBuilder();
+    });
+    presetPanel.appendChild(btn);
+  });
+
+  // Icon mode tabs
+  document.querySelectorAll('.icon-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.icon-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const mode = tab.dataset.mode;
+      presetPanel.style.display = mode === 'preset' ? 'grid' : 'none';
+      document.getElementById('custom-svg-panel').style.display = mode === 'custom' ? 'block' : 'none';
+      updateBuilder();
+    });
+  });
+
+  // Name input
+  document.getElementById('builder-name').addEventListener('input', updateBuilder);
+
+  // Custom SVG input
+  document.getElementById('custom-svg-input').addEventListener('input', updateBuilder);
+
+  function escXml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function getActiveIconData() {
+    const mode = document.querySelector('.icon-tab.active').dataset.mode;
+    if (mode === 'preset') {
+      const sel = presetPanel.querySelector('.icon-opt.selected');
+      if (!sel) return null;
+      const icon = PRESET_ICONS.find(i => i.id === sel.dataset.icon);
+      if (!icon) return null;
+      return `<svg x="64" y="18" width="20" height="20" viewBox="${icon.vb}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon.paths}</svg>`;
+    }
+    if (mode === 'custom') {
+      const raw = document.getElementById('custom-svg-input').value.trim();
+      if (!raw) return null;
+      try {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(raw, 'image/svg+xml');
+        const svgEl = doc.documentElement;
+        if (svgEl.tagName !== 'svg') return null;
+        const vb = svgEl.getAttribute('viewBox') || '0 0 24 24';
+        const inner = new XMLSerializer().serializeToString(svgEl)
+          .replace(/<svg[^>]*>/, '').replace(/<\/svg>$/, '');
+        return `<svg x="64" y="18" width="20" height="20" viewBox="${vb}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+      } catch { return null; }
+    }
+    return null;
+  }
+
+  function buildLockupSvg(widthPx) {
+    const name = escXml(document.getElementById('builder-name').value.trim() || 'byEhsan');
+    const iconSvg = getActiveIconData();
+    const textX = iconSvg ? 88 : 64;
+    const heightPx = Math.round(widthPx * 56 / 220);
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" width="${widthPx}" height="${heightPx}">
+  <svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100">${MARK_PATHS}</svg>
+  ${iconSvg || ''}
+  <text x="${textX}" y="37" font-family="'Space Grotesk',system-ui,sans-serif" font-size="24" font-weight="600" letter-spacing="-0.5" fill="currentColor">${name}</text>
+</svg>`;
+  }
+
+  function updateBuilder() {
+    [
+      { id: 'prev-440', w: 440 },
+      { id: 'prev-220', w: 220 },
+      { id: 'prev-120', w: 120 },
+      { id: 'prev-80',  w: 80  },
+    ].forEach(({ id, w }) => {
+      const el = document.getElementById(id);
+      el.innerHTML = buildLockupSvg(w);
+      el.querySelector('svg').style.maxWidth = '100%';
+      el.querySelector('svg').style.height = 'auto';
+    });
+  }
+
+  // Copy SVG button
+  document.getElementById('builder-copy-btn').addEventListener('click', () => {
+    const svg = buildLockupSvg(440);
+    navigator.clipboard.writeText(svg).then(() => {
+      const btn = document.getElementById('builder-copy-btn');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+    });
+  });
+
+  // Download SVG button
+  document.getElementById('builder-dl-btn').addEventListener('click', () => {
+    const svg = buildLockupSvg(440);
+    const name = document.getElementById('builder-name').value.trim() || 'lockup';
+    const blob = new Blob([svg], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `lockup-${name}.svg`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // Initial render
+  updateBuilder();
 </script>
 
 </body>
