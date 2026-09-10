@@ -4,8 +4,7 @@ Brand asset repository for byEhsan. ES pyramid mark with full state animation sy
 eyes, HTTP error states, lockup templates, favicon set, and CI release pipeline.
 
 **Current version:** v3.1.0
-**GH Pages:** https://byehsan.github.io/logo/ — personal landing page (`index.html`); full
-brand asset system + interactive palette switcher at `/brand.html`
+**GH Pages:** https://byehsan.github.io/logo/ (interactive palette switcher)
 **npm:** `@byehsan/logo` on GitHub Packages
 
 **Full system context — mark geometry, palette schema, animation conventions, lockup
@@ -62,15 +61,14 @@ scripts/
 docs/
   CONTEXT.md                  full system reference — read this before non-trivial changes
 
-index.html                  personal landing page — hero, nav, links out to brand.html
-brand.html                   full brand asset system — palette switcher, all states live,
-                             lockup generator, download panel (was index.html pre-v3.1.0)
+index.html                  GH Pages site — logo tool: palette switcher, all states live,
+                             lockup generator, component reference, download panel
 404.html                     GH Pages error page (served automatically for unmatched paths)
 403.html                     access-restricted system page
 500.html                     server-error system page
 503.html                     maintenance system page
 thank-you.html                form/contact confirmation system page
-preview.html                local preview grid (same as brand.html, for offline use)
+preview.html                local preview grid (same as index.html, for offline use)
 states.css                  class-driven Option B stylesheet (.state-loading etc.)
 palette.json                markGeometry + named presets + token map (schema v2)
 ```
@@ -78,6 +76,5 @@ palette.json                markGeometry + named presets + token map (schema v2)
 ## Adding a new state
 
 See `docs/CONTEXT.md`'s "Adding a new state" section — copy `states/neutral.svg`, write the
-`@keyframes py-*`, wire it into `states.css`/`scripts/bundle.mjs`/`brand.html` (not
-`index.html` — that's the landing page, not the asset showcase), add test coverage, then
-document and bump the version (here, and in `docs/CONTEXT.md`).
+`@keyframes py-*`, wire it into `states.css`/`scripts/bundle.mjs`/`index.html`, add test
+coverage, then document and bump the version (here, and in `docs/CONTEXT.md`).
