@@ -31,7 +31,15 @@ describe('npm pack tarball — real consumer install simulation', () => {
   it('extracted tarball contains dist/, palette.json, and the other files-listed paths', () => {
     const pkgRoot = join(extractDir, 'package')
     const entries = readdirSync(pkgRoot)
-    for (const expected of ['dist', 'base.svg', 'signature.svg', 'signature-hand.svg', 'signature-draw.svg', 'states', 'moods', 'http', 'lockup', 'palette.json', 'states.css', 'package.json']) {
+    for (const expected of ['dist', 'base.svg', 'signature.svg', 'signature-hand.svg', 'signature-draw.svg', 'signature-draw-full.svg', 'states', 'moods', 'http', 'lockup', 'palette.json', 'states.css', 'package.json']) {
+      expect(entries).toContain(expected)
+    }
+  })
+
+  it('extracted dist/pages/ contains the branded system pages', () => {
+    const pagesDir = join(extractDir, 'package', 'dist', 'pages')
+    const entries = readdirSync(pagesDir)
+    for (const expected of ['404.html', '403.html', '500.html', '503.html', 'thank-you.html']) {
       expect(entries).toContain(expected)
     }
   })

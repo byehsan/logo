@@ -37,6 +37,7 @@ const SVG_FILES = [
   { key: 'signature',      path: 'signature.svg' },
   { key: 'signatureHand',  path: 'signature-hand.svg' },
   { key: 'signatureDraw',  path: 'signature-draw.svg' },
+  { key: 'signatureDrawFull', path: 'signature-draw-full.svg' },
   { key: 'stateNeutral',   path: 'states/neutral.svg' },
   { key: 'stateLoading',   path: 'states/loading.svg' },
   { key: 'stateSuccess',   path: 'states/success.svg' },
@@ -175,6 +176,18 @@ console.log('✓ index.css')
 // ── states.css (copy) ─────────────────────────────────────────────────────
 copyFileSync(join(ROOT, 'states.css'), join(DIST, 'states.css'))
 console.log('✓ states.css')
+
+// ── System pages (copy) ───────────────────────────────────────────────────
+// 404/403/500/503/thank-you.html are drop-in branded error/confirmation pages, meant to be
+// copied into a consumer's own site — same as the SVGs and lockup templates, they're
+// finished brand assets, not just GH-Pages-only files, so they ship in dist/ (and therefore
+// in the npm package and the release archive) alongside everything else.
+mkdirSync(join(DIST, 'pages'), { recursive: true })
+const SYSTEM_PAGES = ['404.html', '403.html', '500.html', '503.html', 'thank-you.html']
+for (const page of SYSTEM_PAGES) {
+  copyFileSync(join(ROOT, page), join(DIST, 'pages', page))
+  console.log(`✓ pages/${page}`)
+}
 
 // ── Favicon generation ────────────────────────────────────────────────────
 // Colour the currentColor SVG with the default preset's solid colour before rasterising

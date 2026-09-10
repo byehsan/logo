@@ -33,19 +33,47 @@ more handwritten read (teasers, social) over full brand polish; it is not a sepa
 signature, just the unweighted construction. Legibility floor is ~120px wide; below that
 (e.g. the header lockup in `index.html`, ~112px) some readability is expected to be traded
 for compactness — don't try to compensate by inflating stroke-width, that distorts the
-letterforms instead. A separate downloadable `signature-draw.svg` (self-contained, CSS
-`@keyframes` inline) animates the spine drawing on and holding/fading, 4.5s loop, for use
-outside the site — teasers, video overlays, etc. — where a live page context isn't available.
+letterforms instead. Two separate downloadable draw-on animations (self-contained, CSS
+`@keyframes` inline, no JS) — spine drawing on and holding/fading, 4.5s loop — for use
+outside the site (teasers, video overlays, marketing content, etc.) where a live page
+context isn't available:
+
+- `signature-draw.svg` — spine only, ends at the last letter (x=624). Real
+  `getTotalLength()` is 2181.29; `stroke-dasharray`/the 0% `stroke-dashoffset` keyframe use
+  2182 (rounds up so the dash fully covers the path).
+- `signature-draw-full.svg` — spine *and* the flourish tail merged into one continuous
+  stroke (extends to x=882), matching the original design doc's own draw-on demo. This is a
+  longer path — its real length is 2442.10, so it correctly uses `2442`, not 2182. **The two
+  files are not interchangeable and don't share a dasharray value** — always measure
+  `getTotalLength()` on the actual path before hardcoding stroke-dasharray/dashoffset on a
+  new variant; don't assume a value from one signature path applies to another.
 
 ## Site structure
 
 `index.html` is the whole thing: a single-page logo/brand tool (palette switcher, live
-states/http/moods grids, lockup generator, a component reference for developers building
-the actual apps/landing pages — buttons, cards, capsules, progress bars, diagrams/mockup
-grids — and the download panel: source files plus dynamically-fetched latest-release assets
-via the GitHub API). There is deliberately no separate personal landing page — this repo is
-the brand *asset* system, not the product site. `preview.html` is a static offline snapshot
-of `index.html`'s content, kept in sync by hand.
+states/http/moods grids, a 3-step Logo generator wizard, a "Powered by" embeddable badge, a
+component reference for developers building the actual apps/landing pages — buttons, cards,
+capsules, progress bars, diagrams/mockup grids — and the download panel: source files plus
+dynamically-fetched latest-release assets via the GitHub API). There is deliberately no
+separate personal landing page — this repo is the brand *asset* system, not the product site.
+`preview.html` is a static offline snapshot of `index.html`'s content, kept in sync by hand.
+
+**Logo generator wizard** (`#gen-*` ids, step-1/2/3 accordion): Step 1 (Mark, always on) sets
+output size, aspect ratio, and a margin slider (0 by default); Step 2 (Sub-logo) and Step 3
+(Text) are both off by default via a toggle switch. `layout()` composes whichever parts are
+enabled as one linear row with fixed 16px gaps, centered in a canvas sized by margin +
+aspect ratio, then `buildSVG()` renders it and `buildParts`/`renderPart` place each part's own
+`<svg x y width height>` inside the root. **Gotcha:** `.gen-preview-box svg { ... }` as a bare
+descendant selector matches those *nested* per-part `<svg>` elements too, not just the root —
+`height: auto` on a nested, positioned svg corrupts its layout. Keep it scoped to
+`.gen-preview-box > svg` (direct child only).
+
+**"Powered by" badge** (`poweredByBadgeHTML()`): a self-contained embeddable pill (mark +
+signature + ".com") for embedding in other tools/sites — literal hex colors, no external
+CSS/JS dependency, dark and light variants, each with a "Copy embed code" button. The
+page's own footer carries a third instance built with `var(--surface)`/`var(--border)`/
+`var(--text)` refs instead of literal hex, so it re-themes with the palette switcher — don't
+copy that variant out to `poweredByBadgeHTML()`, it only works inside this page's own CSS.
 
 ## Brand palette
 
@@ -195,11 +223,14 @@ would race/duplicate the `pages` job already in `release.yml`.
 
 ```bash
 npm test            # vitest run — palette schema, lockup API, dist/pack smoke tests
-git tag v3.1.0 && git push origin v3.1.0
+git tag v3.2.0 && git push origin v3.2.0
 ```
 
 Release artifacts: zip/tarball with all SVGs, PNGs at 7 sizes, favicon.ico, webmanifest,
-CJS/ESM/CSS bundles, TypeScript defs, palette.json.
+CJS/ESM/CSS bundles, TypeScript defs, palette.json, and `dist/pages/` (the branded
+404/403/500/503/thank-you system pages — drop-in HTML, not just GH-Pages-only files;
+`scripts/bundle.mjs` copies them from the repo root into `dist/pages/` on every build, same
+as the SVGs, so they ship in the npm package and the release archive).
 
 ## Adding a new state
 

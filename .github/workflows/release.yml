@@ -128,6 +128,7 @@ jobs:
             | `dist/site.webmanifest` | PWA manifest |
             | `dist/palette.json` | Brand palette tokens |
             | `dist/svgs/` | All SVG sources |
+            | `dist/pages/` | Branded 404/403/500/503/thank-you system pages, drop-in ready |
 
             ### Install (GitHub Packages)
             ```

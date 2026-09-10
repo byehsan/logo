@@ -100,23 +100,18 @@
     /* ── Lockup ── */
     .lockup-grid { display: flex; flex-direction: column; gap: var(--gap); }
     .lockup-cell { padding: 24px; border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+    .sig-full-card { padding: 40px; border-radius: var(--radius); background: var(--surface); display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .sig-full-card svg { color: var(--mark); }
+    .sig-full-card label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.45; }
     .lockup-cell > label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; margin-bottom: 16px; }
     .lockup-cell svg { color: var(--mark); transition: color 0.3s; max-width: 100%; height: auto; }
 
     /* ── Generator ── */
     .gen-card { background: var(--surface); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; gap: 22px; }
-    .gen-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); padding-bottom: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .gen-tab { appearance: none; background: transparent; border: none; color: var(--text); font-family: inherit; font-size: 13px; font-weight: 500; padding: 8px 18px; border-radius: 8px; cursor: pointer; opacity: 0.42; transition: all 0.2s; white-space: nowrap; }
-    .gen-tab:hover { opacity: 0.75; background: rgba(128,128,128,0.08); }
-    .gen-tab.active { opacity: 1; background: rgba(128,128,128,0.14); }
-    .gen-panel.hidden { display: none; }
     .field-label { display: block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.45; margin-bottom: 8px; }
     .gen-text-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -0.5px; padding: 11px 16px; transition: border-color 0.2s; }
     .gen-text-input:focus { outline: none; border-color: var(--mark); }
     .gen-text-input::placeholder { opacity: 0.25; }
-    .gen-placement-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-    .gen-placement-btn { appearance: none; border: 1px solid var(--border); background: transparent; color: var(--text); border-radius: 6px; padding: 5px 10px; font-family: inherit; font-size: 11px; cursor: pointer; }
-    .gen-placement-btn.active { border-color: var(--mark); color: var(--mark); }
     .gen-slider-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
     .gen-slider-row .lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.45; white-space: nowrap; }
     .gen-slider { flex: 1; accent-color: var(--mark); cursor: pointer; min-width: 0; }
@@ -136,7 +131,7 @@
     .gen-color-row label { font-size: 12px; opacity: 0.55; display: flex; align-items: center; gap: 6px; }
     .gen-color-row input[type="checkbox"] { accent-color: var(--mark); width: 14px; height: 14px; cursor: pointer; }
     .gen-preview-box { background-image: repeating-conic-gradient(rgba(128,128,128,0.08) 0% 25%, transparent 0% 50%); background-size: 14px 14px; border-radius: 8px; padding: 20px; display: flex; align-items: center; justify-content: center; min-height: 80px; overflow: hidden; }
-    .gen-preview-box svg { display: block; max-width: 100%; height: auto; }
+    .gen-preview-box > svg { display: block; max-width: 100%; height: auto; }
     .gen-dl-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; padding-top: 4px; border-top: 1px solid var(--border); }
     .gen-dl-group { display: flex; flex-direction: column; gap: 8px; }
     .chip-row { display: flex; gap: 5px; flex-wrap: wrap; }
@@ -144,6 +139,29 @@
     .chip.active, .chip:hover { border-color: var(--mark); color: var(--mark); }
     .gen-dl-btn { appearance: none; background: var(--mark); color: var(--bg); border: none; border-radius: 8px; font-family: inherit; font-size: 13px; font-weight: 600; padding: 10px 22px; cursor: pointer; transition: opacity 0.2s; display: flex; align-items: center; gap: 7px; margin-left: auto; }
     .gen-dl-btn:hover { opacity: 0.85; }
+
+    /* ── Generator: wizard steps ── */
+    .wizard-step { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .wizard-step-header { width: 100%; display: flex; align-items: center; gap: 10px; background: transparent; border: none; padding: 14px 16px; cursor: pointer; color: var(--text); font-family: inherit; font-size: 13px; font-weight: 600; opacity: .6; text-align: left; }
+    .wizard-step-header.active { opacity: 1; }
+    .wizard-step-num { width: 20px; height: 20px; border-radius: 50%; background: var(--border); display: inline-flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
+    .wizard-step-header.active .wizard-step-num { background: var(--mark); color: var(--bg); }
+    .wizard-step-chevron { margin-left: auto; opacity: .5; transition: transform .2s; font-size: 11px; }
+    .wizard-step-header.active .wizard-step-chevron { transform: rotate(180deg); }
+    .wizard-step-body { padding: 0 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+    .wizard-step-body.hidden { display: none; }
+    .wizard-toggle-row { display: flex; align-items: center; gap: 10px; }
+    .wizard-toggle { position: relative; width: 36px; height: 20px; border-radius: 10px; background: var(--border); cursor: pointer; flex-shrink: 0; transition: background .2s; }
+    .wizard-toggle.on { background: var(--mark); }
+    .wizard-toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); transition: transform .2s; }
+    .wizard-toggle.on::after { transform: translateX(16px); }
+    .sub-type-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .sub-type-btn { appearance: none; border: 1px solid var(--border); background: transparent; color: var(--text); border-radius: 8px; padding: 8px 14px; font-family: inherit; font-size: 12px; cursor: pointer; }
+    .sub-type-btn.active { border-color: var(--mark); color: var(--mark); }
+    .gen-num-input { width: 84px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: inherit; font-size: 12px; padding: 7px 9px; }
+    .aspect-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .aspect-btn { appearance: none; border: 1px solid var(--border); background: transparent; color: var(--text); border-radius: 6px; padding: 6px 10px; font-family: inherit; font-size: 11px; cursor: pointer; }
+    .aspect-btn.active { border-color: var(--mark); color: var(--mark); }
 
     /* ── Install ── */
     .install-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
@@ -191,6 +209,15 @@
     .c-cap-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
     @keyframes cap-breathe { 0%,100% { opacity: .55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
     .c-cap-breathing .c-cap-dot { animation: cap-breathe 1.8s ease-in-out infinite; }
+
+    /* ── Powered-by badge ── */
+    .badge-preview-row { display: flex; flex-wrap: wrap; gap: 16px; }
+    .badge-preview-card { flex: 1; min-width: 220px; border-radius: var(--radius); padding: 32px; display: flex; align-items: center; justify-content: center; }
+    .badge-copy-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .badge-copy-btn { appearance: none; border: none; cursor: pointer; padding: 6px 14px; border-radius: 6px; font-family: inherit; font-size: 11px; font-weight: 500; background: var(--mark); color: var(--bg); transition: opacity 0.2s; }
+    .badge-copy-btn:hover { opacity: 0.85; }
+    .badge-copy-btn.copied { background: #2ecc71; color: #05170c; }
+    footer .pwrby-badge-wrap { margin-top: 10px; }
 
     /* ── Components: progress ── */
     .prog-track { width: 100%; height: 6px; border-radius: 4px; background: var(--surface); overflow: hidden; }
@@ -296,6 +323,26 @@
     <div class="mark-grid" id="mark-grid"></div>
   </section>
 
+  <!-- Signature, draw-on (full) -->
+  <section>
+    <div class="section-label">Signature, draw-on — full</div>
+    <div class="sig-full-card">
+      <svg viewBox="0 0 900 300" width="100%" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="max-width: 460px; display: block">
+        <style>
+          @keyframes sig-pen-draw-full { 0% { stroke-dashoffset: 2442; } 62% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+          @keyframes sig-pen-fade-full { 0%, 4% { opacity: 0; } 8%, 66% { opacity: 1; } 78%, 100% { opacity: 0; } }
+          .sig-pen-full { animation: sig-pen-draw-full 4.5s linear infinite, sig-pen-fade-full 4.5s linear infinite; }
+        </style>
+        <path class="sig-pen-full" d="M88 214C96 170 118 108 142 82C152 72 158 82 150 108C140 145 130 175 132 196C150 150 200 140 208 168C214 190 180 212 152 202C175 196 196 178 212 156C222 172 226 190 232 202C242 176 252 154 262 146C258 190 250 240 232 262C222 274 208 272 206 260C230 240 280 212 312 190C342 172 358 148 346 128C334 108 304 116 299 141C294 166 307 183 327 185C306 191 295 207 305 221C316 236 345 233 353 214C360 199 369 190 379 186C387 160 398 116 406 92C410 80 417 83 413 101C405 141 393 178 393 200C401 168 421 150 437 156C449 161 445 180 443 200C455 182 468 162 484 160C496 159 498 173 486 181C476 188 468 196 474 204C480 211 494 208 502 198C516 190 538 166 556 164C540 158 522 164 520 180C518 194 532 202 546 196C556 191 558 176 558 164C558 180 557 192 559 202C566 184 574 164 580 160C584 174 583 190 581 202C588 178 600 160 614 162C626 164 626 184 624 202C652 198 700 187 756 181C812 175 856 177 882 187" stroke-width="4" stroke-dasharray="2442"/>
+      </svg>
+      <label>4.5s loop · signs once, holds, fades</label>
+      <a class="dl-btn" href="signature-draw-full.svg" download style="margin-top:4px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download SVG — reusable for marketing/teasers
+      </a>
+    </div>
+  </section>
+
   <!-- States -->
   <section>
     <div class="section-label">States</div>
@@ -332,69 +379,121 @@
     <div class="lockup-grid" id="lockup-grid"></div>
   </section>
 
-  <!-- Sub-brand Logo Generator -->
+  <!-- Logo Generator -->
   <section>
-    <div class="section-label">Sub-brand lockup generator</div>
+    <div class="section-label">Logo generator</div>
     <div class="gen-card">
 
-      <div class="gen-tabs">
-        <button class="gen-tab active" data-tab="text">Text</button>
-        <button class="gen-tab" data-tab="icon">Add icon (SVG)</button>
-      </div>
-
-      <!-- Text panel -->
-      <div class="gen-panel" id="gen-panel-text">
-        <label class="field-label" for="gen-text">Sub-brand name</label>
-        <input class="gen-text-input" type="text" id="gen-text" value="blog" placeholder="e.g. blog, store, docs…" maxlength="48" autocomplete="off" spellcheck="false">
-        <div class="gen-slider-row">
-          <span class="lbl">Font size</span>
-          <input class="gen-slider" type="range" id="gen-font-size" min="12" max="40" value="24" step="1">
-          <span class="gen-slider-val" id="gen-font-size-val">24px</span>
-        </div>
-      </div>
-
-      <!-- Icon panel — custom SVG placed BESIDE the pyramid mark -->
-      <div class="gen-panel hidden" id="gen-panel-icon">
-        <label class="field-label">Custom icon SVG — appears beside the byEhsan mark, colored to match</label>
-        <label class="gen-upload-label" for="gen-svg-file">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Upload SVG
-          <input type="file" id="gen-svg-file" accept=".svg" style="display:none">
-        </label>
-        <textarea class="gen-svg-textarea" id="gen-svg-code" rows="5" placeholder="…or paste SVG code here&#10;&#10;&lt;svg viewBox=&quot;0 0 24 24&quot;&gt;&#10;  &lt;path d=&quot;…&quot; fill=&quot;currentColor&quot;/&gt;&#10;&lt;/svg&gt;"></textarea>
-        <p class="gen-icon-note">Tip: SVGs using <code>fill="currentColor"</code> or <code>stroke="currentColor"</code> automatically pick up the mark color.</p>
-        <div style="margin-top:14px">
-          <label class="field-label">Placement</label>
-          <div class="gen-placement-row" id="gen-placement-row">
-            <button class="gen-placement-btn" data-pl="n">N</button>
-            <button class="gen-placement-btn active" data-pl="e">E</button>
-            <button class="gen-placement-btn" data-pl="s">S</button>
-            <button class="gen-placement-btn" data-pl="w">W</button>
-            <button class="gen-placement-btn" data-pl="ne">NE badge</button>
-            <button class="gen-placement-btn" data-pl="se">SE badge</button>
-            <button class="gen-placement-btn" data-pl="sw">SW badge</button>
-            <button class="gen-placement-btn" data-pl="nw">NW badge</button>
+      <!-- Step 1: Mark (always on) -->
+      <div class="wizard-step">
+        <button class="wizard-step-header active" data-step-toggle="1" aria-expanded="true">
+          <span class="wizard-step-num">1</span> Mark <span class="wizard-step-chevron">⌄</span>
+        </button>
+        <div class="wizard-step-body" id="step-body-1">
+          <div>
+            <label class="field-label">Size — output width (px)</label>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <input class="gen-num-input" type="number" id="gen-size" min="32" max="4096" step="1" placeholder="auto">
+              <div class="chip-row">
+                <button class="chip" data-size="256">256</button>
+                <button class="chip" data-size="512">512</button>
+                <button class="chip" data-size="1024">1024</button>
+                <button class="chip" data-size="2048">2048</button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label class="field-label">Aspect ratio</label>
+            <div class="aspect-row">
+              <button class="aspect-btn active" data-aspect="auto">Auto (fit content)</button>
+              <button class="aspect-btn" data-aspect="1:1">1:1</button>
+              <button class="aspect-btn" data-aspect="4:3">4:3</button>
+              <button class="aspect-btn" data-aspect="16:9">16:9</button>
+              <button class="aspect-btn" data-aspect="9:16">9:16</button>
+              <button class="aspect-btn" data-aspect="3:1">3:1</button>
+            </div>
+          </div>
+          <div class="gen-slider-row">
+            <span class="lbl">Margin</span>
+            <input class="gen-slider" type="range" id="gen-margin" min="0" max="80" value="0" step="1">
+            <span class="gen-slider-val" id="gen-margin-val">0px</span>
+          </div>
+          <div>
+            <label class="field-label">Palette</label>
+            <div class="gen-palette-bar" id="gen-palette-bar"></div>
+            <div class="gen-color-row">
+              <label>Mark color <input type="color" id="gen-mark-color" value="#f2f2f3"></label>
+              <label>Background <input type="color" id="gen-bg-color" value="#1d1f20"></label>
+              <label><input type="checkbox" id="gen-with-bg"> Include background</label>
+            </div>
           </div>
         </div>
-        <div style="margin-top:14px">
-          <label class="field-label" for="gen-text-icon">Sub-brand name</label>
-          <input class="gen-text-input" type="text" id="gen-text-icon" value="blog" placeholder="e.g. blog, store, docs…" maxlength="48" autocomplete="off" spellcheck="false">
-        </div>
-        <div class="gen-slider-row">
-          <span class="lbl">Font size</span>
-          <input class="gen-slider" type="range" id="gen-font-size-icon" min="12" max="40" value="24" step="1">
-          <span class="gen-slider-val" id="gen-font-size-val-icon">24px</span>
+      </div>
+
+      <!-- Step 2: Sub-logo (optional) -->
+      <div class="wizard-step">
+        <button class="wizard-step-header" data-step-toggle="2" aria-expanded="false">
+          <span class="wizard-step-num">2</span> Sub-logo <span style="opacity:.5;font-weight:400;font-size:11px;margin-left:2px">(optional)</span> <span class="wizard-step-chevron">⌄</span>
+        </button>
+        <div class="wizard-step-body hidden" id="step-body-2">
+          <div class="wizard-toggle-row">
+            <span class="wizard-toggle" id="gen-sub-toggle" role="switch" aria-checked="false" tabindex="0"></span>
+            <span style="font-size:12px" id="gen-sub-toggle-label">Off — mark only</span>
+          </div>
+          <div id="gen-sub-controls" class="hidden" style="display:flex;flex-direction:column;gap:14px">
+            <div>
+              <label class="field-label">Type</label>
+              <div class="sub-type-row">
+                <button class="sub-type-btn active" data-subtype="signature">Signature</button>
+                <button class="sub-type-btn" data-subtype="icon">Icon</button>
+                <button class="sub-type-btn" data-subtype="both">Signature + icon</button>
+              </div>
+            </div>
+            <div id="gen-icon-controls" class="hidden">
+              <label class="field-label">Custom icon SVG</label>
+              <label class="gen-upload-label" for="gen-svg-file">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Upload SVG
+                <input type="file" id="gen-svg-file" accept=".svg" style="display:none">
+              </label>
+              <textarea class="gen-svg-textarea" id="gen-svg-code" rows="4" placeholder="…or paste SVG code here&#10;&#10;&lt;svg viewBox=&quot;0 0 24 24&quot;&gt;&#10;  &lt;path d=&quot;…&quot; fill=&quot;currentColor&quot;/&gt;&#10;&lt;/svg&gt;"></textarea>
+              <p class="gen-icon-note">Tip: SVGs using <code>fill="currentColor"</code> or <code>stroke="currentColor"</code> automatically pick up the mark color.</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Palette -->
-      <div>
-        <label class="field-label">Palette</label>
-        <div class="gen-palette-bar" id="gen-palette-bar"></div>
-        <div class="gen-color-row">
-          <label>Mark color <input type="color" id="gen-mark-color" value="#2b2b2d"></label>
-          <label>Background <input type="color" id="gen-bg-color" value="#1d1f20"></label>
-          <label><input type="checkbox" id="gen-with-bg"> Include background</label>
+      <!-- Step 3: Text (optional) -->
+      <div class="wizard-step">
+        <button class="wizard-step-header" data-step-toggle="3" aria-expanded="false">
+          <span class="wizard-step-num">3</span> Text <span style="opacity:.5;font-weight:400;font-size:11px;margin-left:2px">(optional)</span> <span class="wizard-step-chevron">⌄</span>
+        </button>
+        <div class="wizard-step-body hidden" id="step-body-3">
+          <div class="wizard-toggle-row">
+            <span class="wizard-toggle" id="gen-text-toggle" role="switch" aria-checked="false" tabindex="0"></span>
+            <span style="font-size:12px" id="gen-text-toggle-label">Off — no text</span>
+          </div>
+          <div id="gen-text-controls" class="hidden" style="display:flex;flex-direction:column;gap:14px">
+            <div>
+              <label class="field-label" for="gen-text">Sub-brand name</label>
+              <input class="gen-text-input" type="text" id="gen-text" value="blog" placeholder="e.g. blog, store, docs…" maxlength="48" autocomplete="off" spellcheck="false">
+            </div>
+            <div>
+              <label class="field-label">Font</label>
+              <div class="sub-type-row">
+                <button class="sub-type-btn active" data-font="space-grotesk">Space Grotesk</button>
+                <button class="sub-type-btn" data-font="inter">Inter</button>
+                <button class="sub-type-btn" data-font="system">System</button>
+                <button class="sub-type-btn" data-font="serif">Serif</button>
+                <button class="sub-type-btn" data-font="mono">Mono</button>
+              </div>
+            </div>
+            <div class="gen-slider-row">
+              <span class="lbl">Font size</span>
+              <input class="gen-slider" type="range" id="gen-font-size" min="12" max="40" value="24" step="1">
+              <span class="gen-slider-val" id="gen-font-size-val">24px</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -406,15 +505,6 @@
 
       <!-- Download -->
       <div class="gen-dl-row">
-        <div class="gen-dl-group">
-          <label class="field-label">Size</label>
-          <div class="chip-row">
-            <button class="chip" data-scale="0.5">½×</button>
-            <button class="chip active" data-scale="1">1×</button>
-            <button class="chip" data-scale="2">2×</button>
-            <button class="chip" data-scale="4">4×</button>
-          </div>
-        </div>
         <div class="gen-dl-group">
           <label class="field-label">Format</label>
           <div class="chip-row">
@@ -605,6 +695,19 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
     </div>
   </section>
 
+  <!-- Powered-by badge -->
+  <section>
+    <div class="section-label">"Powered by" badge — embeddable</div>
+    <div class="badge-preview-row">
+      <div class="badge-preview-card" style="background:#e9e9eb" id="badge-card-dark"></div>
+      <div class="badge-preview-card" style="background:#141516" id="badge-card-light"></div>
+    </div>
+    <div class="badge-copy-row">
+      <button class="badge-copy-btn" id="badge-copy-dark">Copy embed code — dark badge</button>
+      <button class="badge-copy-btn" id="badge-copy-light">Copy embed code — light badge</button>
+    </div>
+  </section>
+
   <!-- Download -->
   <section>
     <div class="section-label">Download</div>
@@ -616,6 +719,7 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
           <a class="dl-btn" href="signature.svg" download>signature.svg</a>
           <a class="dl-btn" href="signature-hand.svg" download>signature-hand.svg</a>
           <a class="dl-btn" href="signature-draw.svg" download>signature-draw.svg (animated)</a>
+          <a class="dl-btn" href="signature-draw-full.svg" download>signature-draw-full.svg (animated, w/ flourish)</a>
           <a class="dl-btn" href="palette.json" download>palette.json</a>
           <a class="dl-btn" href="states.css" download>states.css</a>
         </div>
@@ -648,6 +752,7 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
 <footer>
   <div class="container">
     byEhsan logo system · MIT license · <a href="https://github.com/byehsan/logo" style="color:inherit">github.com/byehsan/logo</a>
+    <div class="pwrby-badge-wrap" id="footer-badge"></div>
   </div>
 </footer>
 
@@ -803,6 +908,46 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
   }
   renderMarkGrid();
 
+  // ── "Powered by" badge — self-contained embeddable pill (mark + signature + .com) ──
+  // Every color is a literal hex, not a var(--...) reference: this markup is meant to be
+  // copy-pasted onto someone else's site, which won't have our CSS custom properties defined.
+  function poweredByBadgeHTML(theme) {
+    const dark = theme === 'dark';
+    const bg = dark ? '#1d1f20' : '#f5f5f6';
+    const border = dark ? '#3a3b3d' : '#d7d7da';
+    const fg = dark ? '#f2f2f3' : '#1d1f20';
+    const muted = dark ? 'rgba(242,242,243,.55)' : 'rgba(29,31,32,.55)';
+    const sigWeights = SIGNATURE_WEIGHTS.map(([d, sw]) => `<path d="${d}" stroke-width="${sw}"/>`).join('');
+    return `<a href="https://byehsan.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:999px;background:${bg};border:1px solid ${border};color:${fg};text-decoration:none;font-family:system-ui,-apple-system,sans-serif;font-size:12px;line-height:1;white-space:nowrap">`
+      + `<svg width="16" height="18" viewBox="0 0 200 220" fill="none" stroke="currentColor" stroke-linejoin="miter" stroke-miterlimit="10" style="flex-shrink:0">${MARK_INNER}</svg>`
+      + `<span style="color:${muted}">Powered by</span>`
+      + `<svg width="58" height="19" viewBox="0 0 900 300" style="flex-shrink:0"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="${SIGNATURE_SPINE_D}" stroke-width="7"/>${sigWeights}</g><path fill="currentColor" d="${SIGNATURE_FLOURISH_D}"/></svg>`
+      + `<span style="font-weight:600">.com</span>`
+      + `</a>`;
+  }
+  const badgeDarkHTML = poweredByBadgeHTML('dark');
+  const badgeLightHTML = poweredByBadgeHTML('light');
+  document.getElementById('badge-card-dark').innerHTML = badgeDarkHTML;
+  document.getElementById('badge-card-light').innerHTML = badgeLightHTML;
+  [['badge-copy-dark', badgeDarkHTML], ['badge-copy-light', badgeLightHTML]].forEach(([id, html]) => {
+    const btn = document.getElementById(id);
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(html).then(() => {
+        const p = btn.textContent; btn.textContent = 'Copied!'; btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = p; btn.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+  // Footer instance — uses var(--...) refs (not literal hex) so it re-themes automatically
+  // with the page's own palette switcher, same as everything else on this page.
+  document.getElementById('footer-badge').innerHTML =
+    `<a href="https://byehsan.github.io/logo/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--border);color:var(--text);text-decoration:none;font-family:inherit;font-size:12px;line-height:1;white-space:nowrap">`
+    + `<svg width="14" height="16" viewBox="0 0 200 220" fill="none" stroke="currentColor" stroke-linejoin="miter" stroke-miterlimit="10" style="flex-shrink:0">${MARK_INNER}</svg>`
+    + `<span style="opacity:.55">Powered by</span>`
+    + `<svg width="52" height="17" viewBox="0 0 900 300" style="flex-shrink:0"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="${SIGNATURE_SPINE_D}" stroke-width="7"/>${SIGNATURE_WEIGHTS.map(([d, sw]) => `<path d="${d}" stroke-width="${sw}"/>`).join('')}</g><path fill="currentColor" d="${SIGNATURE_FLOURISH_D}"/></svg>`
+    + `<span style="font-weight:600">.com</span>`
+    + `</a>`;
+
   // ── States (inline animated, scoped class names to avoid id collisions) ──
   const STATE_DEFS = [
     { key:'neutral', label:'neutral', file:'states/neutral.svg', cls:'s-neu', style:`@keyframes k-neu{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}.s-neu{transform-box:view-box;transform-origin:100px 58px;animation:k-neu 4s ease-in-out infinite}` , wrap: inner => `<g class="s-neu">${inner}</g>` },
@@ -874,116 +1019,199 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
       </svg>
     </div>`;
 
-  // ── Generator (client-side port of src/lockup.mjs, same 16px-gap/x=64 grid) ──
-  const GAP = 16, ICON = 20, R = 12, BICON = 16;
-  const ilMargin = GAP + ICON;
-  const ilMarkX = ilMargin, ilMarkY = ilMargin;
-  const ilMarkRight = ilMarkX + 48, ilMarkBottom = ilMarkY + 48;
-  const ilMarkCx = ilMarkX + 24, ilMarkCy = ilMarkY + 24;
-  const ilCanvasH = ilMarkBottom + ilMargin;
+  // ── Generator: composable wizard (mark, always on) + (sub-logo, optional) + (text, optional) ──
+  // Parts are laid out left-to-right in one row, separated by ROW_GAP, then the row is
+  // centered inside a canvas of margin + optional aspect-ratio padding. This generalizes the
+  // old fixed text-mode/icon-mode split into any combination, at the cost of dropping the old
+  // 8-directional icon placement (n/s/e/w/corners) — everything now sits in the same row.
+  const ROW_GAP = 16;
+  const FONT_STACKS = {
+    'space-grotesk': "'Space Grotesk',system-ui,sans-serif",
+    'inter': "'Inter',system-ui,sans-serif",
+    'system': 'system-ui,sans-serif',
+    'serif': "Georgia,'Times New Roman',serif",
+    'mono': "'Fira Code','SF Mono',monospace",
+  };
+  const ASPECTS = { '1:1':[1,1], '4:3':[4,3], '16:9':[16,9], '9:16':[9,16], '3:1':[3,1] };
 
-  function xe(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-  function calcW(textX, text, fontSize) {
-    if (!text) return Math.ceil(textX);
-    return Math.ceil(Math.max(220, textX + Math.max(60, String(text).length * fontSize * 0.60 + 8) + 12));
-  }
-  function ilLayout(placement) {
-    const corners = {
-      ne: { cx: ilMarkRight - 4, cy: ilMarkY + 4 }, se: { cx: ilMarkRight - 4, cy: ilMarkBottom - 4 },
-      sw: { cx: ilMarkX + 4, cy: ilMarkBottom - 4 }, nw: { cx: ilMarkX + 4, cy: ilMarkY + 4 },
-    };
-    if (corners[placement]) {
-      const c = corners[placement]; const east = placement === 'ne' || placement === 'se';
-      return { kind:'badge', cx:c.cx, cy:c.cy, r:R, iconX:c.cx-BICON/2, iconY:c.cy-BICON/2, iconSize:BICON, textX: east ? c.cx+R+8 : ilMarkRight+8 };
-    }
-    const inline = {
-      n: { x: ilMarkCx-ICON/2, y: ilMarkY-GAP-ICON }, s: { x: ilMarkCx-ICON/2, y: ilMarkBottom+GAP },
-      e: { x: ilMarkRight+GAP, y: ilMarkCy-ICON/2 }, w: { x: ilMarkX-GAP-ICON, y: ilMarkCy-ICON/2 },
-    };
-    const pos = inline[placement] || inline.e;
-    return { kind:'inline', x:pos.x, y:pos.y, size:ICON, textX: placement === 'e' ? pos.x+ICON+GAP : ilMarkRight+8 };
-  }
-
-  let gMode = 'text', gText = 'blog', gFontSize = 24, gPlacement = 'e';
-  let gMarkColor = '#2b2b2d', gBgColor = '#1d1f20', gWithBg = false, gScale = 1, gFormat = 'svg';
+  let gMargin = 0, gAspect = 'auto', gSizePx = null;
+  let gSubEnabled = false, gSubType = 'signature';
+  let gTextEnabled = false, gFont = 'space-grotesk', gFontSize = 24, gText = 'blog';
+  // Default mark color tracks the dark preview's text token, not the graphite preset's
+  // solid accent (#2b2b2d) — that's near-black, functionally invisible on the dark
+  // checkered "transparent" preview backdrop. Same fix as the main page's --mark wiring.
+  let gMarkColor = '#f2f2f3', gBgColor = '#1d1f20', gWithBg = false, gFormat = 'svg';
   let gIconInner = null, gIconVB = '0 0 24 24';
 
-  function markEl(x, y, color) {
-    return `<svg x="${x}" y="${y}" width="48" height="48" viewBox="0 0 200 220" fill="none" stroke="${color}" stroke-linejoin="miter" stroke-miterlimit="10">${MARK_INNER}</svg>`;
+  function xe(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function signatureInner() {
+    const weights = SIGNATURE_WEIGHTS.map(([d, sw]) => `<path d="${d}" stroke-width="${sw}"/>`).join('');
+    return `<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="${SIGNATURE_SPINE_D}" stroke-width="7"/>${weights}</g><path fill="currentColor" d="${SIGNATURE_FLOURISH_D}"/>`;
+  }
+
+  function buildParts() {
+    const parts = [{ type: 'mark', w: 48, h: 48 }];
+    if (gSubEnabled) {
+      if (gSubType === 'signature' || gSubType === 'both') {
+        const sh = 30, sw = Math.round(sh * 3); // signature.svg viewBox is 900×300 = 3:1
+        parts.push({ type: 'signature', w: sw, h: sh });
+      }
+      if (gSubType === 'icon' || gSubType === 'both') {
+        parts.push({ type: 'icon', w: 22, h: 22 });
+      }
+    }
+    if (gTextEnabled && gText) {
+      const tw = Math.ceil(Math.max(40, String(gText).length * gFontSize * 0.6));
+      const th = Math.ceil(gFontSize * 1.3);
+      parts.push({ type: 'text', w: tw, h: th });
+    }
+    return parts;
+  }
+
+  function layout() {
+    const parts = buildParts();
+    const rowH = Math.max(...parts.map(p => p.h));
+    const rowW = parts.reduce((s, p) => s + p.w, 0) + ROW_GAP * (parts.length - 1);
+    let cw = rowW + gMargin * 2, ch = rowH + gMargin * 2;
+    if (gAspect !== 'auto' && ASPECTS[gAspect]) {
+      const [rw, rh] = ASPECTS[gAspect];
+      const hForW = cw * rh / rw;
+      if (hForW >= ch) ch = hForW; else cw = ch * rw / rh;
+    }
+    const rowX = (cw - rowW) / 2, rowY = (ch - rowH) / 2;
+    let x = rowX;
+    const placed = parts.map(p => {
+      const y = rowY + (rowH - p.h) / 2;
+      const item = Object.assign({}, p, { x, y });
+      x += p.w + ROW_GAP;
+      return item;
+    });
+    return { cw: Math.round(cw), ch: Math.round(ch), parts: placed };
+  }
+
+  function renderPart(p, color, ff) {
+    if (p.type === 'mark') {
+      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="0 0 200 220" fill="none" stroke="${color}" stroke-linejoin="miter" stroke-miterlimit="10">${MARK_INNER}</svg>`;
+    }
+    if (p.type === 'signature') {
+      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="0 0 900 300" style="color:${color}">${signatureInner()}</svg>`;
+    }
+    if (p.type === 'icon') {
+      const inner = gIconInner || '<circle cx="12" cy="12" r="8"/>';
+      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="${gIconVB}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" overflow="visible">${inner}</svg>`;
+    }
+    if (p.type === 'text') {
+      const bl = (p.y + p.h * 0.78).toFixed(1);
+      return `<text x="${p.x}" y="${bl}" font-family="${ff}" font-size="${gFontSize}" font-weight="600" letter-spacing="-0.5" fill="${color}">${xe(gText)}</text>`;
+    }
+    return '';
   }
 
   function buildSVG(opts) {
     opts = opts || {};
-    const ff = opts.useSystemFont ? 'system-ui,sans-serif' : "'Space Grotesk',system-ui,sans-serif";
-    const bl24 = (28 + gFontSize * 0.35).toFixed(1);
-
-    if (gMode === 'text') {
-      const W = calcW(64, gText, gFontSize), H = 56;
-      const bg = gWithBg ? `<rect width="${W}" height="${H}" fill="${gBgColor}"/>` : '';
-      const text = gText ? `<text x="64" y="${bl24}" font-family="${ff}" font-size="${gFontSize}" font-weight="600" letter-spacing="-0.5" fill="${gMarkColor}">${xe(gText)}</text>` : '';
-      const wh = opts.forDownload ? ` width="${Math.round(W*gScale)}" height="${Math.round(H*gScale)}"` : ` width="${W}" height="${H}"`;
-      const fi = (opts.forDownload && !opts.useSystemFont) ? `<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&amp;display=swap');</style>` : '';
-      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}"${wh}>${fi}${bg}${markEl(0,4,gMarkColor)}${text}</svg>`;
-    }
-
-    // icon mode
-    const layout = ilLayout(gPlacement);
-    const W = calcW(layout.textX, gText, gFontSize), H = ilCanvasH;
-    const iconInner = gIconInner || '<circle cx="12" cy="12" r="8"/>';
-    let iconEl;
-    if (layout.kind === 'badge') {
-      iconEl = `<svg x="${layout.iconX}" y="${layout.iconY}" width="${layout.iconSize}" height="${layout.iconSize}" viewBox="${gIconVB}" fill="none" stroke="${gMarkColor}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" overflow="visible">${iconInner}</svg>`;
-    } else {
-      iconEl = `<svg x="${layout.x}" y="${layout.y}" width="${layout.size}" height="${layout.size}" viewBox="${gIconVB}" fill="none" stroke="${gMarkColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" overflow="visible">${iconInner}</svg>`;
-    }
-    const blIcon = (ilMarkCy + gFontSize * 0.35).toFixed(1);
-    const text = gText ? `<text x="${layout.textX}" y="${blIcon}" font-family="${ff}" font-size="${gFontSize}" font-weight="600" letter-spacing="-0.5" fill="${gMarkColor}">${xe(gText)}</text>` : '';
-    const bg = gWithBg ? `<rect width="${W}" height="${H}" fill="${gBgColor}"/>` : '';
-    const wh = opts.forDownload ? ` width="${Math.round(W*gScale)}" height="${Math.round(H*gScale)}"` : ` width="${W}" height="${H}"`;
-    const fi = (opts.forDownload && !opts.useSystemFont) ? `<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&amp;display=swap');</style>` : '';
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}"${wh}>${fi}${bg}${markEl(layout ? ilMarkX : 0, ilMarkY, gMarkColor)}${iconEl}${text}</svg>`;
+    const { cw, ch, parts } = layout();
+    const scale = (opts.forDownload && gSizePx) ? gSizePx / cw : 1;
+    const outW = Math.round(cw * scale), outH = Math.round(ch * scale);
+    const ff = opts.useSystemFont ? 'system-ui,sans-serif' : (FONT_STACKS[gFont] || FONT_STACKS['space-grotesk']);
+    const bg = gWithBg ? `<rect width="${cw}" height="${ch}" fill="${gBgColor}"/>` : '';
+    const content = parts.map(p => renderPart(p, gMarkColor, ff)).join('');
+    const needsWebFont = gTextEnabled && gText && gFont === 'space-grotesk';
+    const fi = (opts.forDownload && !opts.useSystemFont && needsWebFont) ? `<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&amp;display=swap');</style>` : '';
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${cw} ${ch}" width="${outW}" height="${outH}">${fi}${bg}${content}</svg>`;
   }
 
   function updatePreview() {
-    const W = calcW(gMode === 'icon' ? ilLayout(gPlacement).textX : 64, gText, gFontSize);
-    const H = gMode === 'icon' ? ilCanvasH : 56;
-    document.getElementById('gen-size-hint').textContent = `${W} × ${H} px`;
+    const { cw, ch } = layout();
+    document.getElementById('gen-size-hint').textContent = `${cw} × ${ch} px`;
     document.getElementById('gen-preview-box').innerHTML = buildSVG({});
   }
   updatePreview();
 
-  document.getElementById('gen-text').addEventListener('input', e => { gText = e.target.value; updatePreview(); });
-  document.getElementById('gen-text-icon').addEventListener('input', e => { gText = e.target.value; updatePreview(); });
+  // Step accordion — independently toggleable, not exclusive
+  document.querySelectorAll('[data-step-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const body = document.getElementById('step-body-' + btn.dataset.stepToggle);
+      const willOpen = body.classList.contains('hidden');
+      body.classList.toggle('hidden', !willOpen);
+      btn.classList.toggle('active', willOpen);
+      btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    });
+  });
 
-  function setFontSize(v) {
-    gFontSize = parseInt(v);
-    document.getElementById('gen-font-size').value = v;
-    document.getElementById('gen-font-size-icon').value = v;
-    document.getElementById('gen-font-size-val').textContent = v + 'px';
-    document.getElementById('gen-font-size-val-icon').textContent = v + 'px';
+  function setSubEnabled(on) {
+    gSubEnabled = on;
+    const t = document.getElementById('gen-sub-toggle');
+    t.classList.toggle('on', on); t.setAttribute('aria-checked', String(on));
+    document.getElementById('gen-sub-toggle-label').textContent = on ? 'On' : 'Off — mark only';
+    document.getElementById('gen-sub-controls').classList.toggle('hidden', !on);
     updatePreview();
   }
-  document.getElementById('gen-font-size').addEventListener('input', e => setFontSize(e.target.value));
-  document.getElementById('gen-font-size-icon').addEventListener('input', e => setFontSize(e.target.value));
+  const subToggle = document.getElementById('gen-sub-toggle');
+  subToggle.addEventListener('click', () => setSubEnabled(!gSubEnabled));
+  subToggle.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); setSubEnabled(!gSubEnabled); } });
 
-  document.querySelectorAll('.gen-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.gen-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      gMode = tab.dataset.tab;
-      document.getElementById('gen-panel-text').classList.toggle('hidden', gMode !== 'text');
-      document.getElementById('gen-panel-icon').classList.toggle('hidden', gMode !== 'icon');
-      if (gMode === 'icon') document.getElementById('gen-text-icon').value = gText;
-      else document.getElementById('gen-text').value = gText;
+  document.querySelectorAll('[data-subtype]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-subtype]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      gSubType = btn.dataset.subtype;
+      document.getElementById('gen-icon-controls').classList.toggle('hidden', gSubType === 'signature');
       updatePreview();
     });
   });
 
-  document.querySelectorAll('.gen-placement-btn').forEach(btn => {
+  function setTextEnabled(on) {
+    gTextEnabled = on;
+    const t = document.getElementById('gen-text-toggle');
+    t.classList.toggle('on', on); t.setAttribute('aria-checked', String(on));
+    document.getElementById('gen-text-toggle-label').textContent = on ? 'On' : 'Off — no text';
+    document.getElementById('gen-text-controls').classList.toggle('hidden', !on);
+    updatePreview();
+  }
+  const textToggle = document.getElementById('gen-text-toggle');
+  textToggle.addEventListener('click', () => setTextEnabled(!gTextEnabled));
+  textToggle.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); setTextEnabled(!gTextEnabled); } });
+
+  document.getElementById('gen-text').addEventListener('input', e => { gText = e.target.value; updatePreview(); });
+  document.querySelectorAll('[data-font]').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.gen-placement-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('[data-font]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      gPlacement = btn.dataset.pl;
+      gFont = btn.dataset.font;
+      updatePreview();
+    });
+  });
+  document.getElementById('gen-font-size').addEventListener('input', e => {
+    gFontSize = parseInt(e.target.value);
+    document.getElementById('gen-font-size-val').textContent = e.target.value + 'px';
+    updatePreview();
+  });
+
+  document.getElementById('gen-margin').addEventListener('input', e => {
+    gMargin = parseInt(e.target.value);
+    document.getElementById('gen-margin-val').textContent = e.target.value + 'px';
+    updatePreview();
+  });
+
+  document.querySelectorAll('[data-aspect]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-aspect]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      gAspect = btn.dataset.aspect;
+      updatePreview();
+    });
+  });
+
+  document.getElementById('gen-size').addEventListener('input', e => {
+    const v = parseInt(e.target.value);
+    gSizePx = (v && v > 0) ? v : null;
+    updatePreview();
+  });
+  document.querySelectorAll('[data-size]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('gen-size').value = btn.dataset.size;
+      gSizePx = parseInt(btn.dataset.size);
       updatePreview();
     });
   });
@@ -1026,7 +1254,7 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
       btn.addEventListener('click', () => {
         document.querySelectorAll('.gen-palette-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        gMarkColor = p.ui.dark.primary; gBgColor = p.ui.dark.background;
+        gMarkColor = p.ui.dark.text; gBgColor = p.ui.dark.background;
         document.getElementById('gen-mark-color').value = gMarkColor;
         document.getElementById('gen-bg-color').value = gBgColor;
         updatePreview();
@@ -1047,12 +1275,6 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
   });
   document.getElementById('gen-with-bg').addEventListener('change', e => { gWithBg = e.target.checked; updatePreview(); });
 
-  document.querySelectorAll('[data-scale]').forEach(c => {
-    c.addEventListener('click', () => {
-      document.querySelectorAll('[data-scale]').forEach(x => x.classList.remove('active'));
-      c.classList.add('active'); gScale = parseFloat(c.dataset.scale);
-    });
-  });
   document.querySelectorAll('[data-fmt]').forEach(c => {
     c.addEventListener('click', () => {
       document.querySelectorAll('[data-fmt]').forEach(x => x.classList.remove('active'));
@@ -1061,16 +1283,17 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
   });
 
   document.getElementById('gen-dl-btn').addEventListener('click', () => {
-    const name = (gText || 'logo').replace(/[^a-z0-9]/gi, '-').toLowerCase().slice(0, 32) || 'logo';
+    const name = (gTextEnabled && gText ? gText : 'logo').replace(/[^a-z0-9]/gi, '-').toLowerCase().slice(0, 32) || 'logo';
+    const { cw } = layout();
+    const scale = gSizePx ? gSizePx / cw : 1;
     const svgStr0 = buildSVG({ forDownload: true });
-    const vb = svgStr0.match(/viewBox="0 0 (\d+) (\d+)"/);
-    const W = Number(vb[1]), Hh = Number(vb[2]);
-    const pw = Math.round(W * gScale), ph = Math.round(Hh * gScale);
+    const vb = svgStr0.match(/width="(\d+)" height="(\d+)"/);
+    const pw = Number(vb[1]), ph = Number(vb[2]);
 
     if (gFormat === 'svg') {
       const blob = new Blob([svgStr0], { type: 'image/svg+xml' });
       const url = URL.createObjectURL(blob);
-      const a = Object.assign(document.createElement('a'), { href: url, download: `byehsan-${name}.svg` });
+      const a = Object.assign(document.createElement('a'), { href: url, download: `byehsan-${name}-${pw}x${ph}.svg` });
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     } else {
