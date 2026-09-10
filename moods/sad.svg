@@ -1,14 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
   <style>
-    /* idle presence, breathing */
-    @keyframes py-idle {
-      0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.035); }
+    /* sad — crown shrinks and droops downward, heavy and downcast. The outline never
+       moves or changes shape/color — the mood read comes from the crown alone. */
+    @keyframes mood-sad {
+      0%, 100% { transform: scale(0.8) translateY(0); }
+      50%       { transform: scale(0.62) translateY(16px); }
     }
-    #mark {
+    #crown {
       transform-box: view-box;
       transform-origin: 100px 58px;
-      animation: py-idle 4s ease-in-out infinite;
+      animation: mood-sad 2.6s ease-in-out infinite;
     }
   </style>
   <g id="mark" fill="none" stroke="currentColor" stroke-linejoin="miter" stroke-miterlimit="10">

@@ -1,14 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
   <style>
-    /* idle presence, breathing */
-    @keyframes py-idle {
-      0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.035); }
+    /* happy — the whole mark bounces upward with a joyful little rotation */
+    @keyframes py-happy {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      30%       { transform: translateY(-9px) rotate(-6deg); }
+      55%       { transform: translateY(0) rotate(4deg); }
+      75%       { transform: translateY(-3px) rotate(-2deg); }
     }
     #mark {
       transform-box: view-box;
       transform-origin: 100px 58px;
-      animation: py-idle 4s ease-in-out infinite;
+      animation: py-happy 1.8s ease-in-out infinite;
     }
   </style>
   <g id="mark" fill="none" stroke="currentColor" stroke-linejoin="miter" stroke-miterlimit="10">

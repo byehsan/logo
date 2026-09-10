@@ -1,100 +1,97 @@
 # byEhsan logo system
 
-Triskelion mark with full state + lockup system. All assets theme via CSS `currentColor`.
+[![Release Bundle](https://img.shields.io/github/actions/workflow/status/byehsan/logo/release.yml?branch=main&label=build)](https://github.com/byehsan/logo/actions/workflows/release.yml)
+[![Latest release](https://img.shields.io/github/v/release/byehsan/logo)](https://github.com/byehsan/logo/releases/latest)
+[![npm package](https://img.shields.io/badge/npm-%40byehsan%2Flogo-cb3837)](https://github.com/byehsan/logo/pkgs/npm/logo)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/byehsan/logo/blob/main/package.json)
+[![GH Pages demo](https://img.shields.io/badge/demo-byehsan.github.io%2Flogo-2b2b2d)](https://byehsan.github.io/logo/)
+
+ES pyramid mark with full state + mood + lockup system. All assets theme via CSS `currentColor`.
+
+**Live demo / sub-brand generator:** https://byehsan.github.io/logo/
 
 ## File tree
 
 ```
-base.svg                   clean mark, currentColor stroke, no animation
+base.svg                    clean pyramid mark, currentColor stroke, no animation
+signature.svg                abstract cursive flourish mark, pairs with the pyramid in lockups
 states/
-  neutral.svg              calm blink every 6s
-  loading.svg              3-step discrete rotation, 1.2s cycle
-  success.svg              spring bloom with overshoot, one-shot
-  warning.svg              one petal pulses asymmetrically, 800ms loop
-  error.svg                horizontal shake 300ms, then still
+  neutral.svg                idle presence, breathing, 4s loop
+  loading.svg                edge pulse chases the 4 edges + crown, 1.6s loop
+  success.svg                 spring joy snap with settle, 2.2s loop
+  warning.svg                  crown facet + crown flicker, 0.34s loop
+  error.svg                    frustrated jitter, 0.4s loop
 http/
-  404.svg                  tilt oscillation ±6°, drifting petals
-  500.svg                  glitch twitch → flatlines at 30% opacity
-  503.svg                  slow breathe + Zzz floats up-right, 2s loop
-  403.svg                  bar wipes across once, curt no bounce
+  404.svg                    confused tilt wobble ±8°, 1.6s loop
+  500.svg                     malfunctioning jitter, 0.4s loop
+  503.svg                      slow breathe + Zzz floats, 2.2s loop
+  403.svg                       refused, hard flicker, 0.34s loop
+moods/
+  happy.svg                   whole mark bounces with a joyful rotation, 1.8s loop
+  angry.svg                    crown narrows to a tight, shaking glare, 1.1s loop
+  sad.svg                       crown shrinks and droops downward, 2.6s loop
+  sleepy.svg                     crown pulses smaller, heavy-lidded, 3.2s loop
+  surprised.svg                   crown snaps wide and holds, 1.8s loop
 lockup/
-  template.svg             mark + gap + dashed slot guide
-  blog.svg                 worked example: "blog" sub-brand
-preview.html               live grid of all marks + states animating
-states.css                 all @keyframes as class-driven selectors (Option B)
+  template.svg                mark + gap + dashed slot guide
+  blog.svg                     worked example: "blog" sub-brand
+  icon-template.svg             icon slot + gap + text slot guide
+src/
+  mark-paths.mjs               extractMarkPaths/extractCrownRadius
+  lockup.mjs                    createLockupApi — createTextLockup/createIconLockup
+test/                        vitest suite (palette schema, lockup API, dist/pack smoke)
+preview.html                 static offline snapshot of all marks + states
+states.css                   all @keyframes as class-driven selectors (Option B) + light/dark glow/shadow
+palette.json                 markGeometry + named presets (solid + light/dark UI tokens)
 ```
 
-## Theming via currentColor
+## Usage
 
-Set `color` on the SVG element (or any parent) to change the mark color:
-
-```html
-<!-- orange on dark bg -->
-<img src="base.svg" style="color: #f07828">
-
-<!-- or inline -->
-<svg ... style="color: #f07828"> ... </svg>
-```
-
-For React/Vue components, pass a `color` prop and bind it to the SVG's `style.color`.
-
-## Using state SVGs
-
-Drop-in (Option A — self-contained, each file has its own `<style>`):
-
-```html
-<img src="states/loading.svg" width="48" height="48">
-```
-
-Class-driven (Option B — one base SVG + `states.css`):
-
-```html
-<link rel="stylesheet" href="states.css">
-<svg class="state-loading" ...> <!-- base mark paths --> </svg>
-```
-
-Available classes: `state-neutral` `state-loading` `state-success` `state-warning`
-`state-error` `state-404` `state-500` `state-503` `state-403`
-
-## Adding a sub-brand lockup
-
-1. Open `lockup/template.svg`
-2. Replace the dashed slot guide with a `<text>` element at `x="64" y="37"`
-3. Font: Space Grotesk 600, font-size 24, letter-spacing -0.5
-4. The mark never moves — only the text slot changes
-
-```xml
-<text x="64" y="37"
-      font-family="'Space Grotesk', system-ui, sans-serif"
-      font-size="24" font-weight="600" letter-spacing="-0.5"
-      fill="currentColor">your-sub-brand</text>
-```
+Theming (`currentColor`), the state SVGs (drop-in vs class-driven), and sub-brand lockup
+generation are all covered live, interactively, with copy-to-clipboard snippets and a working
+generator, at **https://byehsan.github.io/logo/** — that page is the up-to-date reference; it
+isn't duplicated here to avoid the two drifting out of sync.
 
 ## Adding a new state
 
-1. Copy `states/neutral.svg` as a starting point
-2. Add/replace the `<style>` block with your `@keyframes` and selectors
-3. Add the corresponding `@keyframes be-*` and `.state-*` rules to `states.css`
-4. Add the state to `preview.html`
+1. Copy `states/neutral.svg` as a starting point (`<g id="mark">` with `p0`-`p3` edges + `crown`)
+2. Add/replace the `<style>` block with your `@keyframes py-*` and selectors
+3. Add the corresponding `@keyframes py-*` and `.state-*` rules to `states.css`
+4. Add the state to `preview.html` and `index.html`
 5. Add the new file to `scripts/bundle.mjs` SVG_FILES array
-6. Bump version and push a tag
+6. Add/adjust vitest coverage under `test/` if the change touches the lockup API or palette
+7. Bump version and push a tag
 
 ## Versioning
 
 ```bash
-git tag v2.0.0
-git push origin v2.0.0
+npm test
+git tag v3.1.0
+git push origin v3.1.0
 ```
 
-CI builds and publishes a release with PNG exports (16–512px), JS/ESM/CSS bundles, and `palette.json`.
+CI validates every SVG, runs the vitest suite, and on a tag publishes a release with PNG
+exports (16–512px), JS/ESM/CSS bundles, TypeScript defs, `palette.json`, and a per-version
+`test-results/<tag>.html` page.
 
 ## Palette
 
-| Token   | Hex       |
-|---------|-----------|
-| dark    | `#0a0514` |
-| orange  | `#f07828` |
-| indigo  | `#5901d8` |
-| light   | `#eeeef4` |
-| success | `#2ecc71` |
-| error   | `#e74c3c` |
+Six named presets in `palette.json` (schema v2) — `graphite` (default), `forest`, `rust`,
+`slate-indigo`, `steel`, `legacy-brand` — each with a `solid` accent color plus a complete
+`ui.dark`/`ui.light` token set (`background`, `surface`, `primary`, `text`, `textMuted`,
+`border`, `accent`, `success`, `warning`, `error`). Matching the brand-guidelines doc, the
+five new presets share one flat neutral background/surface/text scale and vary only
+`primary`/`accent`; `legacy-brand` is the exception and preserves the old triskelion identity
+verbatim.
+
+| Legacy token | Hex       |
+|--------------|-----------|
+| dark         | `#0a0514` |
+| orange       | `#f07828` |
+| indigo       | `#5901d8` |
+| light        | `#eeeef4` |
+| success      | `#2ecc71` |
+| warning      | `#f5a623` |
+| error        | `#e74c3c` |
+
+The legacy orange/indigo brand palette survives as the `legacy-brand` preset for continuity.
