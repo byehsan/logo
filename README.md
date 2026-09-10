@@ -10,6 +10,11 @@ ES pyramid mark with full state + mood + lockup system. All assets theme via CSS
 
 **Live demo / sub-brand generator:** https://byehsan.github.io/logo/
 
+**For contributors and agents:** the full system reference — mark geometry, palette schema,
+animation conventions, lockup system, CI, and known gotchas — lives in
+[`docs/CONTEXT.md`](docs/CONTEXT.md). `CLAUDE.md` stays a short pointer to it plus the file
+tree below.
+
 ## File tree
 
 ```
