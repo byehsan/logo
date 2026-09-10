@@ -13,7 +13,7 @@ const cjs = require(join(ROOT, 'dist', 'index.js'))
 const esm = await import(join(ROOT, 'dist', 'index.mjs') + `?t=${Date.now()}`)
 
 const SVG_KEYS = [
-  'base', 'signature', 'signatureHand', 'signatureDraw',
+  'base', 'signature', 'signatureHand', 'signatureDraw', 'signatureDrawFull',
   'stateNeutral', 'stateLoading', 'stateSuccess', 'stateWarning', 'stateError',
   'moodHappy', 'moodSad', 'moodAngry', 'moodSurprised', 'moodSleepy',
   'http404', 'http500', 'http503', 'http403',

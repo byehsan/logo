@@ -33,9 +33,20 @@ more handwritten read (teasers, social) over full brand polish; it is not a sepa
 signature, just the unweighted construction. Legibility floor is ~120px wide; below that
 (e.g. the header lockup in `index.html`, ~112px) some readability is expected to be traded
 for compactness — don't try to compensate by inflating stroke-width, that distorts the
-letterforms instead. A separate downloadable `signature-draw.svg` (self-contained, CSS
-`@keyframes` inline) animates the spine drawing on and holding/fading, 4.5s loop, for use
-outside the site — teasers, video overlays, etc. — where a live page context isn't available.
+letterforms instead. Two separate downloadable draw-on animations (self-contained, CSS
+`@keyframes` inline, no JS) — spine drawing on and holding/fading, 4.5s loop — for use
+outside the site (teasers, video overlays, marketing content, etc.) where a live page
+context isn't available:
+
+- `signature-draw.svg` — spine only, ends at the last letter (x=624). Real
+  `getTotalLength()` is 2181.29; `stroke-dasharray`/the 0% `stroke-dashoffset` keyframe use
+  2182 (rounds up so the dash fully covers the path).
+- `signature-draw-full.svg` — spine *and* the flourish tail merged into one continuous
+  stroke (extends to x=882), matching the original design doc's own draw-on demo. This is a
+  longer path — its real length is 2442.10, so it correctly uses `2442`, not 2182. **The two
+  files are not interchangeable and don't share a dasharray value** — always measure
+  `getTotalLength()` on the actual path before hardcoding stroke-dasharray/dashoffset on a
+  new variant; don't assume a value from one signature path applies to another.
 
 ## Site structure
 
