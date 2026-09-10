@@ -1115,22 +1115,24 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
     return { cw: Math.round(cw), ch: Math.round(ch), parts: placed };
   }
 
+  // Substitutes currentColor for a literal color value, instead of relying on it resolving via
+  // an ancestor's CSS `color` property. currentColor support (especially through a *nested*
+  // <svg>'s own inline style attribute) is inconsistent outside of browsers — image viewers,
+  // OS thumbnailers, and some raster/PNG pipelines default an unresolved currentColor to black.
+  // A literal hex on every fill/stroke is basic SVG that every renderer gets right, so the
+  // exported file doesn't depend on the viewer's CSS cascade support at all.
+  function literalColor(inner, color) { return inner.replace(/currentColor/g, color); }
+
   function renderPart(p, color, ff) {
-    // Every part sets style="color:${color}" (not just fill/stroke="${color}") — MARK_INNER's
-    // crown dot and the signature's flourish both use fill="currentColor", which resolves off
-    // the CSS `color` property, not off an ancestor's stroke/fill presentation attribute. Without
-    // an explicit `color` on this element, currentColor falls back to the browser's default
-    // black (or whatever the embedding page happens to set) — invisible/mismatched in a
-    // standalone downloaded file, which has no such ambient color to inherit.
     if (p.type === 'mark') {
-      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="0 0 200 220" fill="none" stroke="${color}" stroke-linejoin="miter" stroke-miterlimit="10" style="color:${color}">${MARK_INNER}</svg>`;
+      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="0 0 200 220" fill="none" stroke="${color}" stroke-linejoin="miter" stroke-miterlimit="10">${literalColor(MARK_INNER, color)}</svg>`;
     }
     if (p.type === 'signature') {
-      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="${SIGNATURE_CROP.x} ${SIGNATURE_CROP.y} ${SIGNATURE_CROP.w} ${SIGNATURE_CROP.h}" style="color:${color}">${signatureInner()}</svg>`;
+      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="${SIGNATURE_CROP.x} ${SIGNATURE_CROP.y} ${SIGNATURE_CROP.w} ${SIGNATURE_CROP.h}">${literalColor(signatureInner(), color)}</svg>`;
     }
     if (p.type === 'icon') {
       const inner = gIconInner || '<circle cx="12" cy="12" r="8"/>';
-      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="${gIconVB}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" overflow="visible" style="color:${color}">${inner}</svg>`;
+      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="${gIconVB}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" overflow="visible">${literalColor(inner, color)}</svg>`;
     }
     if (p.type === 'text') {
       const bl = (p.y + p.h * 0.78).toFixed(1);
