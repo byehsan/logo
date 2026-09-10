@@ -1,9 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300">
   <style>
-    @keyframes sig-pen-draw { 0% { stroke-dashoffset: 2442; } 62% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+    @keyframes sig-pen-draw { 0% { stroke-dashoffset: 2182; } 62% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
     @keyframes sig-pen-fade { 0%, 4% { opacity: 0; } 8%, 66% { opacity: 1; } 78%, 100% { opacity: 0; } }
     #pen {
-      stroke-dasharray: 2442;
+      /* Real getTotalLength() of the path below is 2181.29 — 2182 rounds up so the
+         stroke-dasharray dash segment fully covers the path with no residual gap.
+         (The original spec's own 2442 doesn't match this path's actual length; that
+         slack didn't cause a visible artifact — see docs/CONTEXT.md — but it made the
+         draw finish early relative to the fade keyframe below, so fixed it anyway.) */
+      stroke-dasharray: 2182;
       animation: sig-pen-draw 4.5s linear infinite, sig-pen-fade 4.5s linear infinite;
     }
   </style>
