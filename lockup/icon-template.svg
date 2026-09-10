@@ -1,21 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" width="440" height="112">
+  <!--
+    Icon+text lockup grid (all units in px, viewBox coords) — same mark area and 16px
+    mark→content gap as the plain text lockup (see template.svg), with an icon slot
+    inserted before the sub-brand text slot:
+      Mark area  : x=0,  y=0, w=48, h=56 (mark at y=4, 48×48)
+      Gap        : 16px (x=48 to x=64) — matches the brand's mark→content gap
+      Icon slot  : x=64, y=18, w=20, h=20 — vertically centred in the 56px container
+      Gap        : 4px  (x=84 to x=88) — icon→text gap
+      Text slot  : x=88, baseline y=37, Space Grotesk 600 24px, letter-spacing -0.5
+  -->
+
   <!-- Mark area (48×48 at y=4) -->
-  <svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100">
-    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-      <g transform="rotate(0 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-      <g transform="rotate(120 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-      <g transform="rotate(240 50 56.67)"><path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/></g>
-    </g>
+  <svg x="0" y="4" width="48" height="48" viewBox="0 0 200 220" fill="none" stroke="currentColor" stroke-linejoin="miter" stroke-miterlimit="10">
+    <path d="M100 20L172 58L100 96L28 58Z" stroke-width="2.6"/>
+    <path d="M172 58L100 204" stroke-width="2.6"/>
+    <path d="M28 58L100 204" stroke-width="2.6"/>
+    <path d="M100 96L100 204" stroke-width="1.4" stroke-dasharray="4 4"/>
+    <circle cx="100" cy="58" r="3.4" fill="currentColor" stroke="none"/>
   </svg>
-  <!-- Gap guides (8px gap: x=48 to x=56) -->
+
+  <!-- Gap guides (16px gap: x=48 to x=64) -->
   <line x1="48" y1="4" x2="48" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
-  <line x1="56" y1="4" x2="56" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
-  <!-- Icon slot (20×20 at x=56, y=18 — vertically centred in the 56px container) -->
-  <rect x="56" y="18" width="20" height="20" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
-  <text x="57.5" y="30" font-family="'Space Grotesk',system-ui,sans-serif" font-size="5" fill="currentColor" opacity="0.35">ICON</text>
-  <!-- Gap between icon and text (4px: x=76 to x=80) -->
-  <line x1="80" y1="4" x2="80" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.2"/>
-  <!-- Text slot (x=80 baseline y=37) -->
-  <rect x="80" y="4" width="136" height="48" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
-  <text x="84" y="36" font-family="'Space Grotesk',system-ui,sans-serif" font-size="10" fill="currentColor" opacity="0.35">SUB-BRAND SLOT</text>
+  <line x1="64" y1="4" x2="64" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.3"/>
+
+  <!-- Icon slot (20×20 at x=64, y=18 — vertically centred in the 56px container) -->
+  <rect x="64" y="18" width="20" height="20" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
+  <text x="65.5" y="30" font-family="'Space Grotesk',system-ui,sans-serif" font-size="5" fill="currentColor" opacity="0.35">ICON</text>
+
+  <!-- Gap between icon and text (4px: x=84 to x=88) -->
+  <line x1="88" y1="4" x2="88" y2="52" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2,2" opacity="0.2"/>
+
+  <!-- Text slot (x=88 baseline y=37) -->
+  <rect x="88" y="4" width="128" height="48" fill="none" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3,3" opacity="0.4"/>
+  <text x="92" y="36" font-family="'Space Grotesk',system-ui,sans-serif" font-size="10" fill="currentColor" opacity="0.35">SUB-BRAND SLOT</text>
 </svg>

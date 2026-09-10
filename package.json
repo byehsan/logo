@@ -1,13 +1,14 @@
 {
   "name": "@byehsan/logo",
-  "version": "2.4.1",
-  "description": "byEhsan brand logo system — triskelion mark, state animations, HTTP error states, lockups, favicons",
+  "version": "3.0.0",
+  "description": "byEhsan brand logo system — ES pyramid mark, state animations, HTTP error states, mood eyes, lockups, favicons",
   "type": "module",
+  "engines": { "node": ">=24" },
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
-    ".":              { "import": "./dist/index.esm.js", "require": "./dist/index.js", "types": "./dist/index.d.ts" },
+    ".":              { "import": "./dist/index.mjs", "require": "./dist/index.js", "types": "./dist/index.d.ts" },
     "./css":          "./dist/index.css",
     "./states-css":   "./dist/states.css",
     "./palette":      "./dist/palette.json"
@@ -15,12 +16,15 @@
   "scripts": {
     "build":    "node scripts/bundle.mjs",
     "validate": "find . -name '*.svg' -not -path './.git/*' -not -path './dist/*' | xargs xmllint --noout",
-    "preview":  "open preview.html || xdg-open preview.html"
+    "preview":  "open preview.html || xdg-open preview.html",
+    "test":     "vitest run"
   },
   "files": [
     "dist/",
     "base.svg",
+    "signature.svg",
     "states/",
+    "moods/",
     "http/",
     "lockup/",
     "palette.json",
@@ -30,7 +34,10 @@
     "registry": "https://npm.pkg.github.com",
     "access": "public"
   },
-  "keywords": ["byehsan", "logo", "brand", "svg", "triskelion", "design-system"],
+  "devDependencies": {
+    "vitest": "4.1.10"
+  },
+  "keywords": ["byehsan", "logo", "brand", "svg", "pyramid", "design-system"],
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -4,12 +4,20 @@ on:
   push:
     tags:
       - 'v*.*.*'
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'Version tag to release (e.g. v3.0.0)'
+        required: true
+        default: 'v3.0.0'
 
 jobs:
 
-  # ── Validate SVGs ─────────────────────────────────────────────────────────
+  # ── Validate SVGs + run the npm package test suite on every push ─────────
   validate:
-    name: Validate SVGs
+    name: Validate SVGs & run tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,12 +29,41 @@ jobs:
             echo "Validating $f"
             xmllint --noout "$f" || exit 1
           done
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install JS deps
+        run: npm install --ignore-scripts
+      - name: Run tests
+        run: npm test
 
-  # ── Build release bundle + publish npm ───────────────────────────────────
+  # ── Deploy GitHub Pages on every push to main ────────────────────────────
+  pages:
+    name: Deploy GitHub Pages
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+  # ── Build release bundle + publish npm on tags ───────────────────────────
   bundle:
     name: Build & Release Bundle
     runs-on: ubuntu-latest
     needs: validate
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
     permissions:
       contents: write
       packages: write
@@ -36,7 +73,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@byehsan'
 
@@ -49,9 +86,20 @@ jobs:
       - name: Build bundle (SVGs + PNGs + favicons + TypeScript defs)
         run: node scripts/bundle.mjs
 
+      - name: Run tests
+        run: npm test -- --reporter=verbose --reporter=json --outputFile=test-results.json | tee test-output.log
+
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            test-results.json
+            test-output.log
+
       - name: Create release archives
         run: |
-          VERSION=${GITHUB_REF_NAME}
+          VERSION=${GITHUB_REF_NAME:-${{ inputs.version_tag }}}
           zip -r "byehsan-logo-${VERSION}.zip" dist/
           tar -czf "byehsan-logo-${VERSION}.tar.gz" dist/
 
@@ -61,18 +109,19 @@ jobs:
           files: |
             byehsan-logo-*.zip
             byehsan-logo-*.tar.gz
+          tag_name: ${{ github.ref_name || inputs.version_tag }}
           generate_release_notes: true
           body: |
-            ## byEhsan Logo Bundle ${{ github.ref_name }}
+            ## byEhsan Logo Bundle ${{ github.ref_name || inputs.version_tag }}
 
             **GitHub Pages:** https://byehsan.github.io/logo/
 
             ### Artifacts in this release
             | File | Contents |
             |------|----------|
-            | `byehsan-logo-${{ github.ref_name }}.zip` | Full bundle |
+            | `byehsan-logo-${{ github.ref_name || inputs.version_tag }}.zip` | Full bundle |
             | `dist/index.js` | CJS module |
-            | `dist/index.esm.js` | ES module |
+            | `dist/index.mjs` | ES module |
             | `dist/index.d.ts` | TypeScript definitions |
             | `dist/index.css` | CSS custom properties |
             | `dist/favicons/` | favicon.ico, apple-touch-icon, all PNG sizes |
@@ -90,7 +139,7 @@ jobs:
 
             ### Quick use
             ```js
-            import { base, stateLoading, http404, palettes } from '@byehsan/logo'
+            import { base, stateLoading, http404, palette } from '@byehsan/logo'
             import '@byehsan/logo/css'
             ```
 
@@ -104,9 +153,51 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update package version
-        run: npm version ${{ github.ref_name }} --no-git-tag-version --allow-same-version
+        run: npm version ${{ github.ref_name || inputs.version_tag }} --no-git-tag-version --allow-same-version
 
       - name: Publish to GitHub Packages
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ── Publish this version's test-log page ─────────────────────────────────
+  # Runs only after `bundle` (tests + publish) succeeds, so a page only ever appears for a
+  # version that actually shipped, and only for a real tag push (not workflow_dispatch, which
+  # may not be releasing an actual tag). Checks out main fresh (not the tag's detached HEAD)
+  # so the commit doesn't overwrite main with the tagged tree's other files — it only ever
+  # touches test-results/. NOTE: a push made with the default GITHUB_TOKEN does NOT trigger
+  # other workflows (GitHub's anti-recursion rule for the built-in token), so this commit does
+  # not itself redeploy GH Pages — the `pages` job picks up the new test-results/ page on its
+  # next ordinary push-to-main trigger.
+  publish-test-report:
+    name: Publish test report page
+    runs-on: ubuntu-latest
+    needs: bundle
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: test-results
+
+      - name: Build test-results/<version>.html + index.html
+        run: node scripts/build-test-report.mjs
+        env:
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          GITHUB_SHA: ${{ github.sha }}
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add test-results/
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Add test results for ${{ github.ref_name }}"
+          git push origin HEAD:main

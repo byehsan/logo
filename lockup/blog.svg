@@ -4,24 +4,18 @@
   </style>
 
   <!-- Mark — 48×48, y-offset 4 to center in 56px -->
-  <svg x="0" y="4" width="48" height="48" viewBox="0 0 100 100">
-    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-      <g transform="rotate(0 50 56.67)">
-        <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
-      </g>
-      <g transform="rotate(120 50 56.67)">
-        <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
-      </g>
-      <g transform="rotate(240 50 56.67)">
-        <path d="M50,20 Q60,40 40,40 Q60,40 50,70 Q40,40 60,40 Q50,20 50,20 Z"/>
-      </g>
-    </g>
+  <svg x="0" y="4" width="48" height="48" viewBox="0 0 200 220" fill="none" stroke="currentColor" stroke-linejoin="miter" stroke-miterlimit="10">
+    <path d="M100 20L172 58L100 96L28 58Z" stroke-width="2.6"/>
+    <path d="M172 58L100 204" stroke-width="2.6"/>
+    <path d="M28 58L100 204" stroke-width="2.6"/>
+    <path d="M100 96L100 204" stroke-width="1.4" stroke-dasharray="4 4"/>
+    <circle cx="100" cy="58" r="3.4" fill="currentColor" stroke="none"/>
   </svg>
 
-  <!-- Gap: 8px (x=48 to x=56) -->
+  <!-- Gap: 16px (x=48 to x=64) -->
 
   <!-- Sub-brand text — baseline at y=37, cap-height ~24px -->
-  <text x="56" y="37"
+  <text x="64" y="37"
         font-family="'Space Grotesk', system-ui, sans-serif"
         font-size="24" font-weight="600" letter-spacing="-0.5"
         fill="currentColor">blog</text>

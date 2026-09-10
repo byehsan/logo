@@ -1,14 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
   <style>
-    /* idle presence, breathing */
-    @keyframes py-idle {
+    /* surprised — crown snaps wide and holds, startled. The outline never moves or
+       changes shape/color — the mood read comes from the crown alone. */
+    @keyframes mood-surprised {
       0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.035); }
+      30%, 70%  { transform: scale(1.6); }
     }
-    #mark {
+    #crown {
       transform-box: view-box;
       transform-origin: 100px 58px;
-      animation: py-idle 4s ease-in-out infinite;
+      animation: mood-surprised 1.8s ease-in-out infinite;
     }
   </style>
   <g id="mark" fill="none" stroke="currentColor" stroke-linejoin="miter" stroke-miterlimit="10">
