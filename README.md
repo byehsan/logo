@@ -19,7 +19,8 @@ tree below.
 
 ```
 base.svg                    clean pyramid mark, currentColor stroke, no animation
-signature.svg                abstract cursive flourish mark, pairs with the pyramid in lockups
+signature.svg                "byEhsan" vector calligraphy — spine + 8 weight overlays + flourish
+signature-hand.svg            spine alone, unweighted — rawer/handwritten reading, for teasers etc.
 states/
   neutral.svg                idle presence, breathing, 4s loop
   loading.svg                edge pulse chases the 4 edges + crown, 1.6s loop
@@ -45,12 +46,15 @@ src/
   mark-paths.mjs               extractMarkPaths/extractCrownRadius
   lockup.mjs                    createLockupApi — createTextLockup/createIconLockup
 test/                        vitest suite (palette schema, lockup API, dist/pack smoke)
+index.html                    personal landing page — hero, nav, links out to brand.html
+brand.html                    full brand asset system — palette switcher, all states live,
+                              lockup generator, download panel
 404.html                      GH Pages error page — lost, tilt wobble
 403.html                      access-restricted page — refused, hard flicker
 500.html                      server-error page — malfunctioning jitter
 503.html                      maintenance page — asleep, breathe + Zzz
 thank-you.html                 form/contact confirmation page — happy bounce
-preview.html                 static offline snapshot of all marks + states
+preview.html                 static offline snapshot of all marks + states (same content as brand.html)
 states.css                   all @keyframes as class-driven selectors (Option B) + light/dark glow/shadow
 palette.json                 markGeometry + named presets (solid + light/dark UI tokens)
 ```
@@ -59,15 +63,16 @@ palette.json                 markGeometry + named presets (solid + light/dark UI
 
 Theming (`currentColor`), the state SVGs (drop-in vs class-driven), and sub-brand lockup
 generation are all covered live, interactively, with copy-to-clipboard snippets and a working
-generator, at **https://byehsan.github.io/logo/** — that page is the up-to-date reference; it
-isn't duplicated here to avoid the two drifting out of sync.
+generator, at **https://byehsan.github.io/logo/brand.html** — that page is the up-to-date
+reference; it isn't duplicated here to avoid the two drifting out of sync.
+`https://byehsan.github.io/logo/` itself is the personal landing page, not the asset reference.
 
 ## Adding a new state
 
 1. Copy `states/neutral.svg` as a starting point (`<g id="mark">` with `p0`-`p3` edges + `crown`)
 2. Add/replace the `<style>` block with your `@keyframes py-*` and selectors
 3. Add the corresponding `@keyframes py-*` and `.state-*` rules to `states.css`
-4. Add the state to `preview.html` and `index.html`
+4. Add the state to `preview.html` and `brand.html` (not `index.html` — that's the landing page)
 5. Add the new file to `scripts/bundle.mjs` SVG_FILES array
 6. Add/adjust vitest coverage under `test/` if the change touches the lockup API or palette
 7. Bump version and push a tag
