@@ -52,6 +52,11 @@ scripts/
   build-test-report.mjs       renders a per-release test-results/<tag>.html page
 
 index.html                  GH Pages site — interactive palette switcher, all states live
+404.html                     GH Pages error page (served automatically for unmatched paths)
+403.html                     access-restricted system page
+500.html                     server-error system page
+503.html                     maintenance system page
+thank-you.html                form/contact confirmation system page
 preview.html                local preview grid (same as index.html, for offline use)
 states.css                  class-driven Option B stylesheet (.state-loading etc.)
 palette.json                markGeometry + named presets + token map (schema v2)

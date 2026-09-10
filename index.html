@@ -34,7 +34,7 @@
     header .inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
     .logo-lockup { display: flex; align-items: center; gap: 14px; }
     .logo-lockup svg { color: var(--mark); transition: color 0.3s; flex-shrink: 0; }
-    .logo-lockup .sig { color: var(--accent); opacity: 0.85; }
+    .logo-lockup .sig { color: var(--mark); opacity: 0.85; }
     .wordmark { font-size: 18px; font-weight: 600; letter-spacing: -0.5px; }
     .wordmark span { color: var(--mark); transition: color 0.3s; }
     .tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text); opacity: 0.35; margin-left: 6px; }
@@ -240,6 +240,18 @@
     <div class="states-grid" id="http-grid"></div>
   </section>
 
+  <!-- System pages -->
+  <section>
+    <div class="section-label">System pages — errors and thank-you, same grammar</div>
+    <div class="dl-grid">
+      <a class="dl-btn" href="404.html">404 · lost</a>
+      <a class="dl-btn" href="403.html">403 · refused</a>
+      <a class="dl-btn" href="500.html">500 · flatline</a>
+      <a class="dl-btn" href="503.html">503 · asleep</a>
+      <a class="dl-btn" href="thank-you.html">Thank you</a>
+    </div>
+  </section>
+
   <!-- Moods -->
   <section>
     <div class="section-label">Moods — the crown as expressive focal point</div>
@@ -443,14 +455,19 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
   let currentPreset = 'graphite';
   let currentMode = 'dark';
 
+  // The mark/wordmark always render in the surface's *text* token, not the preset's
+  // primary/accent — same convention as preview.html and the ES brand doc's own header
+  // lockup (`color: var(--color-text)`). A preset's accent (e.g. graphite's near-black
+  // #2b2b2d) is tuned for small UI touches against a *light* surface, not as the mark's
+  // own color on a dark background, where it's nearly invisible against it.
   function applyPalette(id, mode) {
     const p = PRESETS[id].ui[mode];
     const r = document.documentElement.style;
     r.setProperty('--bg', p.background); r.setProperty('--surface', p.surface);
-    r.setProperty('--mark', p.primary); r.setProperty('--text', p.text);
+    r.setProperty('--mark', p.text); r.setProperty('--text', p.text);
     r.setProperty('--muted-t', p.textMuted); r.setProperty('--border', p.border);
     r.setProperty('--accent', p.accent);
-    document.getElementById('custom-mark-color') && (document.getElementById('custom-mark-color').value = p.primary);
+    document.getElementById('custom-mark-color') && (document.getElementById('custom-mark-color').value = p.text);
   }
 
   function buildPaletteBar() {

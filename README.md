@@ -40,6 +40,11 @@ src/
   mark-paths.mjs               extractMarkPaths/extractCrownRadius
   lockup.mjs                    createLockupApi — createTextLockup/createIconLockup
 test/                        vitest suite (palette schema, lockup API, dist/pack smoke)
+404.html                      GH Pages error page — lost, tilt wobble
+403.html                      access-restricted page — refused, hard flicker
+500.html                      server-error page — malfunctioning jitter
+503.html                      maintenance page — asleep, breathe + Zzz
+thank-you.html                 form/contact confirmation page — happy bounce
 preview.html                 static offline snapshot of all marks + states
 states.css                   all @keyframes as class-driven selectors (Option B) + light/dark glow/shadow
 palette.json                 markGeometry + named presets (solid + light/dark UI tokens)

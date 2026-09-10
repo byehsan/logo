@@ -3,6 +3,7 @@
   "version": "3.0.0",
   "description": "byEhsan brand logo system — ES pyramid mark, state animations, HTTP error states, mood eyes, lockups, favicons",
   "type": "module",
+  "engines": { "node": ">=24" },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
