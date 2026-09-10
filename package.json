@@ -1,6 +1,6 @@
 {
   "name": "@byehsan/logo",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "byEhsan brand logo system — ES pyramid mark, state animations, HTTP error states, mood eyes, lockups, favicons",
   "type": "module",
   "engines": { "node": ">=24" },
@@ -23,6 +23,7 @@
     "dist/",
     "base.svg",
     "signature.svg",
+    "signature-hand.svg",
     "states/",
     "moods/",
     "http/",
