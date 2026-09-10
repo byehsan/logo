@@ -3,7 +3,7 @@
 Brand asset repository for byEhsan. ES pyramid mark with full state animation system, mood
 eyes, HTTP error states, lockup templates, favicon set, and CI release pipeline.
 
-**Current version:** v3.1.0
+**Current version:** v3.2.0
 **GH Pages:** https://byehsan.github.io/logo/ (interactive palette switcher)
 **npm:** `@byehsan/logo` on GitHub Packages
 

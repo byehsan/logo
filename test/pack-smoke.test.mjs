@@ -36,6 +36,14 @@ describe('npm pack tarball — real consumer install simulation', () => {
     }
   })
 
+  it('extracted dist/pages/ contains the branded system pages', () => {
+    const pagesDir = join(extractDir, 'package', 'dist', 'pages')
+    const entries = readdirSync(pagesDir)
+    for (const expected of ['404.html', '403.html', '500.html', '503.html', 'thank-you.html']) {
+      expect(entries).toContain(expected)
+    }
+  })
+
   it('require()s the extracted CJS build and gets working exports', () => {
     const pkgRoot = join(extractDir, 'package')
     const require = createRequire(import.meta.url)

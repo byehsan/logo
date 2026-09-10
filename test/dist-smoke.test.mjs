@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { createRequire } from 'module'
 import { fileURLToPath } from 'url'
-import { readFileSync } from 'fs'
+import { readFileSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
 import { extractMarkPaths, extractCrownRadius } from '../src/mark-paths.mjs'
 import { createLockupApi } from '../src/lockup.mjs'
@@ -54,5 +54,11 @@ describe('dist/index.js (CJS) and dist/index.mjs (ESM) — real-world build smok
     const srcIcon = src.createIconLockup(...iconArgs)
     expect(cjsIcon).toBe(esmIcon)
     expect(cjsIcon).toBe(srcIcon)
+  })
+
+  it('dist/pages/ carries the branded 404/403/500/503/thank-you system pages', () => {
+    for (const page of ['404.html', '403.html', '500.html', '503.html', 'thank-you.html']) {
+      expect(existsSync(join(ROOT, 'dist', 'pages', page))).toBe(true)
+    }
   })
 })

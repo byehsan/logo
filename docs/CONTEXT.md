@@ -51,12 +51,29 @@ context isn't available:
 ## Site structure
 
 `index.html` is the whole thing: a single-page logo/brand tool (palette switcher, live
-states/http/moods grids, lockup generator, a component reference for developers building
-the actual apps/landing pages — buttons, cards, capsules, progress bars, diagrams/mockup
-grids — and the download panel: source files plus dynamically-fetched latest-release assets
-via the GitHub API). There is deliberately no separate personal landing page — this repo is
-the brand *asset* system, not the product site. `preview.html` is a static offline snapshot
-of `index.html`'s content, kept in sync by hand.
+states/http/moods grids, a 3-step Logo generator wizard, a "Powered by" embeddable badge, a
+component reference for developers building the actual apps/landing pages — buttons, cards,
+capsules, progress bars, diagrams/mockup grids — and the download panel: source files plus
+dynamically-fetched latest-release assets via the GitHub API). There is deliberately no
+separate personal landing page — this repo is the brand *asset* system, not the product site.
+`preview.html` is a static offline snapshot of `index.html`'s content, kept in sync by hand.
+
+**Logo generator wizard** (`#gen-*` ids, step-1/2/3 accordion): Step 1 (Mark, always on) sets
+output size, aspect ratio, and a margin slider (0 by default); Step 2 (Sub-logo) and Step 3
+(Text) are both off by default via a toggle switch. `layout()` composes whichever parts are
+enabled as one linear row with fixed 16px gaps, centered in a canvas sized by margin +
+aspect ratio, then `buildSVG()` renders it and `buildParts`/`renderPart` place each part's own
+`<svg x y width height>` inside the root. **Gotcha:** `.gen-preview-box svg { ... }` as a bare
+descendant selector matches those *nested* per-part `<svg>` elements too, not just the root —
+`height: auto` on a nested, positioned svg corrupts its layout. Keep it scoped to
+`.gen-preview-box > svg` (direct child only).
+
+**"Powered by" badge** (`poweredByBadgeHTML()`): a self-contained embeddable pill (mark +
+signature + ".com") for embedding in other tools/sites — literal hex colors, no external
+CSS/JS dependency, dark and light variants, each with a "Copy embed code" button. The
+page's own footer carries a third instance built with `var(--surface)`/`var(--border)`/
+`var(--text)` refs instead of literal hex, so it re-themes with the palette switcher — don't
+copy that variant out to `poweredByBadgeHTML()`, it only works inside this page's own CSS.
 
 ## Brand palette
 
@@ -206,11 +223,14 @@ would race/duplicate the `pages` job already in `release.yml`.
 
 ```bash
 npm test            # vitest run — palette schema, lockup API, dist/pack smoke tests
-git tag v3.1.0 && git push origin v3.1.0
+git tag v3.2.0 && git push origin v3.2.0
 ```
 
 Release artifacts: zip/tarball with all SVGs, PNGs at 7 sizes, favicon.ico, webmanifest,
-CJS/ESM/CSS bundles, TypeScript defs, palette.json.
+CJS/ESM/CSS bundles, TypeScript defs, palette.json, and `dist/pages/` (the branded
+404/403/500/503/thank-you system pages — drop-in HTML, not just GH-Pages-only files;
+`scripts/bundle.mjs` copies them from the repo root into `dist/pages/` on every build, same
+as the SVGs, so they ship in the npm package and the release archive).
 
 ## Adding a new state
 
