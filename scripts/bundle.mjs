@@ -36,6 +36,7 @@ const SVG_FILES = [
   { key: 'base',           path: 'base.svg' },
   { key: 'signature',      path: 'signature.svg' },
   { key: 'signatureHand',  path: 'signature-hand.svg' },
+  { key: 'signatureDraw',  path: 'signature-draw.svg' },
   { key: 'stateNeutral',   path: 'states/neutral.svg' },
   { key: 'stateLoading',   path: 'states/loading.svg' },
   { key: 'stateSuccess',   path: 'states/success.svg' },

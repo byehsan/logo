@@ -31,18 +31,21 @@ give, plus a filled two-curve flourish tail that tapers to a true point. `signat
 is the spine alone — same gesture, no weights, no flourish — for contexts wanting a rawer,
 more handwritten read (teasers, social) over full brand polish; it is not a separately traced
 signature, just the unweighted construction. Legibility floor is ~120px wide; below that
-(e.g. the header lockups in `index.html`/`brand.html`, ~90–110px) some readability is
-expected to be traded for compactness — don't try to compensate by inflating stroke-width,
-that distorts the letterforms instead.
+(e.g. the header lockup in `index.html`, ~112px) some readability is expected to be traded
+for compactness — don't try to compensate by inflating stroke-width, that distorts the
+letterforms instead. A separate downloadable `signature-draw.svg` (self-contained, CSS
+`@keyframes` inline) animates the spine drawing on and holding/fading, 4.5s loop, for use
+outside the site — teasers, video overlays, etc. — where a live page context isn't available.
 
 ## Site structure
 
-`index.html` is the personal landing page (hero, nav, "Get in touch") — keep it light, no
-palette switcher or generator there. `brand.html` (renamed from `index.html` in v3.1.0) is
-the full asset system: palette switcher, live states/http/moods grids, lockup generator, and
-the download panel (source files + dynamically-fetched latest-release assets via the GitHub
-API). `preview.html` is a static offline snapshot of `brand.html`'s content, kept in sync by
-hand. If you add a new asset kind, it likely belongs on `brand.html`, not `index.html`.
+`index.html` is the whole thing: a single-page logo/brand tool (palette switcher, live
+states/http/moods grids, lockup generator, a component reference for developers building
+the actual apps/landing pages — buttons, cards, capsules, progress bars, diagrams/mockup
+grids — and the download panel: source files plus dynamically-fetched latest-release assets
+via the GitHub API). There is deliberately no separate personal landing page — this repo is
+the brand *asset* system, not the product site. `preview.html` is a static offline snapshot
+of `index.html`'s content, kept in sync by hand.
 
 ## Brand palette
 
@@ -142,7 +145,7 @@ Slot:       x=64, baseline y=37, Space Grotesk 600 24px, letter-spacing -0.5
 ```
 
 16px is canonical — it's load-bearing throughout `src/lockup.mjs`, `test/lockup.test.mjs`,
-`lockup/template.svg`/`icon-template.svg`/`blog.svg`, and `brand.html`'s generator. A past
+`lockup/template.svg`/`icon-template.svg`/`blog.svg`, and `index.html`'s generator. A past
 merge from an independently-diverged `main` briefly reintroduced an 8px variant; it was
 reverted for consistency. Don't reintroduce 8px without updating all of the above together.
 
@@ -204,7 +207,7 @@ CJS/ESM/CSS bundles, TypeScript defs, palette.json.
 2. Write the `@keyframes py-*` with a physical metaphor, set `animation: ... infinite`
 3. Add `.state-<name>` rule(s) to `states.css`
 4. Add the file to `SVG_FILES` in `scripts/bundle.mjs`
-5. Add inline version to `brand.html` states grid
+5. Add inline version to `index.html` states grid
 6. Add/adjust vitest coverage under `test/` if the change affects the lockup API or palette
    schema
 7. Document here and bump the version (`CLAUDE.md`'s **Current version** line too)
