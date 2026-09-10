@@ -769,6 +769,11 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
   const PRESET_ORDER = ['graphite','forest','rust','slate-indigo','steel','legacy-brand'];
   let currentPreset = 'graphite';
   let currentMode = 'dark';
+  // Set by the Logo generator's setup code further down; applyPalette() calls through it
+  // (when non-null) so the generator's default colors track the page's palette/light-dark
+  // switcher. Declared here, ahead of applyPalette's first call below, to avoid a
+  // temporal-dead-zone error on a `let`/`const` declared later in the same script.
+  let genThemeSyncHook = null;
 
   // The mark/wordmark always render in the surface's *text* token, not the preset's
   // primary/accent — same convention as preview.html and the ES brand doc's own header
@@ -783,6 +788,11 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
     r.setProperty('--muted-t', p.textMuted); r.setProperty('--border', p.border);
     r.setProperty('--accent', p.accent);
     document.getElementById('custom-mark-color') && (document.getElementById('custom-mark-color').value = p.text);
+    // Keep the Logo generator's own colors following the page's palette/light-dark switcher
+    // until the user picks a color there directly — see genThemeSyncHook, defined once the
+    // generator section below initializes. Declared as a hook (not a direct call) since
+    // applyPalette also runs once at initial page load, before that code exists yet.
+    if (genThemeSyncHook) genThemeSyncHook();
   }
 
   function buildPaletteBar() {
@@ -920,7 +930,7 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
     const sigWeights = SIGNATURE_WEIGHTS.map(([d, sw]) => `<path d="${d}" stroke-width="${sw}"/>`).join('');
     return `<a href="https://byehsan.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:999px;background:${bg};border:1px solid ${border};color:${fg};text-decoration:none;font-family:system-ui,-apple-system,sans-serif;font-size:12px;line-height:1;white-space:nowrap">`
       + `<svg width="16" height="18" viewBox="0 0 200 220" fill="none" stroke="currentColor" stroke-linejoin="miter" stroke-miterlimit="10" style="flex-shrink:0">${MARK_INNER}</svg>`
-      + `<span style="color:${muted}">Powered by</span>`
+      + `<span style="color:${muted}">Powered</span>`
       + `<svg width="58" height="19" viewBox="0 0 900 300" style="flex-shrink:0"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="${SIGNATURE_SPINE_D}" stroke-width="7"/>${sigWeights}</g><path fill="currentColor" d="${SIGNATURE_FLOURISH_D}"/></svg>`
       + `<span style="font-weight:600">.com</span>`
       + `</a>`;
@@ -943,7 +953,7 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
   document.getElementById('footer-badge').innerHTML =
     `<a href="https://byehsan.github.io/logo/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--border);color:var(--text);text-decoration:none;font-family:inherit;font-size:12px;line-height:1;white-space:nowrap">`
     + `<svg width="14" height="16" viewBox="0 0 200 220" fill="none" stroke="currentColor" stroke-linejoin="miter" stroke-miterlimit="10" style="flex-shrink:0">${MARK_INNER}</svg>`
-    + `<span style="opacity:.55">Powered by</span>`
+    + `<span style="opacity:.55">Powered</span>`
     + `<svg width="52" height="17" viewBox="0 0 900 300" style="flex-shrink:0"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="${SIGNATURE_SPINE_D}" stroke-width="7"/>${SIGNATURE_WEIGHTS.map(([d, sw]) => `<path d="${d}" stroke-width="${sw}"/>`).join('')}</g><path fill="currentColor" d="${SIGNATURE_FLOURISH_D}"/></svg>`
     + `<span style="font-weight:600">.com</span>`
     + `</a>`;
@@ -1037,10 +1047,17 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
   let gMargin = 0, gAspect = 'auto', gSizePx = null;
   let gSubEnabled = false, gSubType = 'signature';
   let gTextEnabled = false, gFont = 'space-grotesk', gFontSize = 24, gText = 'blog';
-  // Default mark color tracks the dark preview's text token, not the graphite preset's
-  // solid accent (#2b2b2d) — that's near-black, functionally invisible on the dark
-  // checkered "transparent" preview backdrop. Same fix as the main page's --mark wiring.
-  let gMarkColor = '#f2f2f3', gBgColor = '#1d1f20', gWithBg = false, gFormat = 'svg';
+  // Default mark/bg colors track the *currently active* preset+mode's text/background tokens
+  // (not a hardcoded hex) — same fix as the main page's --mark wiring, applied here so the
+  // generator's output actually matches whichever light/dark theme is selected up top, instead
+  // of always exporting the dark-mode pair regardless of the page's own toggle state.
+  // genColorsAreDefault tracks whether the user has picked a color directly yet; while true,
+  // syncGenColorsToTheme() (called from applyPalette, see genThemeSyncHook) keeps following the
+  // page's palette switcher — once the user touches a color control, their choice sticks.
+  let gMarkColor = PRESETS[currentPreset].ui[currentMode].text;
+  let gBgColor = PRESETS[currentPreset].ui[currentMode].background;
+  let gWithBg = false, gFormat = 'svg';
+  let genColorsAreDefault = true;
   let gIconInner = null, gIconVB = '0 0 24 24';
 
   function xe(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
@@ -1050,11 +1067,19 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
     return `<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="${SIGNATURE_SPINE_D}" stroke-width="7"/>${weights}</g><path fill="currentColor" d="${SIGNATURE_FLOURISH_D}"/>`;
   }
 
+  // The full signature.svg viewBox (0 0 900 300) bakes in a lopsided margin around the actual
+  // ink — measured via getBBox(): the spine+weights+flourish content sits at x=88, width=794
+  // (9.8% blank on the left, only 2% on the right). Rendered at the viewBox's native 3:1 aspect
+  // next to the mark, that left-side blank space stacks on top of the row's own ROW_GAP, making
+  // the mark→signature gap look ~55% wider than the signature→text gap right next to it. Cropped
+  // here to a symmetric ~2% margin (matching the tight side) so ROW_GAP alone controls the gap.
+  const SIGNATURE_CROP = { x: 70, y: 0, w: 830, h: 300 };
+
   function buildParts() {
     const parts = [{ type: 'mark', w: 48, h: 48 }];
     if (gSubEnabled) {
       if (gSubType === 'signature' || gSubType === 'both') {
-        const sh = 30, sw = Math.round(sh * 3); // signature.svg viewBox is 900×300 = 3:1
+        const sh = 30, sw = Math.round(sh * SIGNATURE_CROP.w / SIGNATURE_CROP.h);
         parts.push({ type: 'signature', w: sw, h: sh });
       }
       if (gSubType === 'icon' || gSubType === 'both') {
@@ -1091,15 +1116,21 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
   }
 
   function renderPart(p, color, ff) {
+    // Every part sets style="color:${color}" (not just fill/stroke="${color}") — MARK_INNER's
+    // crown dot and the signature's flourish both use fill="currentColor", which resolves off
+    // the CSS `color` property, not off an ancestor's stroke/fill presentation attribute. Without
+    // an explicit `color` on this element, currentColor falls back to the browser's default
+    // black (or whatever the embedding page happens to set) — invisible/mismatched in a
+    // standalone downloaded file, which has no such ambient color to inherit.
     if (p.type === 'mark') {
-      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="0 0 200 220" fill="none" stroke="${color}" stroke-linejoin="miter" stroke-miterlimit="10">${MARK_INNER}</svg>`;
+      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="0 0 200 220" fill="none" stroke="${color}" stroke-linejoin="miter" stroke-miterlimit="10" style="color:${color}">${MARK_INNER}</svg>`;
     }
     if (p.type === 'signature') {
-      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="0 0 900 300" style="color:${color}">${signatureInner()}</svg>`;
+      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="${SIGNATURE_CROP.x} ${SIGNATURE_CROP.y} ${SIGNATURE_CROP.w} ${SIGNATURE_CROP.h}" style="color:${color}">${signatureInner()}</svg>`;
     }
     if (p.type === 'icon') {
       const inner = gIconInner || '<circle cx="12" cy="12" r="8"/>';
-      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="${gIconVB}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" overflow="visible">${inner}</svg>`;
+      return `<svg x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" viewBox="${gIconVB}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" overflow="visible" style="color:${color}">${inner}</svg>`;
     }
     if (p.type === 'text') {
       const bl = (p.y + p.h * 0.78).toFixed(1);
@@ -1249,12 +1280,13 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
     PRESET_ORDER.forEach(id => {
       const p = PRESETS[id];
       const btn = document.createElement('button');
-      btn.className = 'gen-palette-btn' + (id === 'graphite' ? ' active' : '');
+      btn.className = 'gen-palette-btn' + (id === currentPreset ? ' active' : '');
       btn.innerHTML = `<span class="gen-pal-dot" style="background:${p.solid}"></span>${p.name}`;
       btn.addEventListener('click', () => {
         document.querySelectorAll('.gen-palette-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        gMarkColor = p.ui.dark.text; gBgColor = p.ui.dark.background;
+        genColorsAreDefault = false;
+        gMarkColor = p.ui[currentMode].text; gBgColor = p.ui[currentMode].background;
         document.getElementById('gen-mark-color').value = gMarkColor;
         document.getElementById('gen-bg-color').value = gBgColor;
         updatePreview();
@@ -1264,16 +1296,33 @@ import <span class="hl">'@byehsan/logo/css'</span></pre>
   }
   buildGenPaletteBar();
   document.getElementById('gen-mark-color').addEventListener('input', e => {
+    genColorsAreDefault = false;
     gMarkColor = e.target.value;
     document.querySelectorAll('.gen-palette-btn').forEach(b => b.classList.remove('active'));
     updatePreview();
   });
   document.getElementById('gen-bg-color').addEventListener('input', e => {
+    genColorsAreDefault = false;
     gBgColor = e.target.value;
     document.querySelectorAll('.gen-palette-btn').forEach(b => b.classList.remove('active'));
     updatePreview();
   });
   document.getElementById('gen-with-bg').addEventListener('change', e => { gWithBg = e.target.checked; updatePreview(); });
+
+  // Keep following the page's palette/light-dark switcher until the user picks a generator
+  // color directly (see genColorsAreDefault). Wired into applyPalette() via genThemeSyncHook.
+  function syncGenColorsToTheme() {
+    if (!genColorsAreDefault) return;
+    const p = PRESETS[currentPreset].ui[currentMode];
+    gMarkColor = p.text; gBgColor = p.background;
+    document.getElementById('gen-mark-color').value = gMarkColor;
+    document.getElementById('gen-bg-color').value = gBgColor;
+    document.querySelectorAll('.gen-palette-btn').forEach(b => b.classList.toggle('active', false));
+    const activeBtn = [...document.querySelectorAll('.gen-palette-btn')][PRESET_ORDER.indexOf(currentPreset)];
+    if (activeBtn) activeBtn.classList.add('active');
+    updatePreview();
+  }
+  genThemeSyncHook = syncGenColorsToTheme;
 
   document.querySelectorAll('[data-fmt]').forEach(c => {
     c.addEventListener('click', () => {
