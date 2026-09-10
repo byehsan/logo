@@ -100,6 +100,9 @@
     /* ── Lockup ── */
     .lockup-grid { display: flex; flex-direction: column; gap: var(--gap); }
     .lockup-cell { padding: 24px; border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+    .sig-full-card { padding: 40px; border-radius: var(--radius); background: var(--surface); display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .sig-full-card svg { color: var(--mark); }
+    .sig-full-card label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.45; }
     .lockup-cell > label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; margin-bottom: 16px; }
     .lockup-cell svg { color: var(--mark); transition: color 0.3s; max-width: 100%; height: auto; }
 
@@ -294,6 +297,22 @@
   <section>
     <div class="section-label">Logo library</div>
     <div class="mark-grid" id="mark-grid"></div>
+  </section>
+
+  <!-- Signature, draw-on (full) -->
+  <section>
+    <div class="section-label">Signature, draw-on — full</div>
+    <div class="sig-full-card">
+      <svg viewBox="0 0 900 300" width="100%" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="max-width: 460px; display: block">
+        <style>
+          @keyframes sig-pen-draw-full { 0% { stroke-dashoffset: 2442; } 62% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+          @keyframes sig-pen-fade-full { 0%, 4% { opacity: 0; } 8%, 66% { opacity: 1; } 78%, 100% { opacity: 0; } }
+          .sig-pen-full { animation: sig-pen-draw-full 4.5s linear infinite, sig-pen-fade-full 4.5s linear infinite; }
+        </style>
+        <path class="sig-pen-full" d="M88 214C96 170 118 108 142 82C152 72 158 82 150 108C140 145 130 175 132 196C150 150 200 140 208 168C214 190 180 212 152 202C175 196 196 178 212 156C222 172 226 190 232 202C242 176 252 154 262 146C258 190 250 240 232 262C222 274 208 272 206 260C230 240 280 212 312 190C342 172 358 148 346 128C334 108 304 116 299 141C294 166 307 183 327 185C306 191 295 207 305 221C316 236 345 233 353 214C360 199 369 190 379 186C387 160 398 116 406 92C410 80 417 83 413 101C405 141 393 178 393 200C401 168 421 150 437 156C449 161 445 180 443 200C455 182 468 162 484 160C496 159 498 173 486 181C476 188 468 196 474 204C480 211 494 208 502 198C516 190 538 166 556 164C540 158 522 164 520 180C518 194 532 202 546 196C556 191 558 176 558 164C558 180 557 192 559 202C566 184 574 164 580 160C584 174 583 190 581 202C588 178 600 160 614 162C626 164 626 184 624 202C652 198 700 187 756 181C812 175 856 177 882 187" stroke-width="4" stroke-dasharray="2442"/>
+      </svg>
+      <label>4.5s loop · signs once, holds, fades</label>
+    </div>
   </section>
 
   <!-- States -->
