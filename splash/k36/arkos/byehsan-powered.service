@@ -1,0 +1,12 @@
+[Unit]
+Description=byEhsan Powered capsule in the EmulationStation theme
+After=local-fs.target
+Before=emulationstation.service
+ConditionPathExists=/roms/themes/es-theme-nes-box/theme.xml
+
+[Service]
+Type=oneshot
+ExecStart=/opt/byehsan/powered.sh
+
+[Install]
+WantedBy=multi-user.target

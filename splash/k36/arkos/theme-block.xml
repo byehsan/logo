@@ -1,0 +1,10 @@
+   <!-- byEhsan "Powered" capsule (byehsan/logo badge), top-right of the system view; added by /opt/byehsan/powered.sh -->
+   <view name="system">
+      <image name="byehsan_powered" extra="true">
+         <origin>1 0</origin>
+         <pos>0.98 0.025</pos>
+         <size>0.34 0</size>
+         <path>./_inc/images/byehsan-powered.svg</path>
+         <zIndex>6</zIndex>
+      </image>
+   </view>

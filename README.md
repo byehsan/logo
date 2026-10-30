@@ -42,6 +42,11 @@ lockup/
   template.svg                mark + gap + dashed slot guide
   blog.svg                     worked example: "blog" sub-brand
   icon-template.svg             icon slot + gap + text slot guide
+splash/                      device boot splashes
+  logo_kernel_cm3588+.bmp     CM3588+ kernel splash (script/make_bootsplash.py)
+  k36/                        K36 handheld (ArkOS): boot intro logo.mp4, logo.bmp, logo_kernel.bmp,
+                              and arkos/ EmulationStation splash + Powered badge — see its README
+script/                      Python boot-splash tools: make_bootsplash.py, k36_intro.py, fonts/
 src/
   mark-paths.mjs               extractMarkPaths/extractCrownRadius
   lockup.mjs                    createLockupApi — createTextLockup/createIconLockup
