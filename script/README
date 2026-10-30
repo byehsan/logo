@@ -1,4 +1,10 @@
-USAGE
+Boot splash tools. Install the Python packages first:
+
+```
+pip install -r script/requirement.txt
+```
+
+make_bootsplash.py: a static splash with a title and subtitle (used for splash/logo_kernel_cm3588+.bmp)
 ```
 python3 make_bootsplash.py \
   --svg logo.svg \
@@ -9,3 +15,10 @@ python3 make_bootsplash.py \
   --out-png bootsplash_preview.png
 
 ```
+
+k36_intro.py: the K36 (ArkOS) boot intro and boot logos, written to splash/k36/ (see splash/k36/README.md)
+```
+python3 script/k36_intro.py [--out DIR]
+```
+
+fonts/: Space Grotesk (variable, SIL Open Font License), the lockup typeface, used for ".com"
